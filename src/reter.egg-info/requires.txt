@@ -1,9 +1,0 @@
-reter-core>=0.1.0
-pyarrow>=10.0.0
-
-[dev]
-pytest
-pandas
-
-[pandas]
-pandas>=1.0.0
