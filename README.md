@@ -4,16 +4,14 @@ High-performance Description Logic reasoner with C++ RETE engine.
 
 ## Installation
 
-One-liner with uv:
+With uv (no clone needed):
 ```bash
-git clone https://github.com/codeine-ai/reter.git && uv pip install ./reter --find-links ./reter/reter_core/
+uv pip install git+https://github.com/codeine-ai/reter.git --find-links https://raw.githubusercontent.com/codeine-ai/reter/main/reter_core/index.html
 ```
 
-Or step by step:
+Or clone and install:
 ```bash
-git clone https://github.com/codeine-ai/reter.git
-cd reter
-uv pip install . --find-links ./reter_core/
+git clone https://github.com/codeine-ai/reter.git && uv pip install ./reter --find-links ./reter/reter_core/
 ```
 
 With pip:
