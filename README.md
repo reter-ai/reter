@@ -58,4 +58,6 @@ print(result.to_pandas())
 
 ## License
 
-MIT
+**reter** (this package) is licensed under the [MIT License](LICENSE).
+
+**reter-core** (the C++ engine, distributed as binary wheels) is proprietary software owned by Codeine.AI. It is distributed in binary form only and may only be used as a dependency of the reter package. See [LICENSE](LICENSE) for details.
