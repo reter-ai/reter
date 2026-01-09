@@ -110,19 +110,19 @@ class TestMinimalBug(unittest.TestCase):
 
             classes = reasoner.pattern(
                 ("?x", "type", "py:Class"),
-                ("?x", "name", "?name"),
-                ("?x", "qualifiedName", "?qname")
+                ("?x", "name", "?name")
             ).to_list()
 
             class_names = {c["?name"] for c in classes}
             self.assertEqual(class_names, expected_classes, f"Got classes: {class_names}")
 
-            # Check none are nested
+            # Check none are nested - the entity ID (?x) is the qualified name
             for c in classes:
-                parts = c["?qname"].split(".")
+                qname = c["?x"]
+                parts = qname.split(".")
                 self.assertEqual(
                     len(parts), 2,
-                    f"{c['?name']} should not be nested, got: {c['?qname']}"
+                    f"{c['?name']} should not be nested, got: {qname}"
                 )
         finally:
             os.unlink(temp_path)
@@ -193,19 +193,19 @@ class TestIsolatedBug(unittest.TestCase):
 
             classes = reasoner.pattern(
                 ("?x", "type", "py:Class"),
-                ("?x", "name", "?name"),
-                ("?x", "qualifiedName", "?qname")
+                ("?x", "name", "?name")
             ).to_list()
 
             class_names = {c["?name"] for c in classes}
             self.assertEqual(class_names, expected_classes, f"Got classes: {class_names}")
 
-            # Check none are nested
+            # Check none are nested - the entity ID (?x) is the qualified name
             for c in classes:
-                parts = c["?qname"].split(".")
+                qname = c["?x"]
+                parts = qname.split(".")
                 self.assertEqual(
                     len(parts), 2,
-                    f"{c['?name']} should not be nested, got: {c['?qname']}"
+                    f"{c['?name']} should not be nested, got: {qname}"
                 )
         finally:
             os.unlink(temp_path)

@@ -206,17 +206,28 @@ from collections import defaultdict
 """
         wme_count, errors = self.reasoner.load_python_code(code, "test_module")
 
-        # Query for imports
-        imports = self.reasoner.pattern(
+        # Query for import facts - simple imports have modulePath
+        simple_imports = self.reasoner.pattern(
             ("?import", "type", "py:Import"),
-            ("?import", "imports", "?module")
+            ("?import", "modulePath", "?module")
         ).to_list()
 
-        imported_modules = {i["?module"] for i in imports}
-        self.assertIn("os", imported_modules)
-        self.assertIn("typing", imported_modules)
-        self.assertIn("math", imported_modules)
-        self.assertIn("collections", imported_modules)
+        module_paths = {i["?module"] for i in simple_imports}
+        # Simple imports: import os, import math as m
+        self.assertIn("os", module_paths, f"Expected 'os' in module paths: {module_paths}")
+        self.assertIn("math", module_paths, f"Expected 'math' in module paths: {module_paths}")
+
+        # Query for from-imports - these have imports predicate for specific names
+        from_imports = self.reasoner.pattern(
+            ("?import", "type", "py:Import"),
+            ("?import", "imports", "?name")
+        ).to_list()
+
+        imported_names = {i["?name"] for i in from_imports}
+        # From-imports: from typing import List, Optional; from collections import defaultdict
+        self.assertIn("List", imported_names, f"Expected 'List' in imported names: {imported_names}")
+        self.assertIn("Optional", imported_names, f"Expected 'Optional' in imported names: {imported_names}")
+        self.assertIn("defaultdict", imported_names, f"Expected 'defaultdict' in imported names: {imported_names}")
 
     def test_function_calls(self):
         """Test extraction of function call relationships."""

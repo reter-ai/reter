@@ -1,0 +1,242 @@
+
+================================================================================
+RETE PERFORMANCE: TBox + INSTANCES
+================================================================================
+
+Config                    Load Time    Facts      Subs       Instances    scm-sco    cls-thing   
+----------------------------------------------------------------------------------------------------
+d=5, i=10                 15.25 ms     91         21         70           35         0           
+d=5, i=50                 24.84 ms     371        21         350          35         0           
+d=5, i=100                89.12 ms     721        21         700          35         0           
+d=5, i=200                129.84 ms    1421       21         1400         35         0           
+d=10, i=10                28.28 ms     186        66         120          220        0           
+d=10, i=50                83.36 ms     666        66         600          220        0           
+d=10, i=100               197.30 ms    1266       66         1200         220        0           
+d=10, i=200               553.19 ms    2466       66         2400         220        0           
+d=20, i=10                312.70 ms    451        231        220          1540       0           
+d=20, i=50                611.27 ms    1331       231        1100         1540       0           
+d=20, i=100               1.25 s       2431       231        2200         1540       0           
+d=20, i=200               3.34 s       4631       231        4400         1540       0           
+
+================================================================================
+PERFORMANCE SCALING ANALYSIS
+================================================================================
+
+Instances    Load Time       β_idx        β_fallback   β_idx/inst   Facts/inst  
+-----------------------------------------------------------------------------------------------
+10           15.25 ms        0            0            0.0          9.1         
+10           28.28 ms        0            0            0.0          18.6        
+10           312.70 ms       0            0            0.0          45.1        
+50           24.84 ms        0            0            0.0          7.4         
+50           83.36 ms        0            0            0.0          13.3        
+50           611.27 ms       0            0            0.0          26.6        
+100          89.12 ms        0            0            0.0          7.2         
+100          197.30 ms       0            0            0.0          12.7        
+100          1.25 s          0            0            0.0          24.3        
+200          129.84 ms       0            0            0.0          7.1         
+200          553.19 ms       0            0            0.0          12.3        
+200          3.34 s          0            0            0.0          23.2        
+
+================================================================================
+O(n²) DETECTION
+================================================================================
+
+From     To       Time Ratio   β_idx Ratio  Expected O(n)  
+------------------------------------------------------------
+10       50       1.63         0.00         5.00           
+50       100      3.59         0.00         2.00           
+100      200      1.46         0.00         2.00           
+10       50       2.95         0.00         5.00           
+50       100      2.37         0.00         2.00           
+100      200      2.80         0.00         2.00           
+10       50       1.95         0.00         5.00           
+50       100      2.04         0.00         2.00           
+100      200      2.68         0.00         2.00           
+
+================================================================================
+✓  LINEAR GROWTH
+   Beta activations growing at 0.0x, close to expected 1.0x
+
+================================================================================
+JOIN INDEXING OPTIMIZATION EFFECTIVENESS
+================================================================================
+
+Config                    β_idx        β_fallback   Index %      Optimization   
+-------------------------------------------------------------------------------------
+d=5, i=10                 0            0            0.0        % N/A            
+d=5, i=50                 0            0            0.0        % N/A            
+d=5, i=100                0            0            0.0        % N/A            
+d=5, i=200                0            0            0.0        % N/A            
+d=10, i=10                0            0            0.0        % N/A            
+d=10, i=50                0            0            0.0        % N/A            
+d=10, i=100               0            0            0.0        % N/A            
+d=10, i=200               0            0            0.0        % N/A            
+d=20, i=10                0            0            0.0        % N/A            
+d=20, i=50                0            0            0.0        % N/A            
+d=20, i=100               0            0            0.0        % N/A            
+d=20, i=200               0            0            0.0        % N/A            
+
+================================================================================
+RULE FIRING PATTERNS
+================================================================================
+
+Config                    cls-thing/inst  scm-sco/class  
+------------------------------------------------------------
+d=5, i=10                 0.00            7.00           
+d=5, i=50                 0.00            7.00           
+d=5, i=100                0.00            7.00           
+d=5, i=200                0.00            7.00           
+d=10, i=10                0.00            22.00          
+d=10, i=50                0.00            22.00          
+d=10, i=100               0.00            22.00          
+d=10, i=200               0.00            22.00          
+d=20, i=10                0.00            77.00          
+d=20, i=50                0.00            77.00          
+d=20, i=100               0.00            77.00          
+d=20, i=200               0.00            77.00          
+
+================================================================================
+DETAILED PROFILING ANALYSIS (Bottleneck Detection)
+================================================================================
+
+📊 AGGREGATE PROFILING COUNTERS:
+--------------------------------------------------------------------------------
+
+  Alpha Network:
+    alpha_activations             : 48,096
+    alpha_memory_checks           : 96,192
+    Alpha hit rate                : 50.0%
+
+  Beta Network:
+    beta_left_activations         : 0
+    beta_right_activations        : 0
+    indexed_beta_activations      : 0
+    fallback_beta_activations     : 0
+
+  Join Operations:
+    join_tests_performed          : 0
+    join_tests_passed             : 0
+
+  Token & Production:
+    tokens_created                : 0
+    production_activations        : 0
+
+  Predicate Filtering (Jena Innovation):
+    Total WMEs:                   77,696
+    WMEs filtered:                0 (0.0%)
+    WMEs processed:               77,696 (100.0%)
+
+  Network Structure:
+    total_alpha_memories          : 0
+    total_beta_memories           : 0
+    total_join_nodes              : 0
+
+📈 PER-CONFIGURATION BREAKDOWN:
+--------------------------------------------------------------------------------
+
+Config          α_checks     α_hit%     β_tests      β_success%   Tokens    
+--------------------------------------------------------------------------------
+d=5,i=10        546          50.0     % 0            0.0        % 0         
+d=5,i=50        2,226        50.0     % 0            0.0        % 0         
+d=5,i=100       4,326        50.0     % 0            0.0        % 0         
+d=5,i=200       8,526        50.0     % 0            0.0        % 0         
+d=10,i=10       1,116        50.0     % 0            0.0        % 0         
+d=10,i=50       3,996        50.0     % 0            0.0        % 0         
+d=10,i=100      7,596        50.0     % 0            0.0        % 0         
+d=10,i=200      14,796       50.0     % 0            0.0        % 0         
+d=20,i=10       2,706        50.0     % 0            0.0        % 0         
+d=20,i=50       7,986        50.0     % 0            0.0        % 0         
+d=20,i=100      14,586       50.0     % 0            0.0        % 0         
+d=20,i=200      27,786       50.0     % 0            0.0        % 0         
+
+🔍 BOTTLENECK ANALYSIS:
+--------------------------------------------------------------------------------
+
+  Operation counts:
+    Alpha memory checks   : 96,192
+    Join tests performed  : 0
+    Beta activations      : 0
+
+  ✓  Join indexing effective: 100.0% of beta activations use hash index
+
+  ✓  Alpha network efficient: 50.0% hit rate
+
+================================================================================
+NODE SHARING METRICS (OPS5 Innovation)
+================================================================================
+
+Network Construction Efficiency:
+  Alpha Memories:
+    Requested (virtual): 633
+    Created (real):      92
+    Sharing ratio:       6.88:1
+    Reduction:           85.5%
+
+  Join Nodes:
+    Requested (virtual): 633
+    Created (real):      633
+    Sharing ratio:       1.00:1
+
+  Beta Memories:
+    Requested (virtual): 519
+    Created (real):      519
+    Sharing ratio:       1.00:1
+
+  Overall:
+    Total nodes requested: 1785
+    Total nodes created:   1244
+    Overall ratio:         1.43:1
+    Overall reduction:     30.3%
+    Estimated savings:     67.62 KB
+
+  Analysis:
+    ✓ Excellent alpha memory sharing (6.9:1)
+      Many productions share identical constant tests
+    ℹ️  No join node sharing (each production has unique structure)
+    ✓ Strong overall sharing: 30% node reduction
+
+================================================================================
+SERIALIZATION PERFORMANCE ANALYSIS
+================================================================================
+
+Config          Build(s)     Save(s)      Load(s)      Speedup    Size(KB)     Rules   
+----------------------------------------------------------------------------------------------------
+d=5,i=10        0.0153       0.0044       0.0078       1.95     x 93.7        0       
+d=5,i=50        0.0248       0.0092       0.0121       2.06     x 217.0       0       
+d=5,i=100       0.0891       0.0197       0.0178       5.00     x 370.9       0       
+d=5,i=200       0.1298       0.0260       0.0313       4.14     x 680.3       0       
+d=10,i=10       0.0283       0.0121       0.0183       1.55     x 269.5       0       
+d=10,i=50       0.0834       0.0245       0.0350       2.38     x 528.7       0       
+d=10,i=100      0.1973       0.0350       0.0515       3.83     x 866.9       0       
+d=10,i=200      0.5532       0.0637       0.0948       5.83     x 1541.3      0       
+d=20,i=10       0.3127       0.1174       0.2153       1.45     x 2182.6      0       
+d=20,i=50       0.6113       0.1541       0.2570       2.38     x 2889.8      0       
+d=20,i=100      1.2450       0.1927       0.3113       4.00     x 3714.1      0       
+d=20,i=200      3.3357       0.2633       0.4240       7.87     x 5411.1      0       
+
+================================================================================
+SERIALIZATION ANALYSIS
+================================================================================
+
+Average speedup: 3.54x
+✓  MODERATE: Serialization provides 3.5x faster loading
+✅ SUCCESS: Zero rules fired during deserialization (all tests)
+
+Average file size: 1354.0 bytes per fact
+⚠️  File format could be more compact
+
+Scaling analysis:
+  Depth 5: 10->200 instances (20.0x)
+    Build time scales: 8.51x
+    Load time scales:  4.00x
+    ✓  Deserialization scales better than building
+  Depth 10: 10->200 instances (20.0x)
+    Build time scales: 19.56x
+    Load time scales:  5.19x
+    ✓  Deserialization scales better than building
+  Depth 20: 10->200 instances (20.0x)
+    Build time scales: 10.67x
+    Load time scales:  1.97x
+    ✓  Deserialization scales better than building
+
+✓ Test completed

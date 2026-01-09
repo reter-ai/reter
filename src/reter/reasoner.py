@@ -565,6 +565,84 @@ class Reter:
         except Exception as e:
             raise RuntimeError(f"Failed to load ontology: {e}")
 
+    def load_cnl(self, cnl_text, source=None):
+        """
+        Parse CNL (Controlled Natural Language) text and add to RETE network
+
+        CNL provides an English-like syntax for ontology statements:
+            Every cat is a mammal.           (subsumption)
+            John is a person.                (instance assertion)
+            Mary is-married-to John.         (role assertion)
+            John has-age equal-to 30.        (data assertion)
+
+        Supports backtick-quoted identifiers for namespaced concepts:
+            Every `py:Method` is a `py:Function`.
+            Every `oo:Class` is a `owl:Thing`.
+
+        Args:
+            cnl_text: CNL statements as text
+            source: Optional source identifier for tracking
+
+        Returns:
+            Number of WMEs added
+
+        Example:
+            reasoner = Reter()
+            reasoner.load_cnl('''
+                Every cat is a mammal.
+                Every dog is a mammal.
+                Felix is a cat.
+            ''')
+        """
+        try:
+            # Parse CNL to get facts
+            result = owl_rete_cpp.parse_cnl(cnl_text)
+
+            # Add each fact to the network
+            wme_count = 0
+            for fact_obj in result.facts:
+                # Convert ParsedFact to Fact dict
+                fact_dict = {}
+                for key in fact_obj.keys():
+                    fact_dict[key] = fact_obj.get(key)
+
+                fact = owl_rete_cpp.Fact(fact_dict)
+
+                if source is None:
+                    self.network.add_fact(fact)
+                else:
+                    self.network.add_fact_with_source(fact, source)
+                wme_count += 1
+
+            return wme_count
+
+        except Exception as e:
+            raise RuntimeError(f"Failed to load CNL: {e}")
+
+    def load_cnl_file(self, filepath, source=None):
+        """
+        Load and parse CNL ontology from file
+
+        Args:
+            filepath: Path to CNL ontology file (.cnl)
+            source: Optional source identifier (defaults to filepath)
+
+        Returns:
+            Number of WMEs added
+
+        Example:
+            reasoner = Reter()
+            reasoner.load_cnl_file("ontology.cnl")
+        """
+        with open(filepath, 'r', encoding='utf-8') as f:
+            content = f.read()
+
+        # Use filepath as source if not specified
+        if source is None:
+            source = filepath
+
+        return self.load_cnl(content, source)
+
     def analyze_python_code(self, python_code, module_name="module"):
         """
         Analyze Python source code and return facts and errors without adding to network

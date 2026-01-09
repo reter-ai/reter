@@ -225,7 +225,7 @@ def test_example_6_1_find_calls_from_specific(reter_with_calls):
     result = reter_with_calls.reql("""
         SELECT ?callee
         WHERE {
-            "calls.function_a" calls ?callee
+            "calls.function_a()" calls ?callee
         }
     """)
 
@@ -242,7 +242,7 @@ def test_example_7_1_find_calls_to_specific(reter_with_calls):
     result = reter_with_calls.reql("""
         SELECT ?caller
         WHERE {
-            ?caller calls "calls.function_c"
+            ?caller calls "calls.function_c()"
         }
     """)
 
@@ -313,7 +313,7 @@ def test_example_12_1_find_imports(reter_with_comprehensive_code):
         SELECT ?module ?imports
         WHERE {
             ?import type py:Import .
-            ?import imports ?imports .
+            ?import modulePath ?imports .
             ?import inModule ?module
         }
     """)

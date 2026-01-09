@@ -104,16 +104,28 @@ def test_method_parameters(reasoner, sample_python_code):
     """Test that method parameters are extracted with types"""
     wme_count, errors = reasoner.load_python_code(sample_python_code, "calculator")
 
-    # Query for parameters of the 'add' method
-    result = reasoner.reql("""
-        SELECT ?param ?name ?type ?position
+    # First find the method ID for 'add' (includes full signature)
+    method_result = reasoner.reql("""
+        SELECT ?method
         WHERE {
+            ?method concept "py:Method" .
+            ?method name "add"
+        }
+    """)
+    method_rows = query_to_rows(method_result)
+    assert len(method_rows) > 0, "Should find add method"
+    add_method_id = method_rows[0][0]
+
+    # Query for parameters of the 'add' method using the actual method ID
+    result = reasoner.reql(f"""
+        SELECT ?param ?name ?type ?position
+        WHERE {{
             ?param concept "py:Parameter" .
-            ?param ofFunction "calculator.Calculator.add" .
+            ?param ofFunction "{add_method_id}" .
             ?param name ?name .
             ?param typeAnnotation ?type .
             ?param position ?position
-        }
+        }}
         ORDER BY ?position
     """)
 
@@ -306,27 +318,35 @@ def test_class_docstrings(reasoner, sample_python_code):
 
 
 def test_method_qualified_names(reasoner, sample_python_code):
-    """Test that methods have fully qualified names"""
+    """Test that methods have fully qualified names (encoded in method ID)"""
     wme_count, errors = reasoner.load_python_code(sample_python_code, "calculator")
 
-    # Query for methods with qualified names
+    # The method ID itself contains the qualified name (module.Class.method(signature))
     result = reasoner.reql("""
-        SELECT ?method ?qualifiedName
+        SELECT ?method ?name ?class
         WHERE {
             ?method concept "py:Method" .
-            ?method qualifiedName ?qualifiedName
+            ?method name ?name .
+            ?method definedIn ?class
         }
     """)
 
     rows = query_to_rows(result)
-    print(f"Methods with qualified names: {rows}")
+    print(f"Methods with classes: {rows}")
 
-    assert len(rows) > 0, "Should have qualified names"
+    assert len(rows) > 0, "Should have methods with class info"
 
-    qualified_names = [row[1] for row in rows]
-    assert "calculator.Calculator.add" in qualified_names, "Should have fully qualified name"
-    assert "calculator.Calculator.multiply" in qualified_names
-    assert "calculator.MathHelper.square" in qualified_names
+    # The method IDs (first column) contain full qualified names with signatures
+    method_ids = [row[0] for row in rows]
+    
+    # Check that expected methods exist (method IDs include signature)
+    has_add = any("Calculator.add" in mid for mid in method_ids)
+    has_multiply = any("Calculator.multiply" in mid for mid in method_ids)
+    has_square = any("MathHelper.square" in mid for mid in method_ids)
+    
+    assert has_add, "Should have Calculator.add method"
+    assert has_multiply, "Should have Calculator.multiply method"
+    assert has_square, "Should have MathHelper.square method"
 
 
 if __name__ == "__main__":

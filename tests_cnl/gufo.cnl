@@ -1,0 +1,494 @@
+Non-Rigid-Type is a concept-type.
+Non-Rigid-Type has-description equal-to 'A gufo:EndurantType that does not apply necessarily to at least one of its instances (see Guizzardi, 2005, chapter 4).Examples include anti-rigid types, such as the role `Student` and the phase `Child`, and semi-rigid types, such as the mixin `MusicalArtist` (which necessarily characterizes bands, but contingently characterizes people) and the mixin `FemaleAnimal` (which is necessarily characterizes female dogs, but contigently characterizes clownfish).'.
+Endurant-Type is a concept-type.
+Endurant-Type has-description equal-to 'A gufo:Type whose instances are endurants. Instances of gufo:EndurantType are subclasses of gufo:Endurant.Examples include the object kind `Person`, the phase `Child`, the relator kind `Marriage`.See Guizzardi et al. (2018) for details concerning the taxonomy of endurant types included here.'.
+Every non-rigid-type is an endurant-type.
+Rigid-Type is a concept-type.
+Rigid-Type has-description equal-to 'A gufo:EndurantType which applies necessarily to its instances (see Guizzardi, 2005, chapter 4).Examples include the types `Agent`, `Person`, `Animal`, `PhysicalObject`, `Car`, and `Tree`.'.
+No non-rigid-type is a rigid-type.
+Phase is a concept-type.
+Phase has-description equal-to 'A gufo:EndurantType that is both sortal and anti-rigid. It is defined by instrinsic but contingent instantiation conditions. Phases are relationally independent types that capturec instrinsic properties shared by instances of a given kind.For example, `Child` may be considered a gufo:Phase as a subclass of the gufo:Kind `Person`, instantiated by persons younger than 12. Another example is the type `IllPerson`, which may be considered a gufo:Phase that is instantiated whenever an instance of `Disease` (a gufo:IntrinsicMode) inheres in a person.'.
+Anti-Rigid-Type is a concept-type.
+Anti-Rigid-Type has-description equal-to 'A gufo:NonRigidType that applies contingently to all its instances (see Guizzardi, 2005, chapter 4).Examples include the gufo:Phase `Child`, the gufo:PhaseMixin `InfantAnimal`, the gufo:Role `Student`, and the gufo:RoleMixin `Customer`.'.
+Every phase is an anti-rigid-type.
+Sortal is a concept-type.
+Sortal has-description equal-to 'A gufo:EndurantType which carries (or supplies) a principle of identity for its instances  (see Guizzardi, 2005, chapter 4).'.
+Every phase is a sortal.
+Role is a concept-type.
+Role has-description equal-to 'A gufo:EndurantType that both sortal and anti-rigid. It is defined by relational instantiation conditions. Roles are relationally dependent types, capturing relational properties shared by instances of a given kind.For example, `Student` may be considered a gufo:Role as a subclass of the gufo:Kind `Person`, instantiated by all persons enrolled in a school. "'.
+No phase is a role.
+Quality-Value-Attribution-Situation is a concept-type.
+Quality-Value-Attribution-Situation has-description equal-to 'A gufo:Situation in which a quality value is temporarily attributed to a gufo:Endurant.A gufo:QualityValueAttributionSituation should be used only for mutable qualities, i.e. those whose value can vary in time.Examples include: the situation in which the value of a bitcoin in Euros is 6.526,12, which lasted from 10/12/2019 to 11/12/2019; the situation in which the weight of Mike Tyson was 100 kg; and the situation in which the color of Einstein` hair was grey.This is a reification of the quality value attribution (in a solution that is similar to the qualified relation pattern  http://patterns.dataincubator.org/book/qualified-relation.html )'.
+Every quality-value-attribution-situation is a situation.
+Temporary-Constitution-Situation is a concept-type.
+Temporary-Constitution-Situation has-description equal-to 'A gufo:Situation in which a gufo:Endurant temporarly constitutes another gufo:Endurant.When constitution of an object may change in time, it may be qualified by the period in time in which the relation applies. Examples include: the situation in which the Beatles is constituted by the group composed of {John,Paul,Ringo,George}; and the situation in which the statue of Venus de Milo was constituted by its original quantity of marble (including its arms).This is a reification of constitution (in a solution that is similar to the qualified relation pattern  http://patterns.dataincubator.org/book/qualified-relation.html)'.
+No quality-value-attribution-situation is a temporary-constitution-situation.
+Temporary-Instantiation-Situation is a concept-type.
+Temporary-Instantiation-Situation has-description equal-to 'A gufo:Situation in which a gufo:Endurant temporarily instantiates a gufo:NonRigidType.A gufo:TemporaryInstantiationSituation can account for the time period in which a particular instantiation holds.Examples include: the situation in which Obama instantiates the role of president, which began in 20/01/2009 and lasted until 20/01/2017; the situation in which Coatria instantiates the role of EU Member, which began in 01/07/2013 (and is still on-going); and the situation in which Steve Jobs instantiates the child phase, which began in 24/02/1955 and lasted until 24/02/1965.This solution is inspired in the qualified relation pattern (http://patterns.dataincubator.org/book/qualified-relation.html).'.
+No quality-value-attribution-situation is a temporary-instantiation-situation.
+Temporary-Parthood-Situation is a concept-type.
+Temporary-Parthood-Situation has-description equal-to 'A gufo:Situation in which a gufo:Endurant is temporarily a part of another gufo:Endurant.A gufo:TemporaryParthoodSituation should only be used for mutable parts. It may be qualified by the period in time in which the relation applies. Examples include: the situation in which the United Kingdom is a member of the European Union; the situation in which Messi is a a member of the Barcelona FC squad; the situation in which an engine is part of a car; and the situation in which a transplanted heart is part of a person.Note that, since every instance of gufo:Quantity or gufo:FixedCollection only has essential parts, the gufo:TemporaryParthoodSituation should not be used to represent these parthood relations. This solution is inspired in the qualified relation pattern (http://patterns.dataincubator.org/book/qualified-relation.html).'.
+No quality-value-attribution-situation is a temporary-parthood-situation.
+Temporary-Relationship-Situation is a concept-type.
+Temporary-Relationship-Situation has-description equal-to 'A gufo:Situation in which a gufo:Endurant temporarily stands in a relation with another gufo:Endurant (or other endurants in the case of n-ary relationships). Reification of a gufo:TemporaryRelationshipSituation allows qualification of the relationship with the period in time in which it applies. Examples include: the situation in which Einstein works at the Swiss Patent Office in Bern; the situation in which Elon Musk studies at the University of Pennsylvania; the situation in which John Lennon is married to Yoko Ono; and the situation in which Facebook has a lower market value than Amazon.For material relationships, prefer the use of gufo:Relator.This is a reification of the relationship (in a solution that is similar to the qualified relation pattern  http://patterns.dataincubator.org/book/qualified-relation.html).'.
+No quality-value-attribution-situation is a temporary-relationship-situation.
+Relator is a concept-type.
+Relator has-description equal-to 'A gufo:ExtrinsicAspect that connects (involves, mediates) two or more concrete individuals. Relators are reified relationships composed of reciprocal extrinsic modes.Examples of relators include John and Mary`s marriage (composed of John`s obligations towards Mary in the scope of the marriage, Mary`s reciprocal claims, Mary`s obligations towards John, John`s reciprocal claims), Mary`s employment contract at Nasa, a covalent bond between two atoms.'.
+Extrinsic-Aspect is a concept-type.
+Extrinsic-Aspect has-description equal-to 'A gufo:Aspect that depends on one or more concrete individuals.Extrinsic (or `relational`) aspects are reified relationships, e.g., John and Mary`s marriage, Mary`s employment contract at Nasa, or parts of those relationships, e.g., John`s obligations towards Mary in the scope of the marriage, Mary`s reciprocal claims, Mary`s obligations towards John, John`s reciprocal claims. Extrinsic aspects can also be reified one-sided relationships, e.g., John`s admiration for Obama (which depends on Obama but does not characterize him).Corresponds to `Extrinsic Moment` in Fonseca et al (2019). Encompasses `Externally Depedent Mode`, `Qua Individual` and `Relator` in Guizzardi (2005).'.
+Every relator is an extrinsic-aspect.
+Aspect is a concept-type.
+Aspect has-description equal-to 'A gufo:Endurant that depends on at least one other concrete individual for its existence. A gufo:Aspect is a characteristic or trait of a concrete individual that is itself conceived as an individual. Examples include: intrinsic physical aspects, such as the Moon`s mass, Lassie`s fur color; mental dispositions, such as Bob`s math skills, his belief that the number one is odd; as well as relational aspects, such as John`s love for Mary and the marriage between John and Mary. The specific sort of existential dependence connecting aspects to their bearers is called inherence.Corresponds to `Moment` in Guizzardi (2005). Also termed `property instance`, `particularized property`, `individual accident`, or `(variable) trope` in the philosophical literature.'.
+Every extrinsic-aspect is an aspect.
+Intrinsic-Aspect is a concept-type.
+Intrinsic-Aspect has-description equal-to 'A gufo:Aspect that depends on a single concrete individual in which it inheres. Examples include intrinsic physical aspects, such as the Moon`s mass, Lassie`s fur color; the fragility of John Lennon`s glasses; mental dispositions, such as Bob`s math skills, his belief that the number one is odd.A gufo:IntrinsicAspect is classified as a gufo:Quality (e.g., an apple`s weight, the height of the Statue of Liberty) if it is measurable by a certain value space, or as a gufo:IntrinsicMode (e.g. Bob`s belief that the Eiffel Tower is in Paris) otherwise.Corresponds to `Instrinsic Moment` in Guizzardi (2005). Different from Guizzardi (2005), here we consider that aspects can inhere in concrete individuals in general, and not only in endurants.'.
+No extrinsic-aspect is an intrinsic-aspect.
+Is-Aspect-Proper-Part-Of is a role-type.
+Is-Aspect-Proper-Part-Of has-description equal-to 'Identifies a gufo:Aspect of which the aspect is a proper part.For example, John`s obligations towards Mary in the scope of their marriage is an aspect proper part of their marriage  (and same can be said of Mary`s extrinsic aspects in the scope of their marriage.)This property can be used to represent the composition of a relator from extrisinc aspects, but also to represent complex extrisinc aspects.gufo:isAspectProperPartOf is transitive.'.
+If X is-aspect-proper-part-of something that is-aspect-proper-part-of Y then X is-aspect-proper-part-of Y.
+Concrete-Individual-Type is a concept-type.
+Concrete-Individual-Type has-description equal-to 'A gufo:Type whose instances are concrete individuals.Instances of gufo:ConcreteIndividualType are subclasses of gufo:ConcreteIndividual.Examples include the gufo:Kind `Person`, the gufo:Category `Physical Object`, the gufo:EventType `Business Meeting`.'.
+Type is a concept-type.
+Type has-description equal-to 'An entity that may be instantiated by (or predicated over) other entities. Types encompass what we often call `sorts`, `kinds`, `categories`, etc. Examples include the kind `Person`, the event type `Earthquake`, and the abstract individual type `NaturalNumber`. Relations, such as `marriedTo` and `olderThan`, are also considered as types.Instances of gufo:Type are classes, and should specialize the taxonomy of individuals of gUFO. For example, `Person` is a gufo:Type (more specifically a gufo:Kind), specializing gufo:Object. The mechanism that allows for this is called punning in OWL 2.Encompasses the notion of `Universal` in Guizzardi (2005).'.
+Every concrete-individual-type is a type.
+Relationship-Type is a concept-type.
+Relationship-Type has-description equal-to 'A gufo:Type whose instances are ordered pairs of related entities. Instances of gufo:RelationshipType are object properties in UFO-based ontologies.The object properties `marriedWith` and `enrolledIn` are examples of material relationship types. The object properties `heavierThan`, `olderThan` are examples of comparative relationship types.The use of gufo:RelationshipType and its subclasses requires OWL 2 punning.Corresponds to `Relation` in Guizzardi (2005) and Fonseca et al. (2019).'.
+No concrete-individual-type is a relationship-type.
+Mixin is a concept-type.
+Mixin has-description equal-to 'A gufo:EndurantType that is both non-sortal and semi-rigid. As a semi-rigid type, it applies necessarily to some of its instances and contingently to some others. As a non-sortal, it captures properties shared by instances of different kinds.For example, the type `FemaleAnimal` may be considered a gufo:Mixin as it applies necessarily to animals of certain species, e.g., lions and sharks, while it applies contingently to animals of other species such as clownfish and mushroom corals (which may change sex given certain conditions).'.
+Non-Sortal is a concept-type.
+Non-Sortal has-description equal-to 'A gufo:EndurantType that applies to individuals of different kinds (see Guizzardi, 2005, chapter 4).Non-sortals do not provide a uniform principle of identity for their instances; instead, they just classify things that share common properties but which obey different principles of identity.Also termed `dispersive` types in the philosophical literature.'.
+Every mixin is a non-sortal.
+Semi-Rigid-Type is a concept-type.
+Semi-Rigid-Type has-description equal-to 'A gufo:NonRigidType that applies necessarily to some of its instances and contingently to some others (see Guizzardi, 2005, chapter 4).'.
+Every mixin is a semi-rigid-type.
+Quantity is a concept-type.
+Quantity has-description equal-to 'A complex gufo:Object that is a maximally-connected portion of stuff. A gufo:Quantity has a fixed constitution, and thus, removing or adding a sub-quantity would result in a different quantity.Examples include the portion of wine in a wine tank, a lump of clay, the gold that constitutes a wedding ring.Also termed `quantity of matter`, `objectified portion of matter`, `piece` in the philosophical literature.'.
+Object is a concept-type.
+Object has-description equal-to 'A gufo:Endurant that does not depend on another endurant for its existence (excluding its essential parts and aspects). Examples of objects include ordinary physical entities, such as a dog, a house, a tomato, a car, Alan Turing, but also socially-defined entities such as The Rolling Stones, the European Union, the Brazilian 1988 Constitution.Guizzardi (2005) also included the more abstract notion of `Substantial`, which generalizes both objects and amounts of matter. That notion was left out from this implementation, together with the notion of amount of matter. Support for the representation of maximally-self-connected amounts of matter is given by gufo:Quantity.'.
+Every quantity is an object.
+Phase-Mixin is a concept-type.
+Phase-Mixin has-description equal-to 'A gufo:EndurantType that is both non-sortal and anti-rigid. It is defined by instrinsic but contingent instantiation conditions. Phase mixins are relationally independent types that capture instrinsic properties shared by instances of different kinds.For example, `LivingAnimal` may be considered a gufo:PhaseMixin as a superclass of the phases `LivingPerson` (specializing the gufo:Kind `Person`) and `LivingDog` (specializing the gufo:Kind `Dog`).'.
+Every phase-mixin is an anti-rigid-type.
+Every phase-mixin is a non-sortal.
+Role-Mixin is a concept-type.
+Role-Mixin has-description equal-to 'A gufo:EndurantType that is both non-sortal and anti-rigid. It is defined by relational instantiation conditions. Role mixins are relationally dependent types, capturing relational properties shared by instances of different kinds.For example, `Customer` may be considered a gufo:RoleMixin as a superclass of the roles `CorporateCustomer` (specializing the gufo:Kind `BusinessOrganization`) and `PersonalCustomer` (specializing the gufo:Kind `Person`).'.
+No phase-mixin is a role-mixin.
+Is-Object-Proper-Part-Of is a role-type.
+Is-Object-Proper-Part-Of has-description equal-to 'Identifies a gufo:Object of which the object is a part.This is a general parthood relation between objects. Use the various sub-properties provided in order to represent specific types of parthood, each of which has specialized semantics (and different formal properties in this implementation, in particular, transitivity (Guizzardi, 2005, section 5.6).'.
+If X is-object-proper-part-of something that is-object-proper-part-of Y then X is-object-proper-part-of Y.
+Every temporary-relationship-situation is a situation.
+Comparative-Relationship-Type is a concept-type.
+Comparative-Relationship-Type has-description equal-to 'A gufo:RelationshipType derived from intrinsic aspects of the related entities.For example, `heavierThan`, `olderThan`. For a gufo:ComparativeRelationshipType it is recommended to identify the types of intrinsic aspects from which it is derived (see gufo:isDerivedFrom). For example `heavierThan` is derived from the `Weight` quality type.Note that, in the case of relationships that may change in different circumstances or times, the use of a qualified relation pattern enables indicating the period of time in which the relationship holds. See gufo:TemporaryRelationshipSituation.Corresponds to `comparative formal relation` in Guizzardi (2005) and `Comparative Relation` in Fonseca et al. (2019).'.
+Every comparative-relationship-type is a relationship-type.
+Material-Relationship-Type is a concept-type.
+Material-Relationship-Type has-description equal-to 'A gufo:RelationshipType derived from extrinsic aspects of the related entities.For example, `marriedWith`, `employedBy`, `enrolledIn`, `admires`. For a gufo:MaterialRelationshipType it is recommended to identify the type of extrinsic aspect from which the material relationship type is derived (see gufo:isDerivedFrom). For example `marriedWith` can be derived from the `Marriage` relator type, `employedBy` can be derived from the `Employment` relator type.Encompasses `Material Relation` in Guizzardi (2005) and corresponds to `Material Relation` in Fonseca et al. (2019).'.
+No comparative-relationship-type is a material-relationship-type.
+No individual is a type.
+Is-Sub-Collection-Of is a role-type.
+Is-Sub-Collection-Of has-description equal-to 'Identifies a gufo:Collection of which the collection is a sub-collection. All members of the sub-collection are members of the identified super-collection.gufo:isSubCollectionOf is transitive (Guizzardi, 2005, p. 186).For parthood involving one or more varied collections, see gufo:standsInQualifiedParthood.'.
+If X is-sub-collection-of something that is-sub-collection-of Y then X is-sub-collection-of Y.
+Inheres-In is a role-type.
+Inheres-In has-description equal-to 'Identifies the gufo:ConcreteIndividual in which the gufo:Aspect inheres. Inherence is a sort of existential dependence. The identified concrete individual is the `bearer` of the aspect.For example, the color of an object inheres in the object and the average speed of a flight inheres in the flight.'.
+If X inheres-in Y then Y does-not inhere-in X.
+Nothing inheres-in itself.
+Collection is a concept-type.
+Collection has-description equal-to 'A complex gufo:Object whose parts (the members of the collection) have a uniform structure (i.e., members are conceived as playing the same role in the collection). Collections may have a fixed or variable membership, which can be asserted using gufo:FixedCollection and gufo:VariableCollection respectively.Examples include a deck of cards, a pile of bricks, a forest (conceived as a collection of trees), and a group of people.Collections in many cases constitute a functional complex. For example, a pile of bricks may constitute a wall, a group of people may constitute a football team.A gufo:Collection may be decomposed into `smaller` collections. For instance, a group of people may be decomposed into a group of English speakers and a group of Italian speakers. Sub collections may or may not share members among them.'.
+Every collection is an object.
+Every anti-rigid-type is a non-rigid-type.
+No anti-rigid-type is a semi-rigid-type.
+Functional-Complex is a concept-type.
+Functional-Complex has-description equal-to 'http://purl.org/nemo/gufo#isComponentOf'.
+Every functional-complex is an object.
+Situation-Type is a concept-type.
+Situation-Type has-description equal-to 'A gufo:Type whose instances are situations.Instances of gufo:SituationType are subclasses of gufo:Situation.Examples include `HazardousSituation`, `PersonHasFever`,  `PersonIsStudent`.'.
+Every situation-type is a concrete-individual-type.
+Mediates is a role-type.
+Mediates has-description equal-to 'Identifies the endurants mediated by a gufo:Relator.For example, John and Mary`s marriage mediates John and Mary.'.
+If X mediates Y then Y does-not mediate X.
+Nothing mediates itself.
+Is-Proper-Part-Of is a role-type.
+Is-Proper-Part-Of has-description equal-to 'Identifies a whole of which the entity is a proper part.gufo:isProperPartOf is the most generic parthood relation in this implementation. Use the various sub-properties provided in order to represent specific types of parthood.Proper parthood (and each of its sub-properties) is asymmetric and irreflexive. Nevertheless, these characteristics are not declared in this implementation since that would violate rules of OWL 2 DL that guarantee decidability of reasoning. Instead, we have focused only on declaring transitivity where applicable.Note that gufo:isProperPartOf (as the most general notion of parthood) is transitive, although the various sub-properties may not be transitive.'.
+If X is-proper-part-of something that is-proper-part-of Y then X is-proper-part-of Y.
+Every semi-rigid-type is a non-rigid-type.
+Sub-Kind is a concept-type.
+Sub-Kind has-description equal-to 'A gufo:EndurantType that is both sortal and rigid. It specializes a gufo:Kind carrying the principle of identity supplied by that kind. Every gufo:SubKind should directly or indirectly specialize a gufo:Kind.For example, the gufo:Kind `Lion` may be specialized into the `Lionness` and `Male Lion` subkinds, while the gufo:Kind `Computer` may be specialized into the `Laptop` and `Desktop` subkinds.'.
+Every sub-kind is a rigid-type.
+Every sub-kind is a sortal.
+Extrinsic-Mode is a concept-type.
+Extrinsic-Mode has-description equal-to 'A gufo:ExtrinsicAspect that inheres in a concrete individual and depends on others for its existence.A gufo:ExtrinsicMode can be understood as a reified one-sided relationship, such as John`s admiration for Mary.Corresponds to `Extrinsic Moment` in Fonseca et al (2019). Encompasses what `Externally Dependent Mode`, `Qua Individual` and `Relator` in Guizzardi (2005).'.
+Every extrinsic-mode is an extrinsic-aspect.
+No extrinsic-mode is a relator.
+Intrinsic-Mode is a concept-type.
+Intrinsic-Mode has-description equal-to 'A gufo:IntrinsicAspect that is not measurable.For example, Bob`s belief that the Eiffel Tower is in Paris, his math skills, his headache.Corresponds to `Mode` in Guizzardi (2005).'.
+Every intrinsic-mode is an intrinsic-aspect.
+Quality is a concept-type.
+Quality has-description equal-to 'A gufo:IntrinsicAspect that is measurable by some value spaces. A quality may be used to compare individuals, on the basis of the value it takes in a certain quality space (for instance, a position within the RGB spectrum).Examples include the weight of a person, the name of organization, the color of a car, and the duration of a concert.'.
+No intrinsic-mode is a quality.
+Every role is an anti-rigid-type.
+Every role is a sortal.
+Every temporary-instantiation-situation is a situation.
+No temporary-instantiation-situation is a temporary-parthood-situation.
+No temporary-instantiation-situation is a temporary-relationship-situation.
+Is-Sub-Quantity-Of is a role-type.
+Is-Sub-Quantity-Of has-description equal-to 'Identifies a gufo:Quantity of which the quantity is a part.For example, the quantity of water in a wine glass is a sub-quantity of the wine in that glass.gufo:isSubQuantityOf is transitive (Guizzardi, 2005, p. 184).Sub-quantities are always essential parts of their wholes. Thus, gufo:standsInQualifiedParthood is not applicable for sub-quantities.'.
+If X is-sub-quantity-of something that is-sub-quantity-of Y then X is-sub-quantity-of Y.
+Depends-Historically-On is a role-type.
+Depends-Historically-On has-description equal-to 'Identifies a gufo:ConcreteIndividual on which the concrete individual depends historically. For example, a person is historically dependent on his/her ancestors.When used between events, historical dependence encompasses causation (when the event is caused by the other), but also other cases where there is dependence but not causation (when the event brings about a situation that is either insufficient or more than sufficient to trigger the historically dependent event).For example, Real Madrid`s goal in the 60th minute of the 2016 FIFA Club World Cup Final is historically dependent on (and in this case caused by) a penalty kick by Cristiano Ronaldo. The penalty kick itself is historically dependent on (but not caused by) a penalty (the occurrence of the penalty is necessary but not sufficient to cause the penalty kick as authorization of the referee is required). Historical dependence is transitive. Hence, in the example above, Real Madrid`s goal is historically dependent on the penalty.'.
+If X depends-historically-on something that depends-historically-on Y then X depends-historically-on Y.
+Every role-mixin is an anti-rigid-type.
+Every role-mixin is a non-sortal.
+Every endurant-type is a concrete-individual-type.
+Event-Type is a concept-type.
+Event-Type has-description equal-to 'A gufo:Type whose instances are events.Instances of gufo:EventType are subclasses of gufo:Event.Examples include `Business Meeting`, `Birth`, `Musical Performance`.'.
+No endurant-type is an event-type.
+No endurant-type is a situation-type.
+Every intrinsic-aspect is an aspect.
+Is-Event-Proper-Part-Of is a role-type.
+Is-Event-Proper-Part-Of has-description equal-to 'Identifies a gufo:Event of which the event is part. For example, Cristiano Ronaldo`s penalty kick is an event proper part of the 2016 FIFA Club World Cup Final, having ocurred in the 60th minute of that match. That match is itself an event proper part of the 2016 FIFA Club World Cup.The match can be decomposed in different ways. For example, we can identify the participation of each player in the match (instances of gufo:Participation that are proper parts of the match) or decomposed the match using some temporal segmentation (each minute of the match, each of which is a proper part of the match).gufo:isEventProperPartOf is transitive.'.
+If X is-event-proper-part-of something that is-event-proper-part-of Y then X is-event-proper-part-of Y.
+Concrete-Individual is a concept-type.
+Concrete-Individual has-description equal-to 'A gufo:Individual that exists in space-time. Concrete individuals comprise not only object-like entities (a car, a mountain, a person, a marriage, a belief), but also events (a business meeting, a soccer match) and situations (the situation in which a person weighs 80 kilograms, the situation in which a bank account is overdrawn).'.
+Every concrete-individual is an individual.
+Every temporary-constitution-situation is a situation.
+No temporary-constitution-situation is a temporary-instantiation-situation.
+No temporary-constitution-situation is a temporary-relationship-situation.
+Every non-sortal is an endurant-type.
+No non-sortal is a sortal.
+Endurant is a concept-type.
+Endurant has-description equal-to 'A gufo:ConcreteIndividual that endures in time and may change qualitatively while keeping its identity. Examples include: ordinary objects of everyday experience, such as a person, a house, and a car; reified relationships, such as a marriage, a rental contract, and a person`s love for another; and existentially-dependent aspects of objects, such as a car`s weight, a person`s language skills, and a house`s color. Also termed `continuant` in the philosophical literature.'.
+Every endurant is a concrete-individual.
+Every relationship-type is a type.
+Fixed-Collection is a concept-type.
+Fixed-Collection has-description equal-to 'A gufo:Collection for which no change in membership is possible.Such a collection obeys an extensional principle of identity, i.e., two fixed collections are the same if, and only if, they have the same members.Consider, for example, a group of people understood as a gufo:FixedCollection. In this case, any change in the membership of the group (e.g., the addition of one person) would in fact create a different group of people. In this case, the gufo:FixedCollection may be contrasted with the complexes they constitute. For instance, The Beatles (the band conceived as a gufo:FunctionalComplex) was in a certain circumstance constituted by the collection {John, Paul, George, Pete} and in another one constituted by the collection {John, Paul, George, Ringo}. The replacement of Pete Best by Ringo Star does not alter the identity of the band, but creates a  different group of people.'.
+Every fixed-collection is a collection.
+Variable-Collection is a concept-type.
+Variable-Collection has-description equal-to 'http://purl.org/nemo/gufo#TemporaryParthoodSituation'.
+No fixed-collection is a variable-collection.
+Every quality is an intrinsic-aspect.
+Every sortal is an endurant-type.
+Every instant is an abstract-individual.
+Every event-type is a concrete-individual-type.
+No event-type is a situation-type.
+Quality-Value is a concept-type.
+Quality-Value has-description equal-to 'A gufo:AbstractIndividual that can be associated with a gufo:Quality reflecting the perception or conception of the quality in a certain value space. Instances of gufo:QualityValue include the rational number 2.5 when used to conceive of the acidity of a portion of wine (in a pH scale), the tuple <38.8897,-77.0089> when used to conceive of the location of a building (in a space formed by latitude and longitude), or the triplet <0,0,0> when used to conceive of the color of a physical object (in a trimensional space formed by red, green and blue color components).  Corresponds to `Quale` in Guizzardi (2005). Use this class only for quality values (qualia) that are to be reified in the A-box and associated with a gufo:ConcreteIndividual through the object property gufo:hasReifiedQualityValue. Otherwise, use the gufo:hasQualityValue data property and a literal to determine the quality value.'.
+Every quality-value is an abstract-individual.
+Every material-relationship-type is a relationship-type.
+Every aspect is an endurant.
+No aspect is an object.
+Participation is a concept-type.
+Participation has-description equal-to 'A gufo:Event that depends on a single object. Participations can be used to partition an event into portions, each of which depend exclusively on a single object. Consider a business meeting with multiple participants, including John and Mary. John`s participation in the meeting encompasses all events that are part of the meeting and that depend solely on him. Likewise, Mary`s participation encompasses all events that are part of the meeting and that depend solely on her. Similarly, in Brutus’ stabbing of Caesar, we may identify the participations of Brutus, of Caesar, and of the dagger.'.
+Event is a concept-type.
+Event has-description equal-to 'A gufo:ConcreteIndividual that `occurs` or `happens` in time. They may be instantaneous or long-running. Events are those `things that happen to or are performed by` (Casati and Varzi, 2015) endurants. Examples include actions and processes, such as a business meeting, a communicative act, a soccer match, a goal kick, the clicking of a mouse button; as well as natural occurrences such as an earthquake, the fall of the meteor that caused the extinction of the dinosaurs.Also termed `happening`, `occurrence`, `perdurant` or `occurrent` in the philosophical literature.Casati, R. & Varzi, A. (2015). Events. In E.N. Zalta (Ed.), The Stanford Encyclopedia of Philosophy (Winter 2015 ed.). 19 Metaphysics Research Lab, Stanford University. https://plato.stanford.edu/archives/win2015/entries/events/'.
+Every participation is an event.
+Every abstract-individual is an individual.
+No abstract-individual is a concrete-individual.
+Every event is a concrete-individual.
+Every rigid-type is an endurant-type.
+Every temporary-parthood-situation is a situation.
+No temporary-parthood-situation is a temporary-relationship-situation.
+Depends-Externally-On is a role-type.
+Depends-Externally-On has-description equal-to 'Identifies a gufo:Endurant on which the gufo:ExtrinsicMode depends.For example, John`s duty to return the book he borrowed from Mary (a gufo:ExtrinsicMode) depends externally on Mary.The identifed gufo:Endurant should  be external to the bearer of the extrinsic mode (see Guizzardi, 2005, p. 239). In other words, the identified endurant should not be a part or an intrisic aspect of the bearer of the extrinsic mode.'.
+Nothing depends-externally-on itself.
+Every situation is a concrete-individual.
+Kind is a concept-type.
+Kind has-description equal-to 'A gufo:EndurantType that is both sortal and rigid. It provides a uniform principle of identity for its instances. Every gufo:Endurant instantiates one and only one gufo:Kind. Examples include kinds of ordinary objects of everyday experience, such as: `Person`, `House`, `Car`; kinds of relators, such as `Marriage`, `RentalContract`; kinds of existentially-dependent aspects of objects, such as `Weight`, `Belief`, `Vulnerability`.'.
+Every kind is a rigid-type.
+Every kind is a sortal.
+No kind is a sub-kind.
+Abstract-Individual-Type is a concept-type.
+Abstract-Individual-Type has-description equal-to 'A gufo:Type whose instances are abstract individuals.Instances of gufo:AbstractIndividualType are subclasses of gufo:AbstractIndividual.Examples include the types `NaturalNumber`, `Set`, `Proposition`.'.
+Every abstract-individual-type is a type.
+No abstract-individual-type is a concrete-individual-type.
+No abstract-individual-type is a relationship-type.
+Every variable-collection is a collection.
+Category is a concept-type.
+Category has-description equal-to 'A gufo:EndurantType that is both non-sortal and rigid. It captures essential properties that apply to instances of different kinds.For example, `PhysicalObject` may be considered a gufo:Category, encompassing objects such as cars, planets, trees. `Agent` may be a gufo:Category that classifies both people and organizations.'.
+Every category is a non-sortal.
+Every category is a rigid-type.
+Every object is an endurant.
+Stands-In-Qualified-Attribution is a role-type.
+Stands-In-Qualified-Attribution has-description equal-to 'Identifies a gufo:QualityValueAttributionSituation in which the endurant stands. The identified gufo:QualityValueAttributionSituation is then used with the gufo:concernsQualityValue data property or the gufo:concernsReifiedQualityValue object property to indicate a quality value attributed to the gufo:Endurant standing in the situation. This forms a pattern to represent that quality values may differ in different situations.'.
+Every-single-thing stands-in-qualified-attribution nothing-but quality-value-attribution-situations.
+Has-Associated-Quality-Value-Type is a role-type.
+Has-Associated-Quality-Value-Type has-description equal-to 'Identifies a quality value type to which the quality type is associated. For example, a `Color` quality type may be associated with a `ColorValueInRGB` quality value type.It relates a specialization of gufo:Quality (an instance of gufo:EndurantType) to a specialization of gufo:QualityValue  (an instance of gufo:AbstractIndividualType).To be used only when quality values are reified.'.
+Every-single-thing has-associated-quality-value-type nothing-but abstract-individual-type.
+Has-Begin-Date is a datarole-type.
+Has-Begin-Date has-description equal-to 'Determines the begin point for a gufo:ConcreteIndividual, using a xsd:date literal.In the case of endurants, gufo:asBeginPointInXSDDate determines the time point when the endurant comes into existence. In the case of events, this data property determines the time point when the event starts to take place. In the case of situation, it determines the time point when the situation begins to hold.Use gufo:hasBeginPoint instead when temporal entities are reified.'.
+Every-single-thing has-begin-date nothing-but (some datetime value).
+Concerns-Non-Rigid-Type is a role-type.
+Concerns-Non-Rigid-Type has-description equal-to 'Identifies the gufo:NonRigidType that is instantiated by the endurant that stands in a gufo:TemporaryInstantiationSituation.'.
+Every-single-thing concerns-non-rigid-type nothing-but non-rigid-type.
+Every-single-thing is-aspect-proper-part-of nothing-but aspects.
+Stands-In-Qualified-Relationship is a role-type.
+Stands-In-Qualified-Relationship has-description equal-to 'Identifies a gufo:TemporaryRelationshipSituation in which the endurant stands. The identified gufo:TemporaryRelationshipSituation is then used with the gufo:concernsRelatedEndurant and the gufo:concernsRelationshipType object properties to indicate the related element and the type of relationship that applies. This forms a pattern to represent that relationships that may change in different situations. For example, `heavierThan` may change when the objects involved gain or lose weight.For material relations, prefer the use of gufo:Relator.'.
+Every-single-thing stands-in-qualified-relationship nothing-but temporary-relationship-situations.
+Has-Begin-Timestamp is a datarole-type.
+Has-Begin-Timestamp has-description equal-to 'Determines the begin point for a gufo:ConcreteIndividual, using a xsd:dateTimeStamp literal.In the case of endurants, gufo:hasBeginPointInXSDDateTimeStamp determines the time point when the endurant comes into existence. In the case of events, this data property determines the time point when the event starts to take place. In the case of situation, it determines the time point when the situation begins to hold.Use gufo:hasBeginPoint instead when temporal entities are reified.'.
+Every-single-thing has-begin-timestamp nothing-but (some datetime value).
+Is-Derived-From is a role-type.
+Is-Derived-From has-description equal-to 'Identifies a gufo:EndurantType from which the material or comparative relation can be derived. The identified gufo:EndurantType should be a subclass of gufo:Aspect, more specifically a subclass of gufo:ExtrinsicAspect in the case of a gufo:MaterialRelationshipType, and a subclass of gufo:IntrinsicAspect in the case of a gufo:ComparativeRelationshipType.For example, `marriedWith` can be derived from `Marriage`, `heavierThan` can be derived from `Weight`.See Fonseca et al. (2019).'.
+Every-single-thing is-derived-from nothing-but endurant-type.
+Is-Manifested-In is a role-type.
+Is-Manifested-In has-description equal-to 'Identifies a gufo:Event in which the gufo:Aspect is manifested.For example, the passing of an electrical current in a conductor is an event that encompasses the manifestation of an aspect inhering in a copper wire (the wire`s  electrical conductivity).'.
+Every-single-thing is-manifested-in nothing-but events.
+Is-Situation-Proper-Part-Of is a role-type.
+Is-Situation-Proper-Part-Of has-description equal-to 'Identifies a gufo:Situation of which the situation is a part.Examples include: the situation in which John has influenza is part of the situation in which John has influenza and he is tired; the situation in which John is friends with Mary is part of the situation in which he is friends with Mary and Alice; the situation in which John is married to Alice is part of the situation in which John is married to Alice, while she works at the Free University of Bozen-Bolzano.'.
+Every-single-thing is-situation-proper-part-of nothing-but situations.
+Constitutes is a role-type.
+Constitutes has-description equal-to 'Identifies a gufo:ConcreteIndividual that is constituted (partially) by the constituent individual.For example, the gufo:Collection of persons whose members are John, Paul, George, Ringo constituted the beatles, the gufo:Quantity of marble that constitutes the statue of Venus de Milo, and the gufo:Event of Paul raising his arm in a meeting that constitutes his voting (also a gufo:Event).In case constitution changes in time, see gufo:standsInQualifiedConstitution.'.
+Every-single-thing constitutes nothing-but concrete-individuals.
+Participates-In is a role-type.
+Participates-In has-description equal-to 'Identifies a gufo:Event in which the gufo:Object participated.Examples include the participation of Freddy Mercury in Queen`s Live Aid Concert and the participation of an airplane in a flight.'.
+Every-single-thing participates-in nothing-but events.
+Concerns-Quality-Type is a role-type.
+Concerns-Quality-Type has-description equal-to 'Identifies the quality type (a gufo:EndurantType subclassing gufo:Quality) whose value is attributed in the gufo:QualityValueAttributionSituation.'.
+Every-single-thing concerns-quality-type nothing-but endurant-type.
+Concerns-Temporary-Whole is a role-type.
+Concerns-Temporary-Whole has-description equal-to 'Identifies the whole (a gufo:Endurant) of which the endurant that stands in the gufo:TemporaryParthoodSituation is part.'.
+Every-single-thing concerns-temporary-whole nothing-but endurants.
+Every-single-thing is-object-proper-part-of nothing-but objects.
+Has-End-Date is a datarole-type.
+Has-End-Date has-description equal-to 'Determines the end point for a gufo:ConcreteIndividual using a xsd:date literal. In the case of endurants, gufo:hasEndPointInXSDDate determines the time point when the endurant ceases to exist. In the case of events, this data property determines the time point when the event ends. In the case of situation, it determines the time point when the situation ceases to hold.Use gufo:hasEndPoint instead when temporal entities are reified.'.
+Every-single-thing has-end-date nothing-but (some datetime value).
+Is-Component-Of is a role-type.
+Is-Component-Of has-description equal-to 'Identifies a gufo:FunctionalComplex of which the object is a component.For example, the habitation module is a component of the International Space Station, and so are each of the solar panels; Obama`s brain is a component of his body, and so is his heart; the engine is a component of the HMS Queen Elizabeth (R08).gufo:isComponentOf is not transitive in the general case. Particular sub-properties may be transitive (Guizzardi, 2005, p. 183).When a component may change its relation to be whole, see gufo:standsInQualifiedParthood.'.
+Every-single-thing is-component-of nothing-but functional-complexes.
+Stands-In-Qualified-Parthood is a role-type.
+Stands-In-Qualified-Parthood has-description equal-to 'Identifies a gufo:TemporaryParthoodSituation in which the endurant stands (as a temporary part). The identified gufo:TemporaryParthoodSituation is further related with an endurant (the whole) through the gufo:concernsTemporaryWhole object property. This forms a pattern to represent temporary parthood, in which the relationships between parts and wholes vary in different situations. In particular, this pattern is useful in case parts may be separated from their wholes, attached to other wholes, replaced.'.
+Every-single-thing stands-in-qualified-parthood nothing-but temporary-parthood-situations.
+Has-End-Timestamp is a datarole-type.
+Has-End-Timestamp has-description equal-to 'Determines the end point for a gufo:ConcreteIndividual using a xsd:dateTimeStamp literal. In the case of endurants, gufo:hasEndPointInXSDDateTimeStamp determines the time point when the endurant ceases to exist. In the case of events, this data property determines the time point when the event ends. In the case of situation, it determines the time point when the situation ceases to hold.Use gufo:hasEndPoint instead when temporal entities are reified.'.
+Every-single-thing has-end-timestamp nothing-but (some datetime value).
+Every-single-thing is-sub-collection-of nothing-but collection.
+Is-Terminated-In is a role-type.
+Is-Terminated-In has-description equal-to 'Identifies the gufo:Event in which the gufo:Endurant was brought to an end. For example, the Space Shuttle Challenger (OV-099) (a gufo:FunctionalComplex) was destroyed during the launch of its tenth flight (a gufo:Event). Benevides et al. (2019) only discussed termination of objects; gufo:wasCreatedIn is extended to endurants in general. This means that a gufo:Relator (such as a marriage) can be declared terminated. Further, in that work `terminatedBy` required the event to be `triggered` by a situation in which the terminated object is present. We relax this requirement here, such that the object may be created and terminated in the scope of the identified gufo:Event.A. B. Benevides, J. R. Bourguet, G. Guizzardi, R. Penãloza, and J. P. A. Almeida, “Representing a reference foundational ontology of events in SROIQ,” Applied ontology, vol. 14, iss. 3, p. 293–334, 2019. <http://dx.doi.org/10.3233/AO-190214>'.
+Every-single-thing is-terminated-in nothing-but events.
+Every-single-thing inheres-in nothing-but concrete-individuals.
+Has-End-Point is a role-type.
+Has-End-Point has-description equal-to 'Identifies the end point for a gufo:ConcreteIndividual, in the case in which time instants are reified.In the case of endurants, this identifies the time point when the endurant ceases to exist. In the case of events, this identifies the time point when the event ends. In the case of situation, this identifies the time point when the situation ceases to hold.'.
+Every-single-thing has-end-point nothing-but instants.
+Concerns-Constituted-Endurant is a role-type.
+Concerns-Constituted-Endurant has-description equal-to 'Identifies the constituted gufo:Endurant in the gufo:TemporaryConstitutionSituation.'.
+Every-single-thing concerns-constituted-endurant nothing-but endurants.
+Every-single-thing mediates nothing-but endurants.
+Every-single-thing is-proper-part-of nothing-but things.
+Concerns-Relationship-Type is a role-type.
+Concerns-Relationship-Type has-description equal-to 'Identifies the gufo:RelationshipType instantiated in the gufo:TemporaryRelationshipSituation.'.
+Every-single-thing concerns-relationship-type nothing-but relationship-type.
+Stands-In-Qualified-Constitution is a role-type.
+Stands-In-Qualified-Constitution has-description equal-to 'Identifies a gufo:TemporaryConstitutionSituation in which an endurant stands temporarily (as a constituent). The identified gufo:TemporaryConstitutionSituation is further related with an endurant (the whole) through the gufo:concernsConstitutedEndurant object property. This forms a pattern to represent temporary constitution, in which the relationships between constituents and constituted endurant vary in different situations.Consider, for example, a group of people (understood as a gufo:FixedCollection) constituting a band (understood as a gufo:FunctionalComplex). In this case, any change in the membership of the group (e.g., the replacement of one person) creates a different group of people. Therefore, the band`s constitution can change in time, and the pattern using gufo:TemporaryConstitutionSituation is applicable.'.
+Every-single-thing stands-in-qualified-constitution nothing-but temporary-constitution-situations.
+Is-Brought-About-By is a role-type.
+Is-Brought-About-By has-description equal-to 'Identifies a gufo:Situation that is brought about by the gufo:Event.Guizzardi et al. (2013) included a notion of `brings-about` that related events to a single (`maximal`) situation, embodying all the effects of the event at the time it ends. This implementation of gufo:broughtAbout diverges from `brings-about` in that work because gufo:broughtAbout can be used to relate events to more than one gufo:Situation. Each gufo:Situation identified through gufo:broughtAbout should be understood as an (improper) part of the maximal situation.'.
+Every-single-thing is-brought-about-by nothing-but situations.
+Every-single-thing contributes-to-trigger nothing-but events.
+Has-Begin-Point is a role-type.
+Has-Begin-Point has-description equal-to 'Identifies the begin point for a gufo:ConcreteIndividual, in the case in which time instants are reified. In the case of endurants, this identifies the time point when the endurant comes into existence. In the case of events, this identifies the time point when the event starts to take place. In the case of situation, this identifies the time point when the situation begins to hold.If time instants are not reified, use gufo:hasBeginPointInXSDDate or gufo:hasBeginPointInXSDDateTimeStamp.'.
+Every-single-thing has-begin-point nothing-but instants.
+Every-single-thing is-sub-quantity-of nothing-but quantity.
+Every-single-thing depends-historically-on nothing-but concrete-individuals.
+Every-single-thing is-created-in nothing-but events.
+Every-single-thing is-event-proper-part-of nothing-but events.
+Stands-In is a role-type.
+Stands-In has-description equal-to 'Identifies a gufo:Situation in which the entity stands. This implementation includes sub-properties of gufo:standsIn to identify situations concerning the attribution of (mutable) values to qualities, variable relationships, the instantiation of non-contingent types, temporary parthood and temporary constitution.'.
+Every-single-thing stands-in nothing-but situations.
+Concerns-Reified-Quality-Value is a role-type.
+Concerns-Reified-Quality-Value has-description equal-to 'http://purl.org/nemo/gufo#concernsQualityValue'.
+Every-single-thing concerns-reified-quality-value nothing-but quality-value.
+Categorizes is a role-type.
+Categorizes has-description equal-to 'Identifies a gufo:Type whose instances may be classified by instances of the categorizing higher-order type.For example, `ShipType` gufo:categorizes `Ship`. Instances of `ShipType` such as `Supercarrier` and `Cargoship` should be declared subclasses of `Ship`. OWL 2 punning should be used to capture the two facets of `Supercarrier` and `Cargoship` in this example: (i) as instances of `ShipType`, and (ii) as subclasses of `Ship`.The categorized type is termed the `base type` in the `powertype pattern` see Carvalho et al (2017), the higher-order type is often called the `powertype`.  gufo:categorizes is the general (unspecific) form of categorization. See  gufo:partitions for a more specific form, in which instances of the categorized type are classified by exactly one instance of the higher-order type. The domain is gufo:Type excluding gufo:AbstractIndividualType as well as gufo:ConcreteIndividualTypes because those types are first-order types (their instances are individuals). Only instances of gufo:Type representing higher-order types can categorize a base type.For further details and formalization of `categorization`, see Carvalho et al (2017) which combines UFO with MLT (a multi-level modeling theory).  V. A. Carvalho, J. P. A. Almeida, C. M. Fonseca, and G. Guizzardi, “Multi-level ontology-based conceptual modeling,” Data & Knowledge Engineering, vol. 109, p. 3–24, 2017. <http://dx.doi.org/10.1016/j.datak.2017.03.002>'.
+Every-single-thing categorizes nothing-but type.
+Has-Reified-Quality-Value is a role-type.
+Has-Reified-Quality-Value has-description equal-to 'Identifies an instance of gufo:QualityValue to reflect the perception or conception of a quality in a certain value space. Use this property only for quality values that are to be reified in the A-box and associated with a gufo:ConcreteIndividual. Otherwise, use the gufo:hasQualityValue data property and a literal to determine the quality value.The full representation pattern for quality values involves first identifying a gufo:Quality that inheres in a concrete individual and then associating it with a reified quality value. For example, let us consider the color of Yves Klein`s `Blue Monochrome` painting made in 1961 (MoMA`s object with number 618.1967). In the full pattern, an instance of gufo:Quality that inheres in the physical object (the color of that painting) is associated with a gufo:QualityValue (say the triplet <0, 47, 167> for that painting) through gufo:hasReifiedQualityValue. The full pattern is recommended when different quality spaces are expected to be used for the same quality. For example, the color of that painting could also be associated with a quadruple <100, 72, 0, 35> representing the same color in a CMYK space.When the full pattern is not required, gufo:hasReifiedQualityValue can also be used to directly associate a concrete individual (without identifying the quality) with a quality value.'.
+Every-single-thing has-reified-quality-value nothing-but quality-value.
+Is-Collection-Member-Of is a role-type.
+Is-Collection-Member-Of has-description equal-to 'Identifies a gufo:Collection of which the object is a member. This is the relation between John and a group of persons, and between a cow and its herd.gufo:isCollectionMemberOf is intransitive (Guizzardi, 2005, p. 185).For membership in a gufo:VariableCollection, see gufo:standsInQualifiedParthood.'.
+Every-single-thing is-collection-member-of nothing-but collection.
+Concerns-Related-Endurant is a role-type.
+Concerns-Related-Endurant has-description equal-to 'Identifies the related gufo:Endurant in the gufo:TemporaryRelationshipSituation.'.
+Every-single-thing concerns-related-endurant nothing-but endurants.
+Stands-In-Qualified-Instantiation is a role-type.
+Stands-In-Qualified-Instantiation has-description equal-to 'Identifies a gufo:TemporaryInstantiationSituation in which the endurant stands. The identified gufo:TemporaryInstantiationSituation is further related with a gufo:NonRigidType through the gufo:concernsNonRigidType object property. This forms a pattern to represent the contigent instantiation of a non-rigid type by the endurant, in which case instantiation may vary in different situations.'.
+Every-single-thing stands-in-qualified-instantiation nothing-but temporary-instantiation-situations.
+Every-single-thing depends-externally-on nothing-but endurants.
+Something is a non-rigid-type if-and-only-if-it-either is an anti-rigid-type or is a semi-rigid-type.
+If X stands-in-qualified-attribution Y then X stands-in Y.
+Every-single-thing that stands-in-qualified-attribution is an endurant.
+Concerns-Quality-Value is a datarole-type.
+Concerns-Quality-Value has-description equal-to 'Determines a quality value associated with the gufo:ConcreteIndividual that stands in the gufo:QualityValueAttributionSituation.Use gufo:concernsReifiedQualityValue instead when quality values are refied.It is recommended that subproperties of gufo:concernsQualityValue are created, possibly identifying the datatype to be used. For example, `concernsTemperatureValue` could be defined as a sub-property of gufo:concernsQualityValue with range xsd:double.'.
+Every-single-thing that concerns-quality-value (some value) is a quality-value-attribution-situation.
+Every-single-thing that has-associated-quality-value-type is an endurant-type.
+Every quality-value-attribution-situation concerns-reified-quality-value one quality-value and-or concerns-quality-value one (some value).
+Every quality-value-attribution-situation concerns-quality-type one endurant-type.
+Every quality-value-attribution-situation is stood-in-qualified-attribution by one endurant.
+Every relator mediates at-least two endurants.
+Every-single-thing has-begin-date at-most one (some value).
+Every-single-thing that has-begin-date (some value) is a concrete-individual.
+Every-single-thing concerns-non-rigid-type at-most one thing.
+Every-single-thing that concerns-non-rigid-type is a temporary-instantiation-situation.
+Something is an extrinsic-aspect if-and-only-if-it-either is an extrinsic-mode or is a relator.
+If X is-aspect-proper-part-of Y then X is-proper-part-of Y.
+Every-single-thing that is-aspect-proper-part-of is an aspect.
+If X stands-in-qualified-relationship Y then X stands-in Y.
+Every-single-thing that stands-in-qualified-relationship is an endurant.
+Every-single-thing has-begin-timestamp at-most one (some value).
+Every-single-thing that has-begin-timestamp (some value) is a concrete-individual.
+Every-single-thing that is-derived-from is a comparative-relationship-type and-or is a material-relationship-type.
+Every-single-thing that is-manifested-in is an aspect.
+If X is-situation-proper-part-of Y then X is-proper-part-of Y.
+Every-single-thing that is-situation-proper-part-of is a situation.
+Every-single-thing that constitutes is a concrete-individual.
+Every-single-thing that participates-in is an object.
+Every-single-thing concerns-quality-type at-most one thing.
+Every-single-thing that concerns-quality-type is a quality-value-attribution-situation.
+Every-single-thing concerns-temporary-whole at-most one thing.
+Every-single-thing that concerns-temporary-whole is a temporary-parthood-situation.
+If X is-object-proper-part-of Y then X is-proper-part-of Y.
+Every-single-thing that is-object-proper-part-of is an object.
+Every-single-thing has-end-date at-most one (some value).
+Every-single-thing that has-end-date (some value) is a concrete-individual.
+If X is-component-of Y then X is-object-proper-part-of Y.
+Every-single-thing that is-component-of is an object.
+Has-Value-Component is a datarole-type.
+Has-Value-Component has-description equal-to 'This property is used for quality values that are defined in terms of a multidimensional quality structure (such as color conceived in terms of hue, saturation and brightness). Each value component of a quality value (a particular value for hue, a particular value for saturation, a particular value for brightness) is determined with this property. It is recommended that subproperties of gufo:hasValueComponent are created to indicate values for particular dimensions, possibly identifying the datatype to be used. For example `hasHueComponent`, `hasSaturationComponent` and `hasBrightnessComponent` could be used as data properties specializing gufo:hasValueComponent with the xsd:double datatype.'.
+Every-single-thing that has-value-component (some value) is a quality-value.
+If X stands-in-qualified-parthood Y then X stands-in Y.
+Every-single-thing that stands-in-qualified-parthood is an endurant.
+Every temporary-relationship-situation concerns-related-endurant an endurant.
+Every temporary-relationship-situation concerns-relationship-type one relationship-type.
+Every temporary-relationship-situation is stood-in-qualified-relationship by one endurant.
+Something is an individual if-and-only-if-it-either is an abstract-individual or is a concrete-individual.
+Every-single-thing has-end-timestamp at-most one (some value).
+Every-single-thing that has-end-timestamp (some value) is a concrete-individual.
+If X is-sub-collection-of Y then X is-object-proper-part-of Y.
+Every-single-thing that is-sub-collection-of is a collection.
+Every-single-thing that is-terminated-in is an endurant.
+Every-single-thing inheres-in at-most one thing.
+Every-single-thing that inheres-in is an aspect.
+Every-single-thing that has-end-point is a concrete-individual.
+Something is a collection if-and-only-if-it-either is a fixed-collection or is a variable-collection.
+Every-single-thing that concerns-constituted-endurant is a temporary-constitution-situation.
+Every-single-thing that mediates is a relator.
+Every-single-thing that is-proper-part-of is something.
+Every-single-thing concerns-relationship-type at-most one thing.
+Every-single-thing that concerns-relationship-type is a temporary-relationship-situation.
+If X stands-in-qualified-constitution Y then X stands-in Y.
+Every-single-thing that stands-in-qualified-constitution is an endurant.
+Every-single-thing that is-brought-about-by is an event.
+Every extrinsic-mode depends-externally-on a concrete-individual.
+Every extrinsic-mode inheres-in one concrete-individual.
+Every-single-thing that contributes-to-trigger is a situation.
+Every-single-thing that has-begin-point is a concrete-individual.
+Every temporary-instantiation-situation concerns-non-rigid-type one non-rigid-type.
+Every temporary-instantiation-situation is stood-in-qualified-instantiation by one endurant.
+If X is-sub-quantity-of Y then X is-object-proper-part-of Y.
+Every-single-thing that is-sub-quantity-of is a quantity.
+Every-single-thing that depends-historically-on is a concrete-individual.
+Something is an endurant-type if-and-only-if-it-either is a non-rigid-type or is a rigid-type.
+Something is an endurant-type if-and-only-if-it-either is a non-sortal or is a sortal.
+Every-single-thing that is-created-in is an endurant.
+Every intrinsic-aspect inheres-in one concrete-individual.
+Something is an intrinsic-aspect if-and-only-if-it-either is an intrinsic-mode or is a quality.
+If X is-event-proper-part-of Y then X is-proper-part-of Y.
+Every-single-thing that is-event-proper-part-of is an event.
+Something is a concrete-individual if-and-only-if-it-either is an endurant, is an event or is a situation.
+Every temporary-constitution-situation concerns-constituted-endurant one object.
+Every temporary-constitution-situation is stood-in-qualified-constitution by one object.
+Every-single-thing that stands-in is something.
+Something is an endurant if-and-only-if-it-either is an aspect or is an object.
+Every-single-thing concerns-reified-quality-value at-most one thing.
+Every-single-thing that concerns-reified-quality-value is a quality-value-attribution-situation.
+Every-single-thing that categorizes is a type and is not an abstract-individual-type and is not a concrete-individual-type.
+Partitions is a role-type.
+Partitions has-description equal-to 'Identifies a gufo:Type whose instances are classified by exactly one instance of the partitioning higher-order type.For example, `AnimalSpecies` gufo:partitions `Animal`. Instances of `AnimalSpecies` such as `Lion`, `Hiena` must be disjoint subclasses of `Animal`. OWL 2 punning should be used to capture the two facets of `Lion` and `Hiena` in this example: (i) as instances of `AnimalSpecies`, and (ii) as  subclasses of `Animal`.Note that the partitioned type (in the example `Animal`) may or may not be declared to be a disjoint union of the explicitly enumerated subclasses (such as `Lion`, `Hiena`). This is because other instances of the higher-order type (`AnimalSpecies`) may exist that are not explicitly enumerated in the ontology.The partitioned type is termed the `base type` in the `powertype pattern` see Carvalho et al (2017), the higher-order type is often called the `powertype`.  For further details and formalization of `partitioning`, see Carvalho et al (2017) which combines UFO with MLT (a multi-level modeling theory).  V. A. Carvalho, J. P. A. Almeida, C. M. Fonseca, and G. Guizzardi, “Multi-level ontology-based conceptual modeling,” Data & Knowledge Engineering, vol. 109, p. 3–24, 2017. <http://dx.doi.org/10.1016/j.datak.2017.03.002>'.
+If X partitions Y then X categorizes Y.
+Every-single-thing that partitions is a type and is not an abstract-individual-type and is not a concrete-individual-type.
+Something is an aspect if-and-only-if-it-either is an extrinsic-aspect or is an intrinsic-aspect.
+Every-single-thing that has-reified-quality-value is a concrete-individual.
+If X is-collection-member-of Y then X is-object-proper-part-of Y.
+Every-single-thing that is-collection-member-of is an object.
+Every-single-thing concerns-related-endurant at-most one thing.
+Every-single-thing that concerns-related-endurant is a temporary-relationship-situation.
+X participates-in Y if-and-only-if Y takes-part-in X.
+Every participation takes-part-in one object.
+If X stands-in-qualified-instantiation Y then X stands-in Y.
+Every-single-thing that stands-in-qualified-instantiation is an endurant.
+Every temporary-parthood-situation concerns-temporary-whole one endurant.
+Every temporary-parthood-situation is stood-in-qualified-parthood by one endurant.
+Every-single-thing that depends-externally-on is an extrinsic-mode.
+Has-Quality-Value is a datarole-type.
+Has-Quality-Value has-description equal-to 'Determines a quality value associated with the concrete individual.Use gufo:hasReifiedQualityValue instead when quality values are reified.It is recommended that subproperties of gufo:hasQualityValue are created, possibly identifying the datatype to be used. For example, `hasTemperatureValue` could be defined as a sub-property of gufo:hasQualityValue whose domain is `Temperature` (specializing gufo:Quality) and whose range is xsd:double.'.
+Every-single-thing that has-quality-value (some value) is a concrete-individual.
+Anything either is an endurant, is an event or is a situation or-something-else.
+Anything either is a collection, is a functional-complex or is a quantity or-something-else.
+Instant is-subconcept-of Abstract-Individual.
+Quality-Value-Attribution-Situation is-subconcept-of Situation.
+Role-Mixin is-subconcept-of Non-Sortal.
+Role is-subconcept-of Anti-Rigid-Type.
+Concrete-Individual is-subconcept-of Individual.
+Fixed-Collection is-subconcept-of Collection.
+Endurant is-subconcept-of Concrete-Individual.
+Phase is-subconcept-of Sortal.
+Temporary-Instantiation-Situation is-subconcept-of Situation.
+Extrinsic-Aspect is-subconcept-of Aspect.
+Phase is-subconcept-of Anti-Rigid-Type.
+Abstract-Individual is-subconcept-of Individual.
+Kind is-subconcept-of Sortal.
+Rigid-Type is-subconcept-of Endurant-Type.
+Event-Type is-subconcept-of Concrete-Individual-Type.
+Intrinsic-Aspect is-subconcept-of Aspect.
+Phase-Mixin is-subconcept-of Non-Sortal.
+Kind is-subconcept-of Rigid-Type.
+Phase-Mixin is-subconcept-of Anti-Rigid-Type.
+Endurant-Type is-subconcept-of Concrete-Individual-Type.
+Situation is-subconcept-of Concrete-Individual.
+Quality is-subconcept-of Intrinsic-Aspect.
+Sub-Kind is-subconcept-of Rigid-Type.
+Object is-subconcept-of Endurant.
+Anti-Rigid-Type is-subconcept-of Non-Rigid-Type.
+Functional-Complex is-subconcept-of Object.
+Concrete-Individual-Type is-subconcept-of Type.
+Mixin is-subconcept-of Non-Sortal.
+Comparative-Relationship-Type is-subconcept-of Relationship-Type.
+Relator is-subconcept-of Extrinsic-Aspect.
+Category is-subconcept-of Rigid-Type.
+Variable-Collection is-subconcept-of Collection.
+Role is-subconcept-of Sortal.
+Relationship-Type is-subconcept-of Type.
+Temporary-Parthood-Situation is-subconcept-of Situation.
+Non-Sortal is-subconcept-of Endurant-Type.
+Intrinsic-Mode is-subconcept-of Intrinsic-Aspect.
+Mixin is-subconcept-of Semi-Rigid-Type.
+Abstract-Individual-Type is-subconcept-of Type.
+Event is-subconcept-of Concrete-Individual.
+Participation is-subconcept-of Event.
+Quantity is-subconcept-of Object.
+Sub-Kind is-subconcept-of Sortal.
+Extrinsic-Mode is-subconcept-of Extrinsic-Aspect.
+Material-Relationship-Type is-subconcept-of Relationship-Type.
+Collection is-subconcept-of Object.
+Semi-Rigid-Type is-subconcept-of Non-Rigid-Type.
+Temporary-Relationship-Situation is-subconcept-of Situation.
+Sortal is-subconcept-of Endurant-Type.
+Temporary-Constitution-Situation is-subconcept-of Situation.
+Aspect is-subconcept-of Endurant.
+Non-Rigid-Type is-subconcept-of Endurant-Type.
+Situation-Type is-subconcept-of Concrete-Individual-Type.
+Role-Mixin is-subconcept-of Anti-Rigid-Type.
+Quality-Value is-subconcept-of Abstract-Individual.
+Category is-subconcept-of Non-Sortal.
+Is-Aspect-Proper-Part-Of is-subproperty-of Is-Proper-Part-Of.
+Is-Object-Proper-Part-Of is-subproperty-of Is-Proper-Part-Of.
+Stands-In-Qualified-Relationship is-subproperty-of Stands-In.
+Partitions is-subproperty-of Categorizes.
+Is-Sub-Quantity-Of is-subproperty-of Is-Object-Proper-Part-Of.
+Is-Event-Proper-Part-Of is-subproperty-of Is-Proper-Part-Of.
+Stands-In-Qualified-Constitution is-subproperty-of Stands-In.
+Stands-In-Qualified-Instantiation is-subproperty-of Stands-In.
+Is-Component-Of is-subproperty-of Is-Object-Proper-Part-Of.
+Stands-In-Qualified-Attribution is-subproperty-of Stands-In.
+Stands-In-Qualified-Parthood is-subproperty-of Stands-In.
+Is-Situation-Proper-Part-Of is-subproperty-of Is-Proper-Part-Of.
+Is-Sub-Collection-Of is-subproperty-of Is-Object-Proper-Part-Of.
+Is-Collection-Member-Of is-subproperty-of Is-Object-Proper-Part-Of.

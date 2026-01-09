@@ -1,0 +1,859 @@
+
+================================================================================
+COMPREHENSIVE OWL 2 RL PERFORMANCE TEST
+Testing all grammar constructs with scalable instances
+================================================================================
+
+================================================================================
+TEST: 1 INSTANCES
+================================================================================
+
+📊 RESULTS:
+  Build time:          54.27 ms (parse + reasoning)
+  Total facts:         112
+  Asserted facts:      34
+  Inferred facts:      78
+  Inference ratio:     2.29x
+
+💾 SERIALIZATION:
+  Save time:           15.86 ms
+  File size:           228,363 bytes (223.0 KB)
+  Bytes per fact:      2039.0
+
+⚡ DESERIALIZATION:
+  Load time:           30.59 ms
+  Facts loaded:        112
+  Rules fired:         0 (✅ CORRECT)
+  Speedup vs build:    1.77x faster
+
+📈 FACTS BY TYPE:
+  all_values_from                       2 (  1.8%)
+  alldisjoint_classes                   1 (  0.9%)
+  complement                            1 (  0.9%)
+  data_assertion                        1 (  0.9%)
+  equivalence                          26 ( 23.2%)
+  equivalent_property                   2 (  1.8%)
+  instance_of                           2 (  1.8%)
+  intersection                          1 (  0.9%)
+  property_chain                        3 (  2.7%)
+  some_values_from                      2 (  1.8%)
+  sub_property                          7 (  6.2%)
+  subproperty_of                        2 (  1.8%)
+  subsumption                          59 ( 52.7%)
+  union                                 3 (  2.7%)
+
+🔥 TOP RULE FIRINGS:
+  scm-sco                                   90
+  scm-eqc1-2                                26
+  scm-eqc1-1                                26
+  scm-eqc2                                  26
+  prp-spo1-template-meta                     7
+  scm-spo                                    4
+  scm-uni-1                                  3
+  scm-uni-2                                  3
+  prp-spo2-template-meta                     3
+  cax-eqc1                                   2
+  cax-sco                                    2
+  cax-eqc2                                   2
+  prp-eqp-2                                  2
+  scm-eqp2                                   2
+  scm-eqp1-1                                 2
+
+⚡ OPTIMIZATION METRICS:
+  Alpha hit rate:      49.7%
+
+✅ CORRECTNESS CHECKS:
+  Subsumptions:        59 (schema + inferred)
+  Equivalences:        26 (includes symmetry)
+  Unions:              3
+  Intersections:       1
+  Property chains:     3
+  Restrictions:        4
+  Validation errors:   0 (expected for disjoint tests)
+  Instance inferences: 1
+
+================================================================================
+TEST: 2 INSTANCES
+================================================================================
+
+📊 RESULTS:
+  Build time:          32.32 ms (parse + reasoning)
+  Total facts:         118
+  Asserted facts:      37
+  Inferred facts:      81
+  Inference ratio:     2.19x
+
+💾 SERIALIZATION:
+  Save time:           14.69 ms
+  File size:           231,664 bytes (226.2 KB)
+  Bytes per fact:      1963.3
+
+⚡ DESERIALIZATION:
+  Load time:           32.13 ms
+  Facts loaded:        118
+  Rules fired:         0 (✅ CORRECT)
+  Speedup vs build:    1.01x faster
+
+📈 FACTS BY TYPE:
+  all_values_from                       2 (  1.7%)
+  alldisjoint_classes                   1 (  0.8%)
+  complement                            1 (  0.8%)
+  data_assertion                        1 (  0.8%)
+  equivalence                          26 ( 22.0%)
+  equivalent_property                   2 (  1.7%)
+  instance_of                           5 (  4.2%)
+  intersection                          1 (  0.8%)
+  property_chain                        3 (  2.5%)
+  role_assertion                        3 (  2.5%)
+  some_values_from                      2 (  1.7%)
+  sub_property                          7 (  5.9%)
+  subproperty_of                        2 (  1.7%)
+  subsumption                          59 ( 50.0%)
+  union                                 3 (  2.5%)
+
+🔥 TOP RULE FIRINGS:
+  scm-sco                                   90
+  scm-eqc1-2                                26
+  scm-eqc1-1                                26
+  scm-eqc2                                  26
+  prp-spo1-template-meta                     7
+  cax-sco                                    5
+  scm-spo                                    4
+  scm-uni-1                                  3
+  scm-uni-2                                  3
+  prp-spo2-template-meta                     3
+  cax-eqc1                                   2
+  cax-eqc2                                   2
+  prp-eqp-2                                  2
+  scm-eqp2                                   2
+  scm-eqp1-1                                 2
+
+⚡ OPTIMIZATION METRICS:
+  Alpha hit rate:      50.1%
+
+✅ CORRECTNESS CHECKS:
+  Subsumptions:        59 (schema + inferred)
+  Equivalences:        26 (includes symmetry)
+  Unions:              3
+  Intersections:       1
+  Property chains:     3
+  Restrictions:        4
+  Validation errors:   0 (expected for disjoint tests)
+  Instance inferences: 3
+
+================================================================================
+TEST: 3 INSTANCES
+================================================================================
+
+📊 RESULTS:
+  Build time:          38.94 ms (parse + reasoning)
+  Total facts:         121
+  Asserted facts:      38
+  Inferred facts:      83
+  Inference ratio:     2.18x
+
+💾 SERIALIZATION:
+  Save time:           15.00 ms
+  File size:           232,921 bytes (227.5 KB)
+  Bytes per fact:      1925.0
+
+⚡ DESERIALIZATION:
+  Load time:           31.56 ms
+  Facts loaded:        121
+  Rules fired:         0 (✅ CORRECT)
+  Speedup vs build:    1.23x faster
+
+📈 FACTS BY TYPE:
+  all_values_from                       2 (  1.7%)
+  alldisjoint_classes                   1 (  0.8%)
+  complement                            1 (  0.8%)
+  data_assertion                        1 (  0.8%)
+  equivalence                          26 ( 21.5%)
+  equivalent_property                   2 (  1.7%)
+  instance_of                           8 (  6.6%)
+  intersection                          1 (  0.8%)
+  property_chain                        3 (  2.5%)
+  role_assertion                        3 (  2.5%)
+  some_values_from                      2 (  1.7%)
+  sub_property                          7 (  5.8%)
+  subproperty_of                        2 (  1.7%)
+  subsumption                          59 ( 48.8%)
+  union                                 3 (  2.5%)
+
+🔥 TOP RULE FIRINGS:
+  scm-sco                                   90
+  scm-eqc1-2                                26
+  scm-eqc1-1                                26
+  scm-eqc2                                  26
+  cax-sco                                    8
+  prp-spo1-template-meta                     7
+  scm-spo                                    4
+  scm-uni-1                                  3
+  scm-uni-2                                  3
+  prp-spo2-template-meta                     3
+  cax-eqc1                                   2
+  cax-eqc2                                   2
+  prp-eqp-2                                  2
+  scm-eqp2                                   2
+  scm-eqp1-1                                 2
+
+⚡ OPTIMIZATION METRICS:
+  Alpha hit rate:      50.1%
+
+✅ CORRECTNESS CHECKS:
+  Subsumptions:        59 (schema + inferred)
+  Equivalences:        26 (includes symmetry)
+  Unions:              3
+  Intersections:       1
+  Property chains:     3
+  Restrictions:        4
+  Validation errors:   0 (expected for disjoint tests)
+  Instance inferences: 5
+
+================================================================================
+TEST: 4 INSTANCES
+================================================================================
+
+📊 RESULTS:
+  Build time:          36.32 ms (parse + reasoning)
+  Total facts:         138
+  Asserted facts:      40
+  Inferred facts:      98
+  Inference ratio:     2.45x
+
+💾 SERIALIZATION:
+  Save time:           14.11 ms
+  File size:           242,662 bytes (237.0 KB)
+  Bytes per fact:      1758.4
+
+⚡ DESERIALIZATION:
+  Load time:           26.65 ms
+  Facts loaded:        138
+  Rules fired:         0 (✅ CORRECT)
+  Speedup vs build:    1.36x faster
+
+📈 FACTS BY TYPE:
+  all_values_from                       2 (  1.4%)
+  alldisjoint_classes                   1 (  0.7%)
+  complement                            1 (  0.7%)
+  data_assertion                        1 (  0.7%)
+  equivalence                          26 ( 18.8%)
+  equivalent_property                   2 (  1.4%)
+  instance_of                          20 ( 14.5%)
+  intersection                          1 (  0.7%)
+  property_chain                        3 (  2.2%)
+  role_assertion                        6 (  4.3%)
+  same_as                               2 (  1.4%)
+  some_values_from                      2 (  1.4%)
+  sub_property                          7 (  5.1%)
+  subproperty_of                        2 (  1.4%)
+  subsumption                          59 ( 42.8%)
+  union                                 3 (  2.2%)
+
+🔥 TOP RULE FIRINGS:
+  scm-sco                                   90
+  cax-sco                                   34
+  scm-eqc1-2                                26
+  scm-eqc1-1                                26
+  scm-eqc2                                  26
+  eq-rep-c                                  14
+  cax-eqc1                                  12
+  cax-eqc2                                  12
+  prp-spo1-template-meta                     7
+  eq-rep-o                                   4
+  scm-spo                                    4
+  scm-uni-1                                  3
+  scm-uni-2                                  3
+  prp-spo2-template-meta                     3
+  eq-rep-s                                   2
+
+⚡ OPTIMIZATION METRICS:
+  Alpha hit rate:      50.5%
+
+✅ CORRECTNESS CHECKS:
+  Subsumptions:        59 (schema + inferred)
+  Equivalences:        26 (includes symmetry)
+  Unions:              3
+  Intersections:       1
+  Property chains:     3
+  Restrictions:        4
+  Validation errors:   0 (expected for disjoint tests)
+  Instance inferences: 16
+
+================================================================================
+TEST: 5 INSTANCES
+================================================================================
+
+📊 RESULTS:
+  Build time:          34.26 ms (parse + reasoning)
+  Total facts:         143
+  Asserted facts:      41
+  Inferred facts:      102
+  Inference ratio:     2.49x
+
+💾 SERIALIZATION:
+  Save time:           16.11 ms
+  File size:           245,298 bytes (239.5 KB)
+  Bytes per fact:      1715.4
+
+⚡ DESERIALIZATION:
+  Load time:           27.76 ms
+  Facts loaded:        143
+  Rules fired:         0 (✅ CORRECT)
+  Speedup vs build:    1.23x faster
+
+📈 FACTS BY TYPE:
+  all_values_from                       2 (  1.4%)
+  alldisjoint_classes                   1 (  0.7%)
+  complement                            1 (  0.7%)
+  data_assertion                        1 (  0.7%)
+  equivalence                          26 ( 18.2%)
+  equivalent_property                   2 (  1.4%)
+  instance_of                          25 ( 17.5%)
+  intersection                          1 (  0.7%)
+  property_chain                        3 (  2.1%)
+  role_assertion                        6 (  4.2%)
+  same_as                               2 (  1.4%)
+  some_values_from                      2 (  1.4%)
+  sub_property                          7 (  4.9%)
+  subproperty_of                        2 (  1.4%)
+  subsumption                          59 ( 41.3%)
+  union                                 3 (  2.1%)
+
+🔥 TOP RULE FIRINGS:
+  scm-sco                                   90
+  cax-sco                                   46
+  scm-eqc1-2                                26
+  scm-eqc1-1                                26
+  scm-eqc2                                  26
+  cax-eqc1                                  16
+  cax-eqc2                                  16
+  eq-rep-c                                  14
+  prp-spo1-template-meta                     7
+  cls-uni-left                               4
+  eq-rep-o                                   4
+  scm-spo                                    4
+  scm-uni-1                                  3
+  scm-uni-2                                  3
+  prp-spo2-template-meta                     3
+
+⚡ OPTIMIZATION METRICS:
+  Alpha hit rate:      50.5%
+
+✅ CORRECTNESS CHECKS:
+  Subsumptions:        59 (schema + inferred)
+  Equivalences:        26 (includes symmetry)
+  Unions:              3
+  Intersections:       1
+  Property chains:     3
+  Restrictions:        4
+  Validation errors:   0 (expected for disjoint tests)
+  Instance inferences: 20
+
+================================================================================
+TEST: 10 INSTANCES
+================================================================================
+
+📊 RESULTS:
+  Build time:          35.26 ms (parse + reasoning)
+  Total facts:         152
+  Asserted facts:      48
+  Inferred facts:      104
+  Inference ratio:     2.17x
+
+💾 SERIALIZATION:
+  Save time:           15.60 ms
+  File size:           249,853 bytes (244.0 KB)
+  Bytes per fact:      1643.8
+
+⚡ DESERIALIZATION:
+  Load time:           27.66 ms
+  Facts loaded:        152
+  Rules fired:         0 (✅ CORRECT)
+  Speedup vs build:    1.28x faster
+
+📈 FACTS BY TYPE:
+  all_values_from                       2 (  1.3%)
+  alldisjoint_classes                   1 (  0.7%)
+  complement                            1 (  0.7%)
+  data_assertion                        2 (  1.3%)
+  equivalence                          26 ( 17.1%)
+  equivalent_property                   2 (  1.3%)
+  instance_of                          32 ( 21.1%)
+  intersection                          1 (  0.7%)
+  property_chain                        3 (  2.0%)
+  role_assertion                        7 (  4.6%)
+  same_as                               2 (  1.3%)
+  some_values_from                      2 (  1.3%)
+  sub_property                          7 (  4.6%)
+  subproperty_of                        2 (  1.3%)
+  subsumption                          59 ( 38.8%)
+  union                                 3 (  2.0%)
+
+🔥 TOP RULE FIRINGS:
+  scm-sco                                   90
+  cax-sco                                   52
+  scm-eqc1-2                                26
+  scm-eqc1-1                                26
+  scm-eqc2                                  26
+  cax-eqc1                                  22
+  cax-eqc2                                  22
+  eq-rep-c                                  14
+  prp-spo1-template-meta                     7
+  cls-uni-left                               4
+  eq-rep-o                                   4
+  scm-spo                                    4
+  scm-uni-1                                  3
+  scm-uni-2                                  3
+  prp-spo2-template-meta                     3
+
+⚡ OPTIMIZATION METRICS:
+  Alpha hit rate:      50.6%
+
+✅ CORRECTNESS CHECKS:
+  Subsumptions:        59 (schema + inferred)
+  Equivalences:        26 (includes symmetry)
+  Unions:              3
+  Intersections:       1
+  Property chains:     3
+  Restrictions:        4
+  Validation errors:   0 (expected for disjoint tests)
+  Instance inferences: 22
+
+================================================================================
+TEST: 50 INSTANCES
+================================================================================
+
+📊 RESULTS:
+  Build time:          51.56 ms (parse + reasoning)
+  Total facts:         322
+  Asserted facts:      108
+  Inferred facts:      214
+  Inference ratio:     1.98x
+
+💾 SERIALIZATION:
+  Save time:           19.01 ms
+  File size:           339,017 bytes (331.1 KB)
+  Bytes per fact:      1052.8
+
+⚡ DESERIALIZATION:
+  Load time:           37.68 ms
+  Facts loaded:        322
+  Rules fired:         0 (✅ CORRECT)
+  Speedup vs build:    1.37x faster
+
+📈 FACTS BY TYPE:
+  all_values_from                       2 (  0.6%)
+  alldisjoint_classes                   1 (  0.3%)
+  complement                            1 (  0.3%)
+  data_assertion                        8 (  2.5%)
+  equivalence                          26 (  8.1%)
+  equivalent_property                   2 (  0.6%)
+  instance_of                         168 ( 52.2%)
+  intersection                          1 (  0.3%)
+  property_chain                        3 (  0.9%)
+  role_assertion                       27 (  8.4%)
+  same_as                              10 (  3.1%)
+  some_values_from                      2 (  0.6%)
+  sub_property                          7 (  2.2%)
+  subproperty_of                        2 (  0.6%)
+  subsumption                          59 ( 18.3%)
+  union                                 3 (  0.9%)
+
+🔥 TOP RULE FIRINGS:
+  cax-sco                                  268
+  cax-eqc1                                 118
+  cax-eqc2                                 118
+  scm-sco                                   90
+  eq-rep-c                                  78
+  scm-eqc1-2                                26
+  scm-eqc1-1                                26
+  scm-eqc2                                  26
+  cls-uni-left                              20
+  eq-rep-o                                  12
+  eq-rep-s                                  10
+  cls-uni-right                             10
+  eq-sym                                    10
+  prp-spo1-template-meta                     7
+  prp-spo1-hasParent-hasAncestor             6
+
+⚡ OPTIMIZATION METRICS:
+  Alpha hit rate:      51.7%
+
+✅ CORRECTNESS CHECKS:
+  Subsumptions:        59 (schema + inferred)
+  Equivalences:        26 (includes symmetry)
+  Unions:              3
+  Intersections:       1
+  Property chains:     3
+  Restrictions:        4
+  Validation errors:   0 (expected for disjoint tests)
+  Instance inferences: 118
+
+================================================================================
+TEST: 100 INSTANCES
+================================================================================
+
+📊 RESULTS:
+  Build time:          79.47 ms (parse + reasoning)
+  Total facts:         534
+  Asserted facts:      182
+  Inferred facts:      352
+  Inference ratio:     1.93x
+
+💾 SERIALIZATION:
+  Save time:           26.50 ms
+  File size:           452,287 bytes (441.7 KB)
+  Bytes per fact:      847.0
+
+⚡ DESERIALIZATION:
+  Load time:           42.86 ms
+  Facts loaded:        534
+  Rules fired:         0 (✅ CORRECT)
+  Speedup vs build:    1.85x faster
+
+📈 FACTS BY TYPE:
+  all_values_from                       2 (  0.4%)
+  alldisjoint_classes                   1 (  0.2%)
+  complement                            1 (  0.2%)
+  data_assertion                       15 (  2.8%)
+  equivalence                          26 (  4.9%)
+  equivalent_property                   2 (  0.4%)
+  instance_of                         340 ( 63.7%)
+  intersection                          1 (  0.2%)
+  property_chain                        3 (  0.6%)
+  role_assertion                       50 (  9.4%)
+  same_as                              20 (  3.7%)
+  some_values_from                      2 (  0.4%)
+  sub_property                          7 (  1.3%)
+  subproperty_of                        2 (  0.4%)
+  subsumption                          59 ( 11.0%)
+  union                                 3 (  0.6%)
+
+🔥 TOP RULE FIRINGS:
+  cax-sco                                  540
+  cax-eqc1                                 240
+  cax-eqc2                                 240
+  eq-rep-c                                 160
+  scm-sco                                   90
+  cls-uni-left                              40
+  scm-eqc1-2                                26
+  scm-eqc1-1                                26
+  scm-eqc2                                  26
+  eq-rep-s                                  20
+  cls-uni-right                             20
+  eq-rep-o                                  20
+  eq-sym                                    20
+  prp-spo1-hasParent-hasAncestor            10
+  cls-svf1-_:restriction7-owns-Dog          10
+
+⚡ OPTIMIZATION METRICS:
+  Alpha hit rate:      52.0%
+
+✅ CORRECTNESS CHECKS:
+  Subsumptions:        59 (schema + inferred)
+  Equivalences:        26 (includes symmetry)
+  Unions:              3
+  Intersections:       1
+  Property chains:     3
+  Restrictions:        4
+  Validation errors:   0 (expected for disjoint tests)
+  Instance inferences: 240
+
+================================================================================
+TEST: 200 INSTANCES
+================================================================================
+
+📊 RESULTS:
+  Build time:          117.14 ms (parse + reasoning)
+  Total facts:         958
+  Asserted facts:      331
+  Inferred facts:      627
+  Inference ratio:     1.89x
+
+💾 SERIALIZATION:
+  Save time:           32.36 ms
+  File size:           695,962 bytes (679.7 KB)
+  Bytes per fact:      726.5
+
+⚡ DESERIALIZATION:
+  Load time:           51.46 ms
+  Facts loaded:        958
+  Rules fired:         0 (✅ CORRECT)
+  Speedup vs build:    2.28x faster
+
+📈 FACTS BY TYPE:
+  all_values_from                       2 (  0.2%)
+  alldisjoint_classes                   1 (  0.1%)
+  complement                            1 (  0.1%)
+  data_assertion                       29 (  3.0%)
+  equivalence                          26 (  2.7%)
+  equivalent_property                   2 (  0.2%)
+  instance_of                         680 ( 71.0%)
+  intersection                          1 (  0.1%)
+  property_chain                        3 (  0.3%)
+  role_assertion                      100 ( 10.4%)
+  same_as                              40 (  4.2%)
+  some_values_from                      2 (  0.2%)
+  sub_property                          7 (  0.7%)
+  subproperty_of                        2 (  0.2%)
+  subsumption                          59 (  6.2%)
+  union                                 3 (  0.3%)
+
+🔥 TOP RULE FIRINGS:
+  cax-sco                                1,080
+  cax-eqc1                                 480
+  cax-eqc2                                 480
+  eq-rep-c                                 320
+  scm-sco                                   90
+  cls-uni-left                              80
+  eq-rep-s                                  40
+  cls-uni-right                             40
+  eq-rep-o                                  40
+  eq-sym                                    40
+  scm-eqc1-2                                26
+  scm-eqc1-1                                26
+  scm-eqc2                                  26
+  prp-spo1-hasParent-hasAncestor            20
+  cls-svf1-_:restriction7-owns-Dog          20
+
+⚡ OPTIMIZATION METRICS:
+  Alpha hit rate:      52.3%
+
+✅ CORRECTNESS CHECKS:
+  Subsumptions:        59 (schema + inferred)
+  Equivalences:        26 (includes symmetry)
+  Unions:              3
+  Intersections:       1
+  Property chains:     3
+  Restrictions:        4
+  Validation errors:   0 (expected for disjoint tests)
+  Instance inferences: 480
+
+================================================================================
+TEST: 500 INSTANCES
+================================================================================
+
+📊 RESULTS:
+  Build time:          431.18 ms (parse + reasoning)
+  Total facts:         2,231
+  Asserted facts:      779
+  Inferred facts:      1,452
+  Inference ratio:     1.86x
+
+💾 SERIALIZATION:
+  Save time:           84.39 ms
+  File size:           1,485,896 bytes (1451.1 KB)
+  Bytes per fact:      666.0
+
+⚡ DESERIALIZATION:
+  Load time:           130.38 ms
+  Facts loaded:        2,231
+  Rules fired:         0 (✅ CORRECT)
+  Speedup vs build:    3.31x faster
+
+📈 FACTS BY TYPE:
+  all_values_from                       2 (  0.1%)
+  alldisjoint_classes                   1 (  0.0%)
+  complement                            1 (  0.0%)
+  data_assertion                       72 (  3.2%)
+  equivalence                          26 (  1.2%)
+  equivalent_property                   2 (  0.1%)
+  instance_of                       1,700 ( 76.2%)
+  intersection                          1 (  0.0%)
+  property_chain                        3 (  0.1%)
+  role_assertion                      250 ( 11.2%)
+  same_as                             100 (  4.5%)
+  some_values_from                      2 (  0.1%)
+  sub_property                          7 (  0.3%)
+  subproperty_of                        2 (  0.1%)
+  subsumption                          59 (  2.6%)
+  union                                 3 (  0.1%)
+
+🔥 TOP RULE FIRINGS:
+  cax-sco                                2,700
+  cax-eqc1                               1,200
+  cax-eqc2                               1,200
+  eq-rep-c                                 800
+  cls-uni-left                             200
+  eq-rep-s                                 100
+  cls-uni-right                            100
+  eq-rep-o                                 100
+  eq-sym                                   100
+  scm-sco                                   90
+  prp-spo1-hasParent-hasAncestor            50
+  cls-svf1-_:restriction7-owns-Dog          50
+  scm-eqc1-2                                26
+  scm-eqc1-1                                26
+  scm-eqc2                                  26
+
+⚡ OPTIMIZATION METRICS:
+  Alpha hit rate:      52.5%
+
+✅ CORRECTNESS CHECKS:
+  Subsumptions:        59 (schema + inferred)
+  Equivalences:        26 (includes symmetry)
+  Unions:              3
+  Intersections:       1
+  Property chains:     3
+  Restrictions:        4
+  Validation errors:   0 (expected for disjoint tests)
+  Instance inferences: 1,200
+
+================================================================================
+TEST: 1000 INSTANCES
+================================================================================
+
+📊 RESULTS:
+  Build time:          1.35 s (parse + reasoning)
+  Total facts:         4,352
+  Asserted facts:      1,525
+  Inferred facts:      2,827
+  Inference ratio:     1.85x
+
+💾 SERIALIZATION:
+  Save time:           186.11 ms
+  File size:           2,955,431 bytes (2886.2 KB)
+  Bytes per fact:      679.1
+
+⚡ DESERIALIZATION:
+  Load time:           261.98 ms
+  Facts loaded:        4,352
+  Rules fired:         0 (✅ CORRECT)
+  Speedup vs build:    5.15x faster
+
+📈 FACTS BY TYPE:
+  all_values_from                       2 (  0.0%)
+  alldisjoint_classes                   1 (  0.0%)
+  complement                            1 (  0.0%)
+  data_assertion                      143 (  3.3%)
+  equivalence                          26 (  0.6%)
+  equivalent_property                   2 (  0.0%)
+  instance_of                       3,400 ( 78.1%)
+  intersection                          1 (  0.0%)
+  property_chain                        3 (  0.1%)
+  role_assertion                      500 ( 11.5%)
+  same_as                             200 (  4.6%)
+  some_values_from                      2 (  0.0%)
+  sub_property                          7 (  0.2%)
+  subproperty_of                        2 (  0.0%)
+  subsumption                          59 (  1.4%)
+  union                                 3 (  0.1%)
+
+🔥 TOP RULE FIRINGS:
+  cax-sco                                5,400
+  cax-eqc1                               2,400
+  cax-eqc2                               2,400
+  eq-rep-c                               1,600
+  cls-uni-left                             400
+  eq-rep-s                                 200
+  cls-uni-right                            200
+  eq-rep-o                                 200
+  eq-sym                                   200
+  prp-spo1-hasParent-hasAncestor           100
+  cls-svf1-_:restriction7-owns-Dog         100
+  scm-sco                                   90
+  scm-eqc1-2                                26
+  scm-eqc1-1                                26
+  scm-eqc2                                  26
+
+⚡ OPTIMIZATION METRICS:
+  Alpha hit rate:      52.6%
+
+✅ CORRECTNESS CHECKS:
+  Subsumptions:        59 (schema + inferred)
+  Equivalences:        26 (includes symmetry)
+  Unions:              3
+  Intersections:       1
+  Property chains:     3
+  Restrictions:        4
+  Validation errors:   0 (expected for disjoint tests)
+  Instance inferences: 2,400
+
+================================================================================
+SCALABILITY ANALYSIS
+================================================================================
+
+Instances    Build Time      Load Time       Speedup      Facts        Inferred    
+-----------------------------------------------------------------------------------------------
+1            54.27 ms        30.59 ms        1.77       x 112          78          
+2            32.32 ms        32.13 ms        1.01       x 118          81          
+3            38.94 ms        31.56 ms        1.23       x 121          83          
+4            36.32 ms        26.65 ms        1.36       x 138          98          
+5            34.26 ms        27.76 ms        1.23       x 143          102         
+10           35.26 ms        27.66 ms        1.28       x 152          104         
+50           51.56 ms        37.68 ms        1.37       x 322          214         
+100          79.47 ms        42.86 ms        1.85       x 534          352         
+200          117.14 ms       51.46 ms        2.28       x 958          627         
+500          431.18 ms       130.38 ms       3.31       x 2,231        1,452       
+1000         1.35 s          261.98 ms       5.15       x 4,352        2,827       
+
+From     To       Time Ratio      Expected O(n)   Status              
+--------------------------------------------------------------------------------
+1        2        0.60            2.00            ✓  Linear scaling   
+2        3        1.20            1.50            ✓  Linear scaling   
+3        4        0.93            1.33            ✓  Linear scaling   
+4        5        0.94            1.25            ✓  Linear scaling   
+5        10       1.03            2.00            ✓  Linear scaling   
+10       50       1.46            5.00            ✓  Linear scaling   
+50       100      1.54            2.00            ✓  Linear scaling   
+100      200      1.47            2.00            ✓  Linear scaling   
+200      500      3.68            2.50            ⚠️  Slightly superlinear
+500      1000     3.13            2.00            ⚠️  Slightly superlinear
+
+================================================================================
+SERIALIZATION PERFORMANCE
+================================================================================
+
+Instances    Save Time       Bytes/Fact   Speedup      Rules Fired    
+--------------------------------------------------------------------------------
+1            15.86 ms        2039.0      1.77       x ✅ OK           
+2            14.69 ms        1963.3      1.01       x ✅ OK           
+3            15.00 ms        1925.0      1.23       x ✅ OK           
+4            14.11 ms        1758.4      1.36       x ✅ OK           
+5            16.11 ms        1715.4      1.23       x ✅ OK           
+10           15.60 ms        1643.8      1.28       x ✅ OK           
+50           19.01 ms        1052.8      1.37       x ✅ OK           
+100          26.50 ms        847.0       1.85       x ✅ OK           
+200          32.36 ms        726.5       2.28       x ✅ OK           
+500          84.39 ms        666.0       3.31       x ✅ OK           
+1000         186.11 ms       679.1       5.15       x ✅ OK           
+
+📊 SERIALIZATION SUMMARY:
+  Average speedup:     1.99x
+  Min speedup:         1.01x
+  Max speedup:         5.15x
+  ✅ Zero rules fired during all deserializations (exact state restoration)
+  Average bytes/fact:  1365.1
+
+================================================================================
+CORRECTNESS VERIFICATION (1000 instances)
+================================================================================
+
+✅ Verifying specific inferences:
+  Mother assertions:   100
+  Parent inferences:   300
+  ✓ Disjoint union reasoning working
+  Student assertions:  100
+  Learner/Pupil inferences: 200
+  ✓ Equivalence reasoning working
+  hasParent assertions: 50
+  hasAncestor inferences: 100
+  ✓ Property subsumption working
+
+================================================================================
+NODE SHARING METRICS (OPS5 Innovation)
+================================================================================
+
+Network Construction Efficiency:
+  Alpha sharing ratio:   6.87:1
+  Join sharing ratio:    1.00:1
+  Beta sharing ratio:    1.00:1
+  Overall sharing ratio: 1.43:1
+  Overall reduction:     30.3%
+  Estimated savings:     78.50 KB
+
+================================================================================
+✓ COMPREHENSIVE PERFORMANCE TEST COMPLETED
+================================================================================
+

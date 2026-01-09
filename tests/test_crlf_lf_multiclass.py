@@ -62,18 +62,18 @@ class TestLineEndingMultiClass(unittest.TestCase):
 
             classes = reasoner.pattern(
                 ("?x", "type", "py:Class"),
-                ("?x", "name", "?name"),
-                ("?x", "qualifiedName", "?qname")
+                ("?x", "name", "?name")
             ).to_list()
 
             class_names = {c["?name"] for c in classes}
             self.assertEqual(class_names, {"First", "Second"})
 
-            # Check Second is not nested
+            # Check Second is not nested (entity ID should not contain First)
             for c in classes:
                 if c["?name"] == "Second":
-                    self.assertNotIn("First", c["?qname"],
-                        f"Second should not be nested under First: {c['?qname']}")
+                    # The entity ID (?x) is the qualified name
+                    self.assertNotIn(".First.", c["?x"],
+                        f"Second should not be nested under First: {c['?x']}")
         finally:
             os.unlink(temp_path)
 
@@ -91,19 +91,19 @@ class TestLineEndingMultiClass(unittest.TestCase):
 
             classes = reasoner.pattern(
                 ("?x", "type", "py:Class"),
-                ("?x", "name", "?name"),
-                ("?x", "qualifiedName", "?qname")
+                ("?x", "name", "?name")
             ).to_list()
 
             class_names = {c["?name"] for c in classes}
             self.assertEqual(class_names, {"First", "Second"},
                 f"Expected 2 classes, got: {class_names}")
 
-            # Check Second is not nested
+            # Check Second is not nested (entity ID should not contain First)
             for c in classes:
                 if c["?name"] == "Second":
-                    self.assertNotIn("First", c["?qname"],
-                        f"Second should not be nested under First: {c['?qname']}")
+                    # The entity ID (?x) is the qualified name
+                    self.assertNotIn(".First.", c["?x"],
+                        f"Second should not be nested under First: {c['?x']}")
         finally:
             os.unlink(temp_path)
 
