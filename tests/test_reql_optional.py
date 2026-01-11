@@ -467,5 +467,121 @@ def test_union_large_string_concatenation():
     assert type_b_count == num_entities_per_type
 
 
+def test_optional_multiple_with_group_by_count():
+    """Test multiple OPTIONAL patterns with GROUP BY and COUNT.
+
+    This is a regression test for a bug where multiple OPTIONAL clauses
+    combined with GROUP BY and COUNT produce incorrect results due to
+    cross-product behavior.
+
+    Expected: Each COUNT should count its own OPTIONAL pattern independently.
+    Bug behavior: Counts become identical (field_count × method_count).
+
+    Example with the bug:
+    - Class with 35 fields and 51 methods
+    - Expected: attr_count=35, method_count=51
+    - Bug result: attr_count=1785, method_count=1785 (35 × 51 cross-product)
+    """
+    reter = Reter("ai")
+
+    # Load test data: a class with specific counts of fields and methods
+    reter.load_ontology("""
+Class(MyDataClass)
+name(MyDataClass, 'MyDataClass')
+
+# 3 fields
+Field(field1)
+Field(field2)
+Field(field3)
+definedIn(field1, MyDataClass)
+definedIn(field2, MyDataClass)
+definedIn(field3, MyDataClass)
+
+# 5 methods
+Method(method1)
+Method(method2)
+Method(method3)
+Method(method4)
+Method(method5)
+definedIn(method1, MyDataClass)
+definedIn(method2, MyDataClass)
+definedIn(method3, MyDataClass)
+definedIn(method4, MyDataClass)
+definedIn(method5, MyDataClass)
+    """, "test.optional.groupby.count")
+
+    # Query with two OPTIONAL patterns and COUNT aggregation
+    result = reter.reql("""
+        SELECT ?c ?name (COUNT(?attr) AS ?attr_count) (COUNT(?method) AS ?method_count)
+        WHERE {
+            ?c type Class .
+            ?c name ?name .
+            OPTIONAL { ?attr type Field . ?attr definedIn ?c }
+            OPTIONAL { ?method type Method . ?method definedIn ?c }
+        }
+        GROUP BY ?c ?name
+    """)
+
+    assert result.num_rows == 1, f"Expected 1 row, got {result.num_rows}"
+
+    df = result.to_pandas()
+    row = df.iloc[0]
+
+    attr_count = int(row['?attr_count'])
+    method_count = int(row['?method_count'])
+
+    # The bug would show attr_count=15 and method_count=15 (3 × 5 cross-product)
+    # Correct behavior: attr_count=3, method_count=5
+    assert attr_count == 3, f"Expected attr_count=3, got {attr_count} (cross-product bug if 15)"
+    assert method_count == 5, f"Expected method_count=5, got {method_count} (cross-product bug if 15)"
+
+
+def test_optional_multiple_with_group_by_count_null_handling():
+    """Test multiple OPTIONAL with GROUP BY/COUNT when some OPTIONALs are empty.
+
+    Ensures that empty OPTIONAL patterns produce count=0, not incorrect values.
+    """
+    reter = Reter("ai")
+
+    # Load test data: one class with fields but no methods, another with neither
+    reter.load_ontology("""
+Class(DataOnlyClass)
+name(DataOnlyClass, 'DataOnlyClass')
+Field(data_field1)
+Field(data_field2)
+definedIn(data_field1, DataOnlyClass)
+definedIn(data_field2, DataOnlyClass)
+
+Class(EmptyClass)
+name(EmptyClass, 'EmptyClass')
+    """, "test.optional.groupby.null")
+
+    result = reter.reql("""
+        SELECT ?c ?name (COUNT(?attr) AS ?attr_count) (COUNT(?method) AS ?method_count)
+        WHERE {
+            ?c type Class .
+            ?c name ?name .
+            OPTIONAL { ?attr type Field . ?attr definedIn ?c }
+            OPTIONAL { ?method type Method . ?method definedIn ?c }
+        }
+        GROUP BY ?c ?name
+        ORDER BY ?name
+    """)
+
+    assert result.num_rows == 2, f"Expected 2 rows, got {result.num_rows}"
+
+    df = result.to_pandas()
+
+    # DataOnlyClass: 2 fields, 0 methods
+    data_only = df[df['?name'] == 'DataOnlyClass'].iloc[0]
+    assert int(data_only['?attr_count']) == 2, f"DataOnlyClass attr_count should be 2"
+    assert int(data_only['?method_count']) == 0, f"DataOnlyClass method_count should be 0"
+
+    # EmptyClass: 0 fields, 0 methods
+    empty = df[df['?name'] == 'EmptyClass'].iloc[0]
+    assert int(empty['?attr_count']) == 0, f"EmptyClass attr_count should be 0"
+    assert int(empty['?method_count']) == 0, f"EmptyClass method_count should be 0"
+
+
 if __name__ == '__main__':
     pytest.main([__file__, '-v'])
