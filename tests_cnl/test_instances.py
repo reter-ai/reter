@@ -53,23 +53,23 @@ class TestRoleAssertions:
     def test_john_owns_pussy(self, get_facts):
         """John owns Pussy."""
         facts = get_facts("John owns Pussy.")
-        assert has_fact(facts, type='role_assertion', subject='John', predicate='owns', object='Pussy')
+        assert has_fact(facts, type='role_assertion', subject='John', role='owns', object='Pussy')
 
     def test_john_loves_mary(self, get_facts):
         """John loves Mary."""
         facts = get_facts("John loves Mary.")
-        assert has_fact(facts, type='role_assertion', subject='John', predicate='loves', object='Mary')
+        assert has_fact(facts, type='role_assertion', subject='John', role='loves', object='Mary')
 
     def test_tom_loves_mary(self, get_facts):
         """Tom loves Mary."""
         facts = get_facts("Tom loves Mary.")
-        assert has_fact(facts, type='role_assertion', subject='Tom', predicate='loves', object='Mary')
+        assert has_fact(facts, type='role_assertion', subject='Tom', role='loves', object='Mary')
 
     def test_john_is_married_to_mary(self, get_facts):
         """John is-married-to Mary."""
         facts = get_facts("John is-married-to Mary.")
         # 'is-' prefix is preserved
-        assert has_fact(facts, type='role_assertion', subject='John', predicate='is-married-to', object='Mary')
+        assert has_fact(facts, type='role_assertion', subject='John', role='is-married-to', object='Mary')
 
 
 class TestPassiveVoice:
@@ -79,18 +79,18 @@ class TestPassiveVoice:
         """Pussy is owned by John."""
         facts = get_facts("Pussy is owned by John.")
         # Should produce same as active voice - predicate in 3rd person singular
-        assert has_fact(facts, type='role_assertion', subject='John', predicate='owns', object='Pussy')
+        assert has_fact(facts, type='role_assertion', subject='John', role='owns', object='Pussy')
 
     def test_passive_loved_by(self, get_facts):
         """Mary is loved by John."""
         facts = get_facts("Mary is loved by John.")
         # Should produce same as active voice - predicate in 3rd person singular
-        assert has_fact(facts, type='role_assertion', subject='John', predicate='loves', object='Mary')
+        assert has_fact(facts, type='role_assertion', subject='John', role='loves', object='Mary')
 
     def test_passive_loved_by_tom(self, get_facts):
         """Mary is loved by Tom."""
         facts = get_facts("Mary is loved by Tom.")
-        assert has_fact(facts, type='role_assertion', subject='Tom', predicate='loves', object='Mary')
+        assert has_fact(facts, type='role_assertion', subject='Tom', role='loves', object='Mary')
 
 
 class TestActivePassiveEquivalence:
@@ -108,7 +108,7 @@ class TestActivePassiveEquivalence:
         assert active is not None
         assert passive is not None
         assert active['subject'] == passive['subject']
-        assert active['predicate'] == passive['predicate']
+        assert active['role'] == passive['role']
         assert active['object'] == passive['object']
 
     def test_loves_equivalence(self, get_facts):
@@ -122,5 +122,5 @@ class TestActivePassiveEquivalence:
         assert active is not None
         assert passive is not None
         assert active['subject'] == passive['subject']
-        assert active['predicate'] == passive['predicate']
+        assert active['role'] == passive['role']
         assert active['object'] == passive['object']

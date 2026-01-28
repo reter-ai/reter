@@ -24,7 +24,7 @@ def get_facts():
             fact_dict = {'type': f.get('type')}
             # Add all known keys
             for key in ['sub', 'sup', 'individual', 'concept', 'subject',
-                        'predicate', 'object', 'c1', 'c2', 'property',
+                        'role', 'object', 'c1', 'c2', 'property',
                         'filler', 'cardinality', 'id', 'class', 'i1', 'i2',
                         'modality', 'chain', 'super_property', 'value', 'datatype']:
                 val = f.get(key)

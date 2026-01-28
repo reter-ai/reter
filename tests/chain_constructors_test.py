@@ -2,7 +2,12 @@
 
 
 class SimpleClass:
-    """Simple class - should not be flagged."""
+    """
+    Simple class - should not be flagged.
+
+    @reter: TestLayer(self)
+    @reter: Fixture(self)
+    """
 
     def __init__(self, name):
         self.name = name

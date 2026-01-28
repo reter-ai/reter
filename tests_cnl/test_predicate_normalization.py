@@ -47,13 +47,13 @@ class TestInstanceAssertionNormalization:
         """'John loves Mary' -> predicate: 'loves'"""
         facts = parse_cnl("John loves Mary.")
         fact = get_fact_by_type(facts, 'role_assertion')
-        assert fact['predicate'] == 'loves', f"Expected 'loves', got '{fact['predicate']}'"
+        assert fact['role'] == 'loves', f"Expected 'loves', got '{fact['role']}'"
 
     def test_passive_verb_normalized(self):
         """'Mary is loved by John' -> predicate: 'loves'"""
         facts = parse_cnl("Mary is loved by John.")
         fact = get_fact_by_type(facts, 'role_assertion')
-        assert fact['predicate'] == 'loves', f"Expected 'loves', got '{fact['predicate']}'"
+        assert fact['role'] == 'loves', f"Expected 'loves', got '{fact['role']}'"
 
     def test_passive_swaps_subject_object(self):
         """Passive voice swaps subject/object: John is agent, Mary is patient."""
@@ -70,7 +70,7 @@ class TestInstanceAssertionNormalization:
         active = get_fact_by_type(active_facts, 'role_assertion')
         passive = get_fact_by_type(passive_facts, 'role_assertion')
 
-        assert active['predicate'] == passive['predicate'] == 'owns'
+        assert active['role'] == passive['role'] == 'owns'
         assert active['subject'] == passive['subject'] == 'John'
         assert active['object'] == passive['object'] == 'Pussy'
 
@@ -78,13 +78,13 @@ class TestInstanceAssertionNormalization:
         """'inheres-in' -> 'inheres-in' (3rd person singular)"""
         facts = parse_cnl("Alfa inheres-in Beta.")
         fact = get_fact_by_type(facts, 'role_assertion')
-        assert fact['predicate'] == 'inheres-in', f"Expected 'inheres-in', got '{fact['predicate']}'"
+        assert fact['role'] == 'inheres-in', f"Expected 'inheres-in', got '{fact['role']}'"
 
     def test_is_role_pattern_preserved(self):
         """'is-part-of' -> 'is-part-of' (is- prefix preserved)"""
         facts = parse_cnl("John is-part-of Team.")
         fact = get_fact_by_type(facts, 'role_assertion')
-        assert fact['predicate'] == 'is-part-of', f"Expected 'is-part-of', got '{fact['predicate']}'"
+        assert fact['role'] == 'is-part-of', f"Expected 'is-part-of', got '{fact['role']}'"
 
     @pytest.mark.parametrize("cnl,expected_predicate", [
         ("John eats Pizza.", "eats"),
@@ -99,7 +99,7 @@ class TestInstanceAssertionNormalization:
         facts = parse_cnl(cnl)
         role_facts = get_facts_by_type(facts, 'role_assertion')
         assert len(role_facts) > 0, f"No role_assertion found for: {cnl}"
-        assert role_facts[0]['predicate'] == expected_predicate
+        assert role_facts[0]['role'] == expected_predicate
 
 
 # =============================================================================
@@ -320,8 +320,8 @@ class TestEdgeCases:
         facts = parse_cnl(cnl)
         role_facts = get_facts_by_type(facts, 'role_assertion')
         if role_facts:
-            assert role_facts[0]['predicate'] == expected, \
-                f"'{past}' should become '{expected}', got '{role_facts[0]['predicate']}'"
+            assert role_facts[0]['role'] == expected, \
+                f"'{past}' should become '{expected}', got '{role_facts[0]['role']}'"
 
     def test_third_person_singular_preserved(self):
         """Third person singular verbs are preserved: 'loves' -> 'loves'"""
@@ -347,7 +347,7 @@ class TestEdgeCases:
         facts = parse_cnl("John marries Mary.")
         role_facts = get_facts_by_type(facts, 'role_assertion')
         assert len(role_facts) > 0
-        assert role_facts[0]['predicate'] == 'marries'
+        assert role_facts[0]['role'] == 'marries'
 
         # Test with existential restriction
         facts = parse_cnl("Every person carries a bag.")
@@ -378,7 +378,7 @@ class TestRegressions:
         """Regression: 'owned' should become 'owns', not 'own' or 'owne'"""
         facts = parse_cnl("Pussy is owned by John.")
         fact = get_fact_by_type(facts, 'role_assertion')
-        assert fact['predicate'] == 'owns', f"Got '{fact['predicate']}' instead of 'owns'"
+        assert fact['role'] == 'owns', f"Got '{fact['role']}' instead of 'owns'"
 
     def test_passive_existential_has_inverse(self):
         """Regression: passive existential must use inverse property"""

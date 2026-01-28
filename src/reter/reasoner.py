@@ -219,6 +219,10 @@ class FilteredQueryResultSet:
     Thin wrapper that delegates to C++ not_exists_query with Arrow anti-join
 
     Performance: 10-100x faster than Python implementation
+
+    @reter: CoreLayer(self)
+    @reter: Wrapper(self)
+    @reter: PublicAPI(self)
     """
 
     def __new__(cls, production, variables, network, not_exists_patterns, reasoner):
@@ -275,6 +279,9 @@ class UnionQueryResultSet:
     Merges results from multiple QueryResultSets with deduplication
 
     Week 6 Optimization: Thin wrapper delegating to C++ union_query
+
+    @reter: CoreLayer(self)
+    @reter: DataTransformer(self)
     """
 
     def __new__(cls, queries, network):
@@ -310,6 +317,9 @@ class PropertyPathResultSet:
     """
     Query result set for property paths (Week 5, Day 6-7)
     Computes transitive closure of a property using BFS
+
+    @reter: CoreLayer(self)
+    @reter: QueryExecutor(self)
     """
 
     def __init__(self, subject, property_name, object_var, max_depth, reasoner):
@@ -425,6 +435,9 @@ class LiveQueryResultSet:
     """
     Auto-updating query result set (Week 4, Day 4-7)
     Results update incrementally as facts are added/removed
+
+    @reter: CoreLayer(self)
+    @reter: Observer(self)
     """
 
     def __init__(self, live_query, variables, network):

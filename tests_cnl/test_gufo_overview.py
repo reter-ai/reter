@@ -31,7 +31,7 @@ def _facts_to_dicts(facts):
     for f in facts:
         fact_dict = {}
         for key in ['type', 'sub', 'sup', 'individual', 'concept', 'subject',
-                    'predicate', 'object', 'c1', 'c2', 'property', 'filler',
+                    'role', 'object', 'c1', 'c2', 'property', 'filler',
                     'cardinality', 'id', 'class', 'i1', 'i2', 'modality',
                     'chain', 'super_property', 'value', 'datatype']:
             val = f.get(key)
@@ -201,7 +201,7 @@ class TestObjectsAndParts:
         assert has_fact_type(facts, 'intersection')
         assert has_fact_type(facts, 'instance_of')
         assert has_fact(facts, type='role_assertion', subject='Johns-Brain',
-                       predicate='is-component-of', object='John')
+                       role='is-component-of', object='John')
 
     def test_brain_as_object(self, parse_cnl):
         """Brain as sub-class of object."""
@@ -270,7 +270,7 @@ class TestQualitiesAdvanced:
             S is a shirt-size.
             M is a shirt-size.
             L is a shirt-size.
-            XL is a shirt-size.
+            `XL` is a shirt-size.
         """)
         assert has_fact(facts, type='instance_of', individual='S', concept='shirt-size')
         assert has_fact(facts, type='instance_of', individual='XL', concept='shirt-size')
@@ -375,7 +375,7 @@ class TestExtrinsicAspects:
                        concept='extrinsic-mode')
         assert has_fact(facts, type='role_assertion',
                        subject='Johns-Right-To-Service-Provisioning',
-                       predicate='inheres-in', object='John')
+                       role='inheres-in', object='John')
 
 
 # =============================================================================
@@ -414,7 +414,7 @@ class TestEvents:
             World-Cup-1970-Final depends-historically-on Brazil-Uruguay-World-Cup-1970-Semi-Final.
         """)
         assert has_fact(facts, type='role_assertion', subject='World-Cup-1970-Final',
-                       predicate='depends-historically-on',
+                       role='depends-historically-on',
                        object='Brazil-Uruguay-World-Cup-1970-Semi-Final')
 
     def test_participation_in_event(self, parse_cnl):
@@ -433,7 +433,7 @@ class TestEvents:
         """)
         assert has_fact(facts, type='instance_of', individual='World-Cup-1970', concept='event')
         assert has_fact(facts, type='role_assertion', subject='World-Cup-1970-Final',
-                       predicate='is-event-proper-part-of', object='World-Cup-1970')
+                       role='is-event-proper-part-of', object='World-Cup-1970')
 
     def test_event_creates_relator(self, parse_cnl):
         """Event creates relator (wedding creates marriage)."""
@@ -450,7 +450,7 @@ class TestEvents:
         """)
         assert has_fact(facts, type='instance_of', individual='Challenger', concept='functional-complex')
         assert has_fact(facts, type='role_assertion', subject='Challenger',
-                       predicate='is-terminated-in', object='Challengers-10-Th-Flight')
+                       role='is-terminated-in', object='Challengers-10-Th-Flight')
 
 
 # =============================================================================
@@ -491,7 +491,7 @@ class TestSituations:
             that concerns-temporary-whole John.
         """)
         assert has_fact(facts, type='role_assertion', subject='Johns-Heart',
-                       predicate='stands-in-qualified-parthood', object='John-Has-Original-Heart')
+                       role='stands-in-qualified-parthood', object='John-Has-Original-Heart')
         assert has_fact(facts, type='instance_of',
                        individual='John-Has-Original-Heart',
                        concept='temporary-parthood-situation')
@@ -560,7 +560,7 @@ class TestRelationshipTypes:
         assert has_fact(facts, type='instance_of', individual='Is-Married-With',
                        concept='material-relationship-type')
         assert has_fact(facts, type='role_assertion', subject='Is-Married-With',
-                       predicate='is-derived-from', object='Marriage')
+                       role='is-derived-from', object='Marriage')
 
 
 # =============================================================================
@@ -579,7 +579,7 @@ class TestHigherOrderTypes:
             Every student is a person.
         """)
         assert has_fact(facts, type='role_assertion', subject='Person-Role',
-                       predicate='categorizes', object='Person')
+                       role='categorizes', object='Person')
         assert has_fact(facts, type='instance_of', individual='Student', concept='person-role')
 
     def test_ship_type_sub_kind(self, parse_cnl):
@@ -591,7 +591,7 @@ class TestHigherOrderTypes:
             Every supercarrier is a ship.
         """)
         assert has_fact(facts, type='role_assertion', subject='Ship-Type',
-                       predicate='categorizes', object='Ship')
+                       role='categorizes', object='Ship')
         assert has_fact(facts, type='subsumption', sub='ship-type', sup='sub-kind')
 
     def test_animal_species_partitions(self, parse_cnl):
@@ -606,7 +606,7 @@ class TestHigherOrderTypes:
             Cecil is a lion.
         """)
         assert has_fact(facts, type='role_assertion', subject='Animal-Species',
-                       predicate='partitions', object='Animal')
+                       role='partitions', object='Animal')
         assert has_fact(facts, type='instance_of', individual='Cecil', concept='lion')
 
 

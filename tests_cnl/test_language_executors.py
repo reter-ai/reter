@@ -136,7 +136,7 @@ class TestRoleAssertion:
         facts = parse_cnl("John owns Pussy.")
         ra = get_fact_by_type(facts, 'role_assertion')
         assert ra['subject'] == 'John'
-        assert ra['predicate'] == 'owns'
+        assert ra['role'] == 'owns'
         assert ra['object'] == 'Pussy'
 
     def test_passive_role_assertion(self):
@@ -144,20 +144,20 @@ class TestRoleAssertion:
         facts = parse_cnl("Pussy is owned by John.")
         ra = get_fact_by_type(facts, 'role_assertion')
         assert ra['subject'] == 'John'
-        assert ra['predicate'] == 'owns'
+        assert ra['role'] == 'owns'
         assert ra['object'] == 'Pussy'
 
     def test_hyphenated_role(self):
         """John has-parent Mary."""
         facts = parse_cnl("John has-parent Mary.")
         ra = get_fact_by_type(facts, 'role_assertion')
-        assert ra['predicate'] == 'has-parent'
+        assert ra['role'] == 'has-parent'
 
     def test_is_role_preserved(self):
         """John is-married-to Mary."""
         facts = parse_cnl("John is-married-to Mary.")
         ra = get_fact_by_type(facts, 'role_assertion')
-        assert ra['predicate'] == 'is-married-to'
+        assert ra['role'] == 'is-married-to'
 
     @pytest.mark.parametrize("cnl,expected_predicate", [
         ("John loves Mary.", "loves"),
@@ -175,7 +175,7 @@ class TestRoleAssertion:
         """Various role predicates are in 3rd person singular."""
         facts = parse_cnl(cnl)
         ra = get_fact_by_type(facts, 'role_assertion')
-        assert ra['predicate'] == expected_predicate
+        assert ra['role'] == expected_predicate
 
 
 class TestSameAsDifferentFrom:
@@ -499,7 +499,7 @@ class TestComplexConstructs:
         """John hates Mary."""
         facts = parse_cnl("John hates Mary.")
         ra = get_fact_by_type(facts, 'role_assertion')
-        assert ra['predicate'] == 'hates'
+        assert ra['role'] == 'hates'
         assert ra['subject'] == 'John'
         assert ra['object'] == 'Mary'
 

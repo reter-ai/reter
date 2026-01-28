@@ -32,7 +32,7 @@ def parse_with_gufo(gufo_facts):
         for f in result.facts:
             fact_dict = {}
             for key in ['type', 'sub', 'sup', 'individual', 'concept', 'subject',
-                        'predicate', 'object', 'c1', 'c2', 'property', 'filler',
+                        'role', 'object', 'c1', 'c2', 'property', 'filler',
                         'cardinality', 'id', 'class', 'i1', 'i2', 'modality',
                         'chain', 'super_property', 'value', 'datatype']:
                 val = f.get(key)
@@ -113,7 +113,7 @@ class TestGufoPersonExample:
         # Quality inheres in person
         facts = parse_with_gufo("Johns-Weight inheres-in John.")
         assert has_fact(facts, type='role_assertion', subject='Johns-Weight',
-                       predicate='inheres-in', object='John')
+                       role='inheres-in', object='John')
 
     def test_person_age(self, parse_with_gufo):
         """Person with data property."""
@@ -161,7 +161,7 @@ class TestGufoRelatorExample:
         """Marriage mediates persons (gUFO pattern)."""
         facts = parse_with_gufo("Johns-Marriage mediates John.")
         assert has_fact(facts, type='role_assertion',
-                       subject='Johns-Marriage', predicate='mediates', object='John')
+                       subject='Johns-Marriage', role='mediates', object='John')
 
 
 class TestGufoQualityExample:
@@ -250,7 +250,7 @@ class TestGufoComplexPatterns:
         assert has_fact(facts, type='instance_of',
                        individual='Uk-In-Eu', concept='temporary-parthood-situation')
         assert has_fact(facts, type='role_assertion',
-                       subject='Uk-In-Eu', predicate='concerns-temporary-whole',
+                       subject='Uk-In-Eu', role='concerns-temporary-whole',
                        object='European-Union')
 
     def test_quality_value_attribution(self, parse_with_gufo):
@@ -278,7 +278,7 @@ class TestGufoComplexPatterns:
         assert has_fact(facts, type='instance_of',
                        individual='Johns-Admiration-For-Obama', concept='admiration')
         assert has_fact(facts, type='role_assertion',
-                       subject='Johns-Admiration-For-Obama', predicate='inheres-in',
+                       subject='Johns-Admiration-For-Obama', role='inheres-in',
                        object='John')
 
 
@@ -312,9 +312,9 @@ class TestGufoRealWorldExample:
 
         # Verify relator pattern
         assert has_fact(facts, type='role_assertion',
-                       subject='Johns-Employment', predicate='mediates', object='John')
+                       subject='Johns-Employment', role='mediates', object='John')
         assert has_fact(facts, type='role_assertion',
-                       subject='Johns-Employment', predicate='mediates', object='Acme-Corp')
+                       subject='Johns-Employment', role='mediates', object='Acme-Corp')
 
     def test_event_domain(self, parse_with_gufo):
         """Event-centric domain ontology."""
@@ -331,5 +331,5 @@ class TestGufoRealWorldExample:
         assert has_fact(facts, type='instance_of',
                        individual='World-Cup-Final-2022', concept='soccer-match')
         assert has_fact(facts, type='role_assertion',
-                       subject='Messis-Goal', predicate='is-event-proper-part-of',
+                       subject='Messis-Goal', role='is-event-proper-part-of',
                        object='World-Cup-Final-2022')

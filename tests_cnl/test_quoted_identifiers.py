@@ -1,11 +1,11 @@
 """Test quoted identifiers in CNL.
 
 CNL supports quoted identifiers for concepts, roles, and instances:
-- "concept-name" - quoted concept/role NAME
-- The-"Instance Name" - quoted BIGNAME instance
-- THE-"CONSTANT" - quoted VERYBIGNAME constant
+- "concept-name" - double-quoted concept/role NAME
+- `Instance Name` - backtick-quoted BIGNAME instance
+- Title-Case - unquoted BIGNAME instance
 
-Quotes allow arbitrary characters including spaces, reserved words, and special chars.
+Double quotes for concepts/roles, backticks for instances.
 """
 
 import pytest
@@ -25,7 +25,7 @@ def parse_cnl(text):
 
 
 class TestQuotedConcepts:
-    """Test quoted concept names (NAME token with quotes)."""
+    """Test quoted concept names (NAME token with double quotes)."""
 
     def test_quoted_concept_basic(self):
         """Basic quoted concept name."""
@@ -86,20 +86,20 @@ class TestQuotedRoles:
 
     def test_quoted_role_with_spaces(self):
         """Quoted role with spaces."""
-        facts = parse_cnl('John "is friend of" Mary.')
+        facts = parse_cnl('`John` "is friend of" `Mary`.')
         assert len(facts) >= 1
         # Check that a role_assertion was created with unquoted role
         # Note: morphology adds 's' to the verb part, so "is friend of" -> "is friend ofs"
         for fact in facts:
             if fact.get("type") == "role_assertion":
                 # The field is 'predicate' not 'role'
-                assert fact.get("predicate") == "is friend ofs"
+                assert fact.get("role") == "is friend ofs"
                 return
         assert False, "Role assertion not found"
 
     def test_quoted_data_property(self):
         """Quoted data property name."""
-        facts = parse_cnl('John "has-age" equal-to 30.')
+        facts = parse_cnl('`John` "has-age" equal-to 30.')
         assert len(facts) >= 1
         for fact in facts:
             if fact.get("type") == "data_assertion":
@@ -108,12 +108,12 @@ class TestQuotedRoles:
         assert False, "Data assertion not found"
 
 
-class TestQuotedInstances:
-    """Test quoted instance names (BIGNAME with The-"..." prefix)."""
+class TestBacktickedInstances:
+    """Test backtick-quoted instance names (`...` syntax)."""
 
-    def test_quoted_bigname_basic(self):
-        """Basic quoted BIGNAME instance."""
-        facts = parse_cnl('The-"Eiffel Tower" is a landmark.')
+    def test_backticked_bigname_basic(self):
+        """Basic backticked BIGNAME instance."""
+        facts = parse_cnl('`Eiffel Tower` is a landmark.')
         assert len(facts) >= 1
         for fact in facts:
             if fact.get("type") == "instance_of":
@@ -121,9 +121,9 @@ class TestQuotedInstances:
                 return
         assert False, "Instance not found"
 
-    def test_quoted_bigname_with_spaces(self):
-        """Quoted instance with multiple spaces."""
-        facts = parse_cnl('The-"United Nations Building" is a headquarters.')
+    def test_backticked_bigname_with_spaces(self):
+        """Backticked instance with multiple spaces."""
+        facts = parse_cnl('`United Nations Building` is a headquarters.')
         assert len(facts) >= 1
         for fact in facts:
             if fact.get("type") == "instance_of":
@@ -131,9 +131,9 @@ class TestQuotedInstances:
                 return
         assert False, "Instance not found"
 
-    def test_quoted_verybigname_basic(self):
-        """Basic quoted VERYBIGNAME constant."""
-        facts = parse_cnl('THE-"USA GOVERNMENT" is an organization.')
+    def test_backticked_constant(self):
+        """Backticked constant (replaces VERYBIGNAME)."""
+        facts = parse_cnl('`USA GOVERNMENT` is an organization.')
         assert len(facts) >= 1
         for fact in facts:
             if fact.get("type") == "instance_of":
@@ -141,13 +141,37 @@ class TestQuotedInstances:
                 return
         assert False, "Instance not found"
 
-    def test_quoted_bigname_escaped_quote(self):
-        """Quoted instance with escaped quote."""
-        facts = parse_cnl('The-"John ""Johnny"" Doe" is a person.')
+    def test_backticked_bigname_escaped_backtick(self):
+        """Backticked instance with escaped backtick."""
+        facts = parse_cnl('`John ``JJ`` Doe` is a person.')
         assert len(facts) >= 1
         for fact in facts:
             if fact.get("type") == "instance_of":
-                assert fact.get("individual") == 'John "Johnny" Doe'
+                assert fact.get("individual") == 'John `JJ` Doe'
+                return
+        assert False, "Instance not found"
+
+
+class TestTitleCaseInstances:
+    """Test Title-Case instance names (unquoted BIGNAME)."""
+
+    def test_titlecase_basic(self):
+        """Basic Title-Case instance."""
+        facts = parse_cnl('John is a person.')
+        assert len(facts) >= 1
+        for fact in facts:
+            if fact.get("type") == "instance_of":
+                assert fact.get("individual") == "John"
+                return
+        assert False, "Instance not found"
+
+    def test_titlecase_hyphenated(self):
+        """Title-Case instance with hyphens."""
+        facts = parse_cnl('New-York is a city.')
+        assert len(facts) >= 1
+        for fact in facts:
+            if fact.get("type") == "instance_of":
+                assert fact.get("individual") == "New-York"
                 return
         assert False, "Instance not found"
 
@@ -157,19 +181,19 @@ class TestQuotedInRoleAssertions:
 
     def test_all_quoted(self):
         """All parts quoted in role assertion."""
-        facts = parse_cnl('The-"John Doe" "is-married-to" The-"Jane Doe".')
+        facts = parse_cnl('`John Doe` "is-married-to" `Jane Doe`.')
         assert len(facts) >= 1
         for fact in facts:
             if fact.get("type") == "role_assertion":
                 assert fact.get("subject") == "John Doe"
-                assert fact.get("predicate") == "is-married-to"  # Field is 'predicate' not 'role'
+                assert fact.get("role") == "is-married-to"
                 assert fact.get("object") == "Jane Doe"
                 return
         assert False, "Role assertion not found"
 
     def test_quoted_subject_only(self):
         """Only subject is quoted."""
-        facts = parse_cnl('The-"New York City" is-located-in USA.')
+        facts = parse_cnl('`New York City` is-located-in USA.')
         assert len(facts) >= 1
         for fact in facts:
             if fact.get("type") == "role_assertion":
@@ -235,139 +259,17 @@ class TestMixedQuoted:
         # Should parse without errors and strip all quotes
 
 
-class TestBacktickedConcepts:
-    """Test backtick-quoted concept names (`...` syntax)."""
-
-    def test_backticked_concept_basic(self):
-        """Basic backticked concept name."""
-        facts = parse_cnl('Every `my-concept` is a mammal.')
-        assert len(facts) >= 1
-        fact = facts[0]
-        assert fact.get("sub") == "my-concept"
-        assert fact.get("sup") == "mammal"
-
-    def test_backticked_concept_with_spaces(self):
-        """Backticked concept with spaces."""
-        facts = parse_cnl('Every `flying cat` is a mammal.')
-        assert len(facts) >= 1
-        fact = facts[0]
-        assert fact.get("sub") == "flying cat"
-
-    def test_backticked_concept_reserved_word(self):
-        """Backticked concept using a reserved word."""
-        facts = parse_cnl('Every `value` is a `thing`.')
-        assert len(facts) >= 1
-        fact = facts[0]
-        assert fact.get("sub") == "value"
-        assert fact.get("sup") == "thing"
-
-    def test_backticked_concept_escaped_backtick(self):
-        """Backticked concept with escaped backtick (``)."""
-        facts = parse_cnl('Every `say ``hello``` is a greeting.')
-        assert len(facts) >= 1
-        fact = facts[0]
-        assert fact.get("sub") == 'say `hello`'
-
-
-class TestBacktickedInstances:
-    """Test backtick-quoted instance names (The-`...` syntax)."""
-
-    def test_backticked_bigname_basic(self):
-        """Basic backticked BIGNAME instance."""
-        facts = parse_cnl('The-`Eiffel Tower` is a landmark.')
-        assert len(facts) >= 1
-        for fact in facts:
-            if fact.get("type") == "instance_of":
-                assert fact.get("individual") == "Eiffel Tower"
-                return
-        assert False, "Instance not found"
-
-    def test_backticked_bigname_with_spaces(self):
-        """Backticked instance with multiple spaces."""
-        facts = parse_cnl('The-`United Nations Building` is a headquarters.')
-        assert len(facts) >= 1
-        for fact in facts:
-            if fact.get("type") == "instance_of":
-                assert fact.get("individual") == "United Nations Building"
-                return
-        assert False, "Instance not found"
-
-    def test_backticked_verybigname_basic(self):
-        """Basic backticked VERYBIGNAME constant."""
-        facts = parse_cnl('THE-`USA GOVERNMENT` is an organization.')
-        assert len(facts) >= 1
-        for fact in facts:
-            if fact.get("type") == "instance_of":
-                assert fact.get("individual") == "USA GOVERNMENT"
-                return
-        assert False, "Instance not found"
-
-    def test_backticked_bigname_escaped_backtick(self):
-        """Backticked instance with escaped backtick."""
-        facts = parse_cnl('The-`John ``JJ`` Doe` is a person.')
-        assert len(facts) >= 1
-        for fact in facts:
-            if fact.get("type") == "instance_of":
-                assert fact.get("individual") == 'John `JJ` Doe'
-                return
-        assert False, "Instance not found"
-
-
-class TestBacktickedRoles:
-    """Test backtick-quoted role/property names."""
-
-    def test_backticked_role_basic(self):
-        """Basic backticked role name."""
-        facts = parse_cnl('Every person `is-related-to` a person.')
-        assert len(facts) >= 1
-        for fact in facts:
-            if fact.get("type") == "some_values_from":
-                role = fact.get("property")
-                if role == "is-related-to":
-                    return
-        assert False, f"Role 'is-related-to' not found in facts: {facts}"
-
-    def test_backticked_role_with_spaces(self):
-        """Backticked role with spaces."""
-        facts = parse_cnl('John `is friend of` Mary.')
-        assert len(facts) >= 1
-        # Note: morphology adds 's' to the verb part, so "is friend of" -> "is friend ofs"
-        for fact in facts:
-            if fact.get("type") == "role_assertion":
-                assert fact.get("predicate") == "is friend ofs"
-                return
-        assert False, "Role assertion not found"
-
-    def test_backticked_data_property(self):
-        """Backticked data property name."""
-        facts = parse_cnl('John `has-age` equal-to 30.')
-        assert len(facts) >= 1
-        for fact in facts:
-            if fact.get("type") == "data_assertion":
-                assert fact.get("property") == "has-age"
-                return
-        assert False, "Data assertion not found"
-
-
 class TestMixedQuoteStyles:
-    """Test mixing double-quoted and backtick-quoted identifiers."""
-
-    def test_double_and_backtick_mixed(self):
-        """Mix of double quotes and backticks in same sentence."""
-        facts = parse_cnl('Every `special-cat` is a "mammal".')
-        assert len(facts) >= 1
-        fact = facts[0]
-        assert fact.get("sub") == "special-cat"
-        assert fact.get("sup") == "mammal"
+    """Test mixing double-quoted concepts and backtick-quoted instances."""
 
     def test_backtick_instance_double_role(self):
         """Backticked instance with double-quoted role."""
-        facts = parse_cnl('The-`John Doe` "is-married-to" Mary.')
+        facts = parse_cnl('`John Doe` "is-married-to" Mary.')
         assert len(facts) >= 1
         for fact in facts:
             if fact.get("type") == "role_assertion":
                 assert fact.get("subject") == "John Doe"
-                assert fact.get("predicate") == "is-married-to"
+                assert fact.get("role") == "is-married-to"
                 return
         assert False, "Role assertion not found"
 

@@ -1,6 +1,11 @@
 # Comment-Based Semantic Annotations
 
-RETER supports extracting semantic facts from specially formatted comments in your code using the `@reter:` annotation syntax. This allows you to add architectural metadata, dependency information, and custom semantic relationships directly in your source code.
+RETER supports extracting semantic facts from specially formatted comments in your code. Two syntax styles are available:
+
+1. **Predicate syntax** (`@reter:`) - Compact, programmatic style
+2. **CNL syntax** (`@reter-cnl:`) - Natural language style using Controlled Natural Language
+
+This allows you to add architectural metadata, dependency information, and custom semantic relationships directly in your source code.
 
 ## Overview
 
@@ -11,7 +16,9 @@ Comment annotations let you define semantic facts that become queryable alongsid
 - Marking code with custom concepts (CriticalPath, SecuritySensitive, etc.)
 - Adding metadata that can't be inferred from code structure
 
-## Annotation Syntax
+---
+
+## Syntax 1: Predicate Annotations (`@reter:`)
 
 ### Basic Format
 
@@ -40,6 +47,123 @@ All of these work identically:
 - `@semantic:`
 - `@owl:`
 - `@fact:`
+
+---
+
+## Syntax 2: CNL Annotations (`@reter-cnl:`)
+
+CNL (Controlled Natural Language) provides a more readable, English-like syntax for semantic annotations.
+
+### Basic Format
+
+```
+@reter-cnl: This is part-of Business-Layer.
+@reter-cnl: This depends-on Payment-Service.
+@reter-cnl: Every Order must have-status.
+```
+
+### Key Features
+
+- **`This`** is automatically resolved to the current class/method as a fully qualified name
+  - `services.OrderService` → `` `services.OrderService` ``
+  - This allows CNL annotation facts to be joined with extracted code facts
+- Use **backticks** for qualified names: `` `module.ClassName` ``
+- Use **Title-Case** for simple names: `Order-Service`, `Payment-Service`
+- Sentences end with `.` or `?`
+- Full OWL 2 RL expressivity
+
+### Supported Prefixes
+
+- `@reter-cnl:`
+- `#reter-cnl:`
+- `reter-cnl:`
+
+### CNL Sentence Patterns
+
+| Pattern | Example | Meaning |
+|---------|---------|---------|
+| **Concept assertion** | `This is a Service.` | Class membership |
+| **Role assertion** | `This depends-on Payment-Service.` | Object property |
+| **Data property** | `This has-version equal-to '1.0'.` | Data value |
+| **Subsumption** | `Every Controller is a Component.` | Class hierarchy |
+| **Restriction** | `Every Service must have-logger.` | Existential restriction |
+| **Cardinality** | `Every Order has at-most 1 status.` | Cardinality constraint |
+
+### CNL vs Predicate Comparison
+
+| Predicate Syntax | CNL Syntax |
+|------------------|------------|
+| `@reter: BusinessLayer(self)` | `@reter-cnl: This is a business-layer.` |
+| `@reter: dependsOn(self, services.PaymentService)` | ``@reter-cnl: This depends-on `services.PaymentService`.`` |
+| `@reter: hasOwner(self, "Team A")` | `@reter-cnl: This has-owner equal-to 'Team A'.` |
+| `@reter: implements(self, IService)` | ``@reter-cnl: This implements `interfaces.IService`.`` |
+
+### CNL Examples by Language
+
+#### Python
+```python
+class OrderService:
+    """
+    Handles order processing.
+
+    @reter-cnl: This is-part-of `layers.BusinessLayer`.
+    @reter-cnl: This depends-on `services.PaymentService`.
+    @reter-cnl: This has-owner equal-to 'Team A'.
+    """
+
+    def process_order(self, order):
+        """
+        @reter-cnl: This is a critical-path.
+        """
+        pass
+```
+
+#### JavaScript
+```javascript
+/**
+ * Authentication service.
+ * @reter-cnl: This is part-of Security-Layer.
+ * @reter-cnl: This depends-on Token-Store.
+ */
+class AuthService {
+    /**
+     * @reter-cnl: This is a Critical-Path.
+     */
+    login(credentials) {
+        // ...
+    }
+}
+```
+
+#### C#
+```csharp
+/// <summary>
+/// Order repository.
+/// @reter-cnl: This is part-of Data-Access-Layer.
+/// @reter-cnl: This implements I-Order-Repository.
+/// </summary>
+public class OrderRepository
+{
+    /// @reter-cnl: This is a Database-Operation.
+    public void Save(Order order) { }
+}
+```
+
+#### C++
+```cpp
+/**
+ * Memory pool allocator.
+ * @reter-cnl: This is part-of Infrastructure-Layer.
+ * @reter-cnl: This has-complexity equal-to 'O(1)'.
+ */
+class MemoryPool {
+public:
+    // @reter-cnl: This is Performance-Critical.
+    void* allocate(size_t size);
+};
+```
+
+---
 
 ## Language Support
 

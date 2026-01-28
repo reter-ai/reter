@@ -2,7 +2,12 @@
 
 
 class DataStore:
-    """Handles data persistence."""
+    """
+    Handles data persistence.
+
+    @reter: TestLayer(self)
+    @reter: Fixture(self)
+    """
 
     def save(self, data):
         """Save data to store."""

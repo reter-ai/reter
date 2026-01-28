@@ -107,19 +107,19 @@ class TestGufoPartWholeRelations:
         """Johns-Brain is-component-of[gufo] John."""
         facts = get_facts("Johns-Brain is-component-of John.")
         assert has_fact(facts, type='role_assertion', subject='Johns-Brain',
-                       predicate='is-component-of', object='John')
+                       role='is-component-of', object='John')
 
     def test_is_collection_member_of(self, get_facts):
         """Tree-1 is-collection-member-of[gufo] Forest-1."""
         facts = get_facts("Tree-1 is-collection-member-of Forest-1.")
         assert has_fact(facts, type='role_assertion', subject='Tree-1',
-                       predicate='is-collection-member-of', object='Forest-1')
+                       role='is-collection-member-of', object='Forest-1')
 
     def test_is_sub_quantity_of(self, get_facts):
         """Small-Portion is-sub-quantity-of[gufo] Large-Portion."""
         facts = get_facts("Small-Portion is-sub-quantity-of Large-Portion.")
         assert has_fact(facts, type='role_assertion', subject='Small-Portion',
-                       predicate='is-sub-quantity-of', object='Large-Portion')
+                       role='is-sub-quantity-of', object='Large-Portion')
 
 
 class TestGufoInheresIn:
@@ -129,7 +129,7 @@ class TestGufoInheresIn:
         """Moon-Mass inheres-in[gufo] Moon."""
         facts = get_facts("Moon-Mass inheres-in Moon.")
         assert has_fact(facts, type='role_assertion', subject='Moon-Mass',
-                       predicate='inheres-in', object='Moon')
+                       role='inheres-in', object='Moon')
 
     def test_every_mass_inheres_in_physical_object(self, get_facts):
         """Every mass inheres-in[gufo] exactly-one physical-object."""
@@ -141,7 +141,7 @@ class TestGufoInheresIn:
         """Johns-Headache inheres-in[gufo] John."""
         facts = get_facts("Johns-Headache inheres-in John.")
         assert has_fact(facts, type='role_assertion', subject='Johns-Headache',
-                       predicate='inheres-in', object='John')
+                       role='inheres-in', object='John')
 
 
 class TestGufoMediates:
@@ -157,7 +157,7 @@ class TestGufoMediates:
         """John-Mary-Marriage mediates[gufo] John."""
         facts = get_facts("John-Mary-Marriage mediates John.")
         assert has_fact(facts, type='role_assertion', subject='John-Mary-Marriage',
-                       predicate='mediates', object='John')
+                       role='mediates', object='John')
 
 
 class TestGufoQualityValues:
@@ -204,7 +204,7 @@ class TestGufoEvents:
         """World-Cup-1970-Final is-event-proper-part-of[gufo] World-Cup-1970."""
         facts = get_facts("World-Cup-1970-Final is-event-proper-part-of World-Cup-1970.")
         assert has_fact(facts, type='role_assertion', subject='World-Cup-1970-Final',
-                       predicate='is-event-proper-part-of', object='World-Cup-1970')
+                       role='is-event-proper-part-of', object='World-Cup-1970')
 
 
 class TestGufoTemporalProperties:
@@ -279,7 +279,7 @@ class TestGufoHigherOrderTypes:
         """Animal-Species partitions[gufo] Animal."""
         facts = get_facts("Animal-Species partitions Animal.")
         assert has_fact(facts, type='role_assertion', subject='Animal-Species',
-                       predicate='partitions', object='Animal')
+                       role='partitions', object='Animal')
 
 
 class TestGufoRelationshipTypes:
@@ -295,7 +295,7 @@ class TestGufoRelationshipTypes:
         """Is-Married-With is-derived-from[gufo] Marriage."""
         facts = get_facts("Is-Married-With is-derived-from Marriage.")
         assert has_fact(facts, type='role_assertion', subject='Is-Married-With',
-                       predicate='is-derived-from', object='Marriage')
+                       role='is-derived-from', object='Marriage')
 
 
 class TestGufoExtrinsicModes:
@@ -307,7 +307,7 @@ class TestGufoExtrinsicModes:
         assert has_fact(facts, type='instance_of', individual='Johns-Right-To-Service',
                        concept='extrinsic-mode')
         assert has_fact(facts, type='role_assertion', subject='Johns-Right-To-Service',
-                       predicate='inheres-in', object='John')
+                       role='inheres-in', object='John')
 
     def test_depends_externally_on(self, get_facts):
         """Johns-Right-To-Service depends-externally-on[gufo] Amazon-Inc."""
@@ -401,7 +401,7 @@ class TestGufoConjunctions:
         facts = get_facts("Johns-Brain is a brain and is-component-of John.")
         # Creates intersection concept + role_assertion
         assert has_fact(facts, type='role_assertion', subject='Johns-Brain',
-                       predicate='is-component-of', object='John')
+                       role='is-component-of', object='John')
         # Instance is of intersection type (combining 'brain' and role restriction)
         inst = find_fact(facts, type='instance_of', individual='Johns-Brain')
         assert inst is not None
@@ -422,7 +422,7 @@ class TestGufoConjunctions:
         facts = get_facts("Moon-Mass is a mass that inheres-in Moon and has-quality-value equal-to 7.34767309E22.")
         assert has_fact(facts, type='instance_of', individual='Moon-Mass', concept='mass')
         assert has_fact(facts, type='role_assertion', subject='Moon-Mass',
-                       predicate='inheres-in', object='Moon')
+                       role='inheres-in', object='Moon')
         data = find_fact(facts, type='data_assertion', subject='Moon-Mass', property='has-quality-value')
         assert data is not None
 
@@ -611,7 +611,7 @@ class TestGufoAspectProperPart:
         """Johns-Right-To-Service is-aspect-proper-part-of John-Amazon-Agreement."""
         facts = get_facts("Johns-Right-To-Service is-aspect-proper-part-of John-Amazon-Agreement.")
         role = find_fact(facts, type='role_assertion', subject='Johns-Right-To-Service',
-                        predicate='is-aspect-proper-part-of', object='John-Amazon-Agreement')
+                        role='is-aspect-proper-part-of', object='John-Amazon-Agreement')
         assert role is not None
 
 
@@ -624,7 +624,7 @@ class TestGufoComplexExtrinsicModes:
         assert has_fact(facts, type='instance_of', individual='Johns-Right-To-Service',
                        concept='extrinsic-mode')
         assert has_fact(facts, type='role_assertion', subject='Johns-Right-To-Service',
-                       predicate='inheres-in', object='John')
+                       role='inheres-in', object='John')
         role = find_fact(facts, type='role_assertion', subject='Johns-Right-To-Service',
                         object='Amazon-Inc')
         assert role is not None

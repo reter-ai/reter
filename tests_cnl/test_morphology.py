@@ -116,7 +116,7 @@ class TestVerbForms:
     def test_owns_stays_owns(self):
         """John owns Pussy -> owns (3rd person)."""
         facts = parse_cnl("John owns Pussy.")
-        ra = find_fact(facts, type='role_assertion', predicate='owns')
+        ra = find_fact(facts, type='role_assertion', role='owns')
         assert ra is not None
 
 
@@ -150,7 +150,7 @@ class TestPastToThirdPerson:
         facts = parse_cnl(cnl)
         role_facts = get_facts_by_type(facts, 'role_assertion')
         assert len(role_facts) > 0, f"No role_assertion for: {cnl}"
-        assert role_facts[0]['predicate'] == expected_third
+        assert role_facts[0]['role'] == expected_third
 
     @pytest.mark.parametrize("past,expected_third", [
         # Doubled consonant verbs (stop -> stopped -> stop -> stops)
@@ -169,7 +169,7 @@ class TestPastToThirdPerson:
         facts = parse_cnl(cnl)
         role_facts = get_facts_by_type(facts, 'role_assertion')
         assert len(role_facts) > 0, f"No role_assertion for: {cnl}"
-        assert role_facts[0]['predicate'] == expected_third
+        assert role_facts[0]['role'] == expected_third
 
     @pytest.mark.parametrize("past,expected_third", [
         # -ied verbs (carry -> carried -> carry -> carries)
@@ -189,7 +189,7 @@ class TestPastToThirdPerson:
         facts = parse_cnl(cnl)
         role_facts = get_facts_by_type(facts, 'role_assertion')
         assert len(role_facts) > 0, f"No role_assertion for: {cnl}"
-        assert role_facts[0]['predicate'] == expected_third
+        assert role_facts[0]['role'] == expected_third
 
 
 # =============================================================================
@@ -202,13 +202,13 @@ class TestPastParticiple:
     def test_owned_to_owns(self):
         """Pussy is owned by John -> owns."""
         facts = parse_cnl("Pussy is owned by John.")
-        ra = find_fact(facts, type='role_assertion', predicate='owns')
+        ra = find_fact(facts, type='role_assertion', role='owns')
         assert ra is not None
 
     def test_loved_to_loves(self):
         """Mary is loved by John -> loves."""
         facts = parse_cnl("Mary is loved by John.")
-        ra = find_fact(facts, type='role_assertion', predicate='loves')
+        ra = find_fact(facts, type='role_assertion', role='loves')
         assert ra is not None
 
     def test_eaten_to_eats(self):
@@ -387,7 +387,7 @@ class TestIrregularVerbs:
         facts = parse_cnl(cnl)
         role_facts = get_facts_by_type(facts, 'role_assertion')
         if len(role_facts) > 0:
-            actual = role_facts[0]['predicate']
+            actual = role_facts[0]['role']
             assert actual == expected_third, f"'{past}' -> '{actual}', expected '{expected_third}'"
         # Some verbs might not parse due to CNL grammar, skip those
 
@@ -421,7 +421,7 @@ class TestCompoundPredicates:
         facts = parse_cnl(cnl)
         role_facts = get_facts_by_type(facts, 'role_assertion')
         if len(role_facts) > 0:
-            assert role_facts[0]['predicate'] == expected
+            assert role_facts[0]['role'] == expected
 
 
 # =============================================================================
@@ -436,14 +436,14 @@ class TestMorphologyRegressions:
         facts = parse_cnl("Mary is married by John.")
         role_facts = get_facts_by_type(facts, 'role_assertion')
         assert len(role_facts) > 0
-        assert role_facts[0]['predicate'] == 'marries'
+        assert role_facts[0]['role'] == 'marries'
 
     def test_is_married_to_preserved(self):
         """'is-married-to' should preserve 'is-' prefix."""
         facts = parse_cnl("John is-married-to Mary.")
         role_facts = get_facts_by_type(facts, 'role_assertion')
         assert len(role_facts) > 0
-        assert role_facts[0]['predicate'] == 'is-married-to'
+        assert role_facts[0]['role'] == 'is-married-to'
 
     def test_parts_of_not_created_from_is_part_of(self):
         """'is-part-of' should NOT become 'parts-of'."""
@@ -456,21 +456,21 @@ class TestMorphologyRegressions:
         facts = parse_cnl("Mary is stopped by John.")
         role_facts = get_facts_by_type(facts, 'role_assertion')
         if len(role_facts) > 0:
-            assert role_facts[0]['predicate'] == 'stops'
+            assert role_facts[0]['role'] == 'stops'
 
     def test_planned_becomes_plans(self):
         """'planned' (doubled n) -> 'plan' -> 'plans'."""
         facts = parse_cnl("Mary is planned by John.")
         role_facts = get_facts_by_type(facts, 'role_assertion')
         if len(role_facts) > 0:
-            assert role_facts[0]['predicate'] == 'plans'
+            assert role_facts[0]['role'] == 'plans'
 
     def test_tried_becomes_tries(self):
         """'tried' -> 'try' -> 'tries', not 'trys' or 'trieds'."""
         facts = parse_cnl("Mary is tried by John.")
         role_facts = get_facts_by_type(facts, 'role_assertion')
         if len(role_facts) > 0:
-            assert role_facts[0]['predicate'] == 'tries'
+            assert role_facts[0]['role'] == 'tries'
 
     def test_fixes_not_fixs(self):
         """'fix' -> 'fixes', not 'fixs'."""
