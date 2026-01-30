@@ -802,6 +802,10 @@ class Reter:
         # Use source_id if provided, otherwise fall back to in_file
         actual_source_id = source_id if source_id is not None else in_file
 
+        # Calculate total items for progress reporting
+        total_items = len(facts) + len(registered_methods) + len(unresolved_calls)
+        items_processed = 0
+
         # Add facts to the network
         wme_count = 0
         for fact in facts:
@@ -810,6 +814,9 @@ class Reter:
                 actual_source_id  # Use source_id for tracking
             )
             wme_count += 1
+            items_processed += 1
+            if progress_callback and items_processed % 100 == 0:
+                progress_callback(items_processed, total_items, f"Adding facts from {in_file}")
 
         # Register methods for maybeCalls resolution
         for method in registered_methods:
@@ -820,6 +827,10 @@ class Reter:
                 method["module"],
                 method["class_name"]
             )
+            items_processed += 1
+
+        if progress_callback and registered_methods:
+            progress_callback(items_processed, total_items, f"Registered {len(registered_methods)} methods")
 
         # Add pending calls for maybeCalls resolution
         for call in unresolved_calls:
@@ -830,6 +841,10 @@ class Reter:
                 call["caller_module"],
                 call["caller_class"]
             )
+            items_processed += 1
+
+        if progress_callback:
+            progress_callback(total_items, total_items, f"Completed {in_file}: {wme_count} WMEs")
 
         return wme_count, errors
 
