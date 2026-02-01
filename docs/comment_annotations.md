@@ -2,7 +2,7 @@
 
 RETER supports extracting semantic facts from specially formatted comments in your code. Two syntax styles are available:
 
-1. **CNL syntax** (`@reter-cnl:`) - **PREFERRED** - Natural language style using Controlled Natural Language
+1. **CNL syntax** (`:::`) - **PREFERRED** - Natural language style using Controlled Natural Language
 2. **Predicate syntax** (`@reter:`) - **DEPRECATED** - Compact, programmatic style (still supported for backwards compatibility)
 
 This allows you to add architectural metadata, dependency information, and custom semantic relationships directly in your source code.
@@ -18,16 +18,16 @@ Comment annotations let you define semantic facts that become queryable alongsid
 
 ---
 
-## CNL Annotations (`@reter-cnl:`) - PREFERRED
+## CNL Annotations (`:::`) - PREFERRED
 
 CNL (Controlled Natural Language) provides a readable, English-like syntax for semantic annotations.
 
 ### Basic Format
 
 ```
-@reter-cnl: This is-in-layer Service-Layer.
-@reter-cnl: This is a repository.
-@reter-cnl: This depends-on `services.PaymentService`.
+::: This is-in-layer Service-Layer.
+::: This is a repository.
+::: This depends-on `services.PaymentService`.
 ```
 
 ### Key Rules
@@ -42,7 +42,7 @@ CNL (Controlled Natural Language) provides a readable, English-like syntax for s
 
 ### Supported Prefixes
 
-- `@reter-cnl:`
+- `:::`
 - `#reter-cnl:`
 - `reter-cnl:`
 
@@ -94,15 +94,15 @@ class OrderService:
     """
     Handles order processing.
 
-    @reter-cnl: This is-in-layer Service-Layer.
-    @reter-cnl: This is a service.
-    @reter-cnl: This depends-on `services.PaymentService`.
-    @reter-cnl: This has-owner "Team A".
+    ::: This is-in-layer Service-Layer.
+    ::: This is a service.
+    ::: This depends-on `services.PaymentService`.
+    ::: This has-owner "Team A".
     """
 
     def process_order(self, order):
         """
-        @reter-cnl: This is a critical-path.
+        ::: This is a critical-path.
         """
         pass
 ```
@@ -112,13 +112,13 @@ class OrderService:
 ```javascript
 /**
  * Authentication service.
- * @reter-cnl: This is-in-layer Service-Layer.
- * @reter-cnl: This is a handler.
- * @reter-cnl: This depends-on `TokenStore`.
+ * ::: This is-in-layer Service-Layer.
+ * ::: This is a handler.
+ * ::: This depends-on `TokenStore`.
  */
 class AuthService {
     /**
-     * @reter-cnl: This is a critical-path.
+     * ::: This is a critical-path.
      */
     login(credentials) {
         // ...
@@ -131,13 +131,13 @@ class AuthService {
 ```csharp
 /// <summary>
 /// Order repository.
-/// @reter-cnl: This is-in-layer Infrastructure-Layer.
-/// @reter-cnl: This is a repository.
-/// @reter-cnl: This implements `IOrderRepository`.
+/// ::: This is-in-layer Infrastructure-Layer.
+/// ::: This is a repository.
+/// ::: This implements `IOrderRepository`.
 /// </summary>
 public class OrderRepository
 {
-    /// @reter-cnl: This is a database-operation.
+    /// ::: This is a database-operation.
     public void Save(Order order) { }
 }
 ```
@@ -147,13 +147,13 @@ public class OrderRepository
 ```cpp
 /**
  * Memory pool allocator.
- * @reter-cnl: This is-in-layer Core-Layer.
- * @reter-cnl: This is a manager.
- * @reter-cnl: This has-complexity "O(1)".
+ * ::: This is-in-layer Core-Layer.
+ * ::: This is a manager.
+ * ::: This has-complexity "O(1)".
  */
 class MemoryPool {
 public:
-    // @reter-cnl: This is a performance-critical.
+    // ::: This is a performance-critical.
     void* allocate(size_t size);
 };
 ```
@@ -162,15 +162,15 @@ public:
 
 ```html
 <!DOCTYPE html>
-<!-- @reter-cnl: This is a web-page. -->
-<!-- @reter-cnl: This belongs-to Marketing-Site. -->
+<!-- ::: This is a web-page. -->
+<!-- ::: This belongs-to Marketing-Site. -->
 <html>
 <head>
-    <!-- @reter-cnl: This has-author "Design Team". -->
+    <!-- ::: This has-author "Design Team". -->
     <title>Home</title>
 </head>
 <body>
-    <!-- @reter-cnl: This is a user-interface-component. -->
+    <!-- ::: This is a user-interface-component. -->
     <main id="content">...</main>
 </body>
 </html>
@@ -185,21 +185,21 @@ public:
 ```python
 class UserController:
     """
-    @reter-cnl: This is-in-layer Presentation-Layer.
-    @reter-cnl: This is a controller.
+    ::: This is-in-layer Presentation-Layer.
+    ::: This is a controller.
     """
 
 class UserService:
     """
-    @reter-cnl: This is-in-layer Service-Layer.
-    @reter-cnl: This is a service.
-    @reter-cnl: This depends-on `app.repositories.UserRepository`.
+    ::: This is-in-layer Service-Layer.
+    ::: This is a service.
+    ::: This depends-on `app.repositories.UserRepository`.
     """
 
 class UserRepository:
     """
-    @reter-cnl: This is-in-layer Infrastructure-Layer.
-    @reter-cnl: This is a repository.
+    ::: This is-in-layer Infrastructure-Layer.
+    ::: This is a repository.
     """
 ```
 
@@ -208,14 +208,14 @@ class UserRepository:
 ```python
 class AuthService:
     """
-    @reter-cnl: This is a security-critical.
-    @reter-cnl: This requires-audit "true".
+    ::: This is a security-critical.
+    ::: This requires-audit "true".
     """
 
     def validate_token(self, token):
         """
-        @reter-cnl: This is a security-sensitive.
-        @reter-cnl: This handles-credentials "JSON-Web-Token".
+        ::: This is a security-sensitive.
+        ::: This handles-credentials "JSON-Web-Token".
         """
 ```
 
@@ -224,20 +224,20 @@ class AuthService:
 ```python
 class Order:
     """
-    @reter-cnl: This is a aggregate-root.
-    @reter-cnl: This is-in-bounded-context Order-Management.
+    ::: This is a aggregate-root.
+    ::: This is-in-bounded-context Order-Management.
     """
 
 class OrderLine:
     """
-    @reter-cnl: This is a entity.
-    @reter-cnl: This is-part-of `domain.Order`.
+    ::: This is a entity.
+    ::: This is-part-of `domain.Order`.
     """
 
 class OrderPlaced:
     """
-    @reter-cnl: This is a domain-event.
-    @reter-cnl: This is-raised-by `domain.Order`.
+    ::: This is a domain-event.
+    ::: This is-raised-by `domain.Order`.
     """
 ```
 
@@ -246,13 +246,13 @@ class OrderPlaced:
 ```python
 class ConfigManager:
     """
-    @reter-cnl: This is a singleton.
+    ::: This is a singleton.
     """
 
 class VehicleFactory:
     """
-    @reter-cnl: This is a factory.
-    @reter-cnl: This creates `domain.Vehicle`.
+    ::: This is a factory.
+    ::: This creates `domain.Vehicle`.
     """
 ```
 
@@ -262,9 +262,9 @@ class VehicleFactory:
 # file: services/order_service.py
 class OrderService:
     """
-    @reter-cnl: This depends-on `services.payment.PaymentGateway`.
-    @reter-cnl: This depends-on `services.inventory.StockService`.
-    @reter-cnl: This publishes `events.OrderCreated`.
+    ::: This depends-on `services.payment.PaymentGateway`.
+    ::: This depends-on `services.inventory.StockService`.
+    ::: This publishes `events.OrderCreated`.
     """
 ```
 
@@ -311,7 +311,7 @@ results = r.reql('''
 
 ## Predicate Annotations (`@reter:`) - DEPRECATED
 
-> **Note:** This syntax is deprecated. Use `@reter-cnl:` instead.
+> **Note:** This syntax is deprecated. Use `:::` instead.
 
 The predicate syntax is still supported for backwards compatibility.
 
@@ -342,16 +342,16 @@ The predicate syntax is still supported for backwards compatibility.
 
 | Deprecated Predicate Syntax | Preferred CNL Syntax |
 |----------------------------|----------------------|
-| `@reter: ServiceLayer(self)` | `@reter-cnl: This is-in-layer Service-Layer.` |
-| `@reter: Repository(self)` | `@reter-cnl: This is a repository.` |
-| `@reter: dependsOn(self, services.X)` | ``@reter-cnl: This depends-on `services.X`.`` |
-| `@reter: hasOwner(self, "Team A")` | `@reter-cnl: This has-owner "Team A".` |
+| `@reter: ServiceLayer(self)` | `::: This is-in-layer Service-Layer.` |
+| `@reter: Repository(self)` | `::: This is a repository.` |
+| `@reter: dependsOn(self, services.X)` | ``::: This depends-on `services.X`.`` |
+| `@reter: hasOwner(self, "Team A")` | `::: This has-owner "Team A".` |
 
 ---
 
 ## Best Practices
 
-1. **Use `@reter-cnl:`** - The CNL syntax is preferred and more readable
+1. **Use `:::`** - The CNL syntax is preferred and more readable
 2. **Use qualified names** for cross-file references with backticks
 3. **Use `This`** for the current class/method to avoid duplication
 4. **Be consistent** with naming conventions across your codebase

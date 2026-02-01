@@ -49,9 +49,9 @@ class Reter:
     Main Description Logic Reasoner
     Uses C++ DL parser and C++ OWL RETE reasoning engine directly
 
-    @reter-cnl: This is-in-layer Core-Layer.
-    @reter-cnl: This is a description-logic-reasoner.
-    @reter-cnl: This depends-on `reter_core.owl_rete_cpp.ReteNetwork`.
+    ::: This is-in-layer Core-Layer.
+    ::: This is a description-logic-reasoner.
+    ::: This depends-on `reter_core.owl_rete_cpp.ReteNetwork`.
     """
 
     # Expose C++ compilation flags

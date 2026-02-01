@@ -178,23 +178,23 @@ inheritsFrom has_range oo:Class
 
 ### 3. Comment-Based Annotations (Integrity Constraints)
 
-RETER supports `@reter-cnl:` annotations in code comments to add semantic metadata:
+RETER supports `:::` annotations in code comments to add semantic metadata:
 
 ```python
 class OrderService:
     """
     Handles order processing.
 
-    @reter-cnl: This is-in-layer Service-Layer.
-    @reter-cnl: This is a service.
-    @reter-cnl: This depends-on `services.PaymentService`.
-    @reter-cnl: This implements `IOrderService`.
+    ::: This is-in-layer Service-Layer.
+    ::: This is a service.
+    ::: This depends-on `services.PaymentService`.
+    ::: This implements `IOrderService`.
     """
 
     def process_order(self, order):
         """
-        @reter-cnl: This is a use-case.
-        @reter-cnl: This is a critical-path.
+        ::: This is a use-case.
+        ::: This is a critical-path.
         """
         pass
 ```
@@ -203,20 +203,20 @@ class OrderService:
 
 | Type | Syntax | Description |
 |------|--------|-------------|
-| **Layer** | `@reter-cnl: This is-in-layer Service-Layer.` | Architectural layer (relation) |
-| **Concept** | `@reter-cnl: This is a service.` | Functional role (concept assertion) |
-| **Object Role** | `@reter-cnl: This depends-on Target.` | Relates two entities |
-| **Data Role** | `@reter-cnl: This has-owner "Team A".` | Attaches data to entity |
+| **Layer** | `::: This is-in-layer Service-Layer.` | Architectural layer (relation) |
+| **Concept** | `::: This is a service.` | Functional role (concept assertion) |
+| **Object Role** | `::: This depends-on Target.` | Relates two entities |
+| **Data Role** | `::: This has-owner "Team A".` | Attaches data to entity |
 
 #### Supported Languages
 
 | Language | Comment Style |
 |----------|---------------|
-| Python | Docstrings: `"""@reter-cnl: ..."""` |
-| JavaScript | JSDoc: `/** @reter-cnl: ... */` |
-| C# | XML docs: `/// @reter-cnl: ...` |
-| C++ | Block comments: `/* @reter-cnl: ... */` |
-| HTML | HTML comments: `<!-- @reter-cnl: ... -->` |
+| Python | Docstrings: `"""::: ..."""` |
+| JavaScript | JSDoc: `/** ::: ... */` |
+| C# | XML docs: `/// ::: ...` |
+| C++ | Block comments: `/* ::: ... */` |
+| HTML | HTML comments: `<!-- ::: ... -->` |
 
 ---
 
@@ -232,24 +232,24 @@ Annotate your classes with architectural layer information:
 # presentation/controllers/user_controller.py
 class UserController:
     """
-    @reter-cnl: This is-in-layer Presentation-Layer.
-    @reter-cnl: This is a controller.
-    @reter-cnl: This depends-on `services.UserService`.
+    ::: This is-in-layer Presentation-Layer.
+    ::: This is a controller.
+    ::: This depends-on `services.UserService`.
     """
 
 # services/user_service.py
 class UserService:
     """
-    @reter-cnl: This is-in-layer Service-Layer.
-    @reter-cnl: This is a service.
-    @reter-cnl: This depends-on `repositories.UserRepository`.
+    ::: This is-in-layer Service-Layer.
+    ::: This is a service.
+    ::: This depends-on `repositories.UserRepository`.
     """
 
 # repositories/user_repository.py
 class UserRepository:
     """
-    @reter-cnl: This is-in-layer Infrastructure-Layer.
-    @reter-cnl: This is a repository.
+    ::: This is-in-layer Infrastructure-Layer.
+    ::: This is a repository.
     """
 ```
 
@@ -301,9 +301,9 @@ OASE allows formalizing design patterns as ontological constraints.
 ```python
 class DatabaseConnection:
     """
-    @reter-cnl: This is a singleton.
-    @reter-cnl: This has-private-constructor "true".
-    @reter-cnl: This has-static-instance "true".
+    ::: This is a singleton.
+    ::: This has-private-constructor "true".
+    ::: This has-static-instance "true".
     """
     _instance = None
 
@@ -332,13 +332,13 @@ r.reql('''
 ```python
 class VehicleFactory:
     """
-    @reter-cnl: This is a factory.
-    @reter-cnl: This creates `domain.Vehicle`.
+    ::: This is a factory.
+    ::: This creates `domain.Vehicle`.
     """
 
     def create_vehicle(self, type: str):
         """
-        @reter-cnl: This is a factory-method.
+        ::: This is a factory-method.
         """
         pass
 ```
@@ -348,14 +348,14 @@ class VehicleFactory:
 ```python
 class EventEmitter:
     """
-    @reter-cnl: This is a subject.
-    @reter-cnl: This notifies Event-Listener.
+    ::: This is a subject.
+    ::: This notifies Event-Listener.
     """
 
 class EventListener:
     """
-    @reter-cnl: This is a observer.
-    @reter-cnl: This subscribes-to Event-Emitter.
+    ::: This is a observer.
+    ::: This subscribes-to Event-Emitter.
     """
 ```
 
@@ -378,11 +378,11 @@ OASE introduces pseudo-modal expressions for requirement validation using `must`
 ```python
 class PaymentProcessor:
     """
-    @reter-cnl: This must implement `IPaymentProcessor`.
-    @reter-cnl: This must have-method "validate".
-    @reter-cnl: This should have-less-than-methods 10.
-    @reter-cnl: This should have-docstring "true".
-    @reter-cnl: This can depend-on `ExternalPaymentGateway`.
+    ::: This must implement `IPaymentProcessor`.
+    ::: This must have-method "validate".
+    ::: This should have-less-than-methods 10.
+    ::: This should have-docstring "true".
+    ::: This can depend-on `ExternalPaymentGateway`.
     """
 ```
 
@@ -579,21 +579,21 @@ While OASE-Annotations validate design-time constraints, **OASE-Assertions** val
 ```python
 class PaymentProcessor:
     """
-    @reter-cnl: This is-in-layer Service-Layer.
-    @reter-cnl: This is a service.
-    @reter-cnl: This handles `payments.Transaction`.
+    ::: This is-in-layer Service-Layer.
+    ::: This is a service.
+    ::: This handles `payments.Transaction`.
     """
 
     def process_payment(self, transaction, amount):
         """
-        @reter-cnl: This is a critical-path.
+        ::: This is a critical-path.
 
         Pre-condition assertions (checked at runtime in debug mode):
-        @reter-cnl: transaction must have-status equal-to 'pending'.
-        @reter-cnl: amount must be greater-than 0.
+        ::: transaction must have-status equal-to 'pending'.
+        ::: amount must be greater-than 0.
 
         Post-condition:
-        @reter-cnl: transaction must have-status equal-to 'completed'.
+        ::: transaction must have-status equal-to 'completed'.
         """
         # Validate pre-conditions
         r = Reter()
@@ -616,14 +616,14 @@ The dissertation shows how OASE-Assertions validate filter compatibility at runt
 ```python
 class Filter:
     """
-    @reter-cnl: This is a pipes-and-filters.
-    @reter-cnl: This has-input-pipe Pipe-A.
-    @reter-cnl: This has-output-pipe Pipe-B.
+    ::: This is a pipes-and-filters.
+    ::: This has-input-pipe Pipe-A.
+    ::: This has-output-pipe Pipe-B.
     """
 
     def process(self, input_stream):
         """
-        @reter-cnl: input_stream must be-connectable-to Pipe-A.
+        ::: input_stream must be-connectable-to Pipe-A.
         """
         # Runtime validation of pipe compatibility
         pass
@@ -1408,7 +1408,7 @@ The following OASE-inspired features are already available in RETER:
 | Semantic Code Search | ✅ Implemented | `semantic_search()` MCP tool |
 | UML Diagram Generation | ✅ Implemented | `diagram()` MCP tool |
 | Multi-language Support | ✅ Implemented | Python, JS, C#, C++, HTML |
-| Comment Annotations | ✅ Implemented | `@reter-cnl:` in docstrings/comments |
+| Comment Annotations | ✅ Implemented | `:::` in docstrings/comments |
 | A-Box Extraction | ✅ Implemented | `load_python_file()`, etc. |
 | T-Box Definition | ✅ Implemented | Built-in OO ontology |
 | RETE Algorithm | ✅ Implemented | C++ RETE network in reter_core |
@@ -1430,7 +1430,7 @@ The following OASE-inspired features are already available in RETER:
 
 - VSCode/JetBrains extension with live annotation suggestions
 - Inline layer violation warnings as you type
-- Auto-complete for `@reter-cnl:` annotations
+- Auto-complete for `:::` annotations
 - Quick-fix suggestions for detected violations
 
 ### 2. CNL-based Constraint Validation
@@ -1597,33 +1597,33 @@ Key figures from `books/OASE_files/`:
 
 ```python
 # Layer Classification (relations - Title-Case layer names)
-@reter-cnl: This is-in-layer Presentation-Layer.
-@reter-cnl: This is-in-layer Service-Layer.
-@reter-cnl: This is-in-layer Infrastructure-Layer.
-@reter-cnl: This is-in-layer Core-Layer.
-@reter-cnl: This is-in-layer Utility-Layer.
+::: This is-in-layer Presentation-Layer.
+::: This is-in-layer Service-Layer.
+::: This is-in-layer Infrastructure-Layer.
+::: This is-in-layer Core-Layer.
+::: This is-in-layer Utility-Layer.
 
 # Component Types (concept assertions - lowercase)
-@reter-cnl: This is a controller.
-@reter-cnl: This is a service.
-@reter-cnl: This is a repository.
-@reter-cnl: This is a factory.
-@reter-cnl: This is a singleton.
+::: This is a controller.
+::: This is a service.
+::: This is a repository.
+::: This is a factory.
+::: This is a singleton.
 
 # Relationships (relations)
-@reter-cnl: This depends-on `other.Service`.
-@reter-cnl: This implements `IInterface`.
-@reter-cnl: This is-part-of `module.name`.
-@reter-cnl: This calls `other.method`.
+::: This depends-on `other.Service`.
+::: This implements `IInterface`.
+::: This is-part-of `module.name`.
+::: This calls `other.method`.
 
 # Data Properties
-@reter-cnl: This has-owner "Team A".
-@reter-cnl: This has-version "1.0.0".
-@reter-cnl: This has-priority "high".
+::: This has-owner "Team A".
+::: This has-version "1.0.0".
+::: This has-priority "high".
 
 # Requirements (Future)
-@reter-cnl: This must implement `IDisposable`.
-@reter-cnl: This should have-less-than-methods 10.
+::: This must implement `IDisposable`.
+::: This should have-less-than-methods 10.
 ```
 
 ### Common Queries
@@ -1862,7 +1862,7 @@ def build_class_descriptor(rete, class_id):
 | Field Gets/Sets | ❌ | ❌ | ❌ | ❌ |
 | Access Modifiers | ✅ | ✅ | N/A | N/A |
 | Type Annotations | ✅ | ✅ | ✅ | Partial |
-| @reter-cnl: Annotations | ✅ | ✅ | ✅ | ✅ |
+| ::: Annotations | ✅ | ✅ | ✅ | ✅ |
 
 ### Recommended Extensions for Full OASE Compatibility
 

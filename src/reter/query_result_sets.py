@@ -29,8 +29,8 @@ class QueryResultSet:
     - Slicing: results[5:10], results[:100]
     - Efficient caching of materialized results
 
-    @reter-cnl: This is-in-layer Core-Layer.
-    @reter-cnl: This is a data-transfer-object.
+    ::: This is-in-layer Core-Layer.
+    ::: This is a data-transfer-object.
     """
 
     def __init__(self, production, variables, network, tokens=None):
@@ -180,9 +180,9 @@ class FilteredQueryResultSet:
 
     Performance: 10-100x faster than Python implementation
 
-    @reter-cnl: This is-in-layer Core-Layer.
-    @reter-cnl: This is a wrapper.
-    @reter-cnl: This is a public-application-programming-interface.
+    ::: This is-in-layer Core-Layer.
+    ::: This is a wrapper.
+    ::: This is a public-application-programming-interface.
     """
 
     def __new__(cls, production, variables, network, not_exists_patterns, reasoner):
@@ -240,8 +240,8 @@ class UnionQueryResultSet:
 
     Week 6 Optimization: Thin wrapper delegating to C++ union_query
 
-    @reter-cnl: This is-in-layer Core-Layer.
-    @reter-cnl: This is a data-transformer.
+    ::: This is-in-layer Core-Layer.
+    ::: This is a data-transformer.
     """
 
     def __new__(cls, queries, network):
@@ -278,8 +278,8 @@ class PropertyPathResultSet:
     Query result set for property paths (Week 5, Day 6-7)
     Computes transitive closure of a property using BFS
 
-    @reter-cnl: This is-in-layer Core-Layer.
-    @reter-cnl: This is a query-executor.
+    ::: This is-in-layer Core-Layer.
+    ::: This is a query-executor.
     """
 
     def __init__(self, subject, property_name, object_var, max_depth, reasoner):
@@ -396,8 +396,8 @@ class LiveQueryResultSet:
     Auto-updating query result set (Week 4, Day 4-7)
     Results update incrementally as facts are added/removed
 
-    @reter-cnl: This is-in-layer Core-Layer.
-    @reter-cnl: This is a observer.
+    ::: This is-in-layer Core-Layer.
+    ::: This is a observer.
     """
 
     def __init__(self, live_query, variables, network):
