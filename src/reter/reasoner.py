@@ -50,7 +50,11 @@ class Reter:
     Uses C++ DL parser and C++ OWL RETE reasoning engine directly
 
     ::: This is-in-layer Core-Layer.
-    ::: This is a description-logic-reasoner.
+    ::: This is a reasoning-engine.
+    ::: This is-in-process Main-Process.
+    ::: This is stateful.
+    ::: This holds-expensive-resource "rete-network".
+    ::: This has-singleton-scope.
     ::: This depends-on `reter_core.owl_rete_cpp.ReteNetwork`.
     """
 
