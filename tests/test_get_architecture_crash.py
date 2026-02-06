@@ -10,6 +10,7 @@ from pathlib import Path
 from reter import Reter
 
 
+@pytest.mark.slow
 def test_get_architecture_with_real_files():
     """Load real Python files and run get_architecture query pattern."""
     reasoner = Reter("ai")
@@ -55,6 +56,7 @@ def test_get_architecture_with_real_files():
     print("SUCCESS!")
 
 
+@pytest.mark.slow
 def test_get_architecture_with_many_files():
     """Load many real Python files - closer to full Reter Code scale."""
     reasoner = Reter("ai")
@@ -103,6 +105,7 @@ def test_get_architecture_with_many_files():
     print("SUCCESS!")
 
 
+@pytest.mark.slow
 def test_get_architecture_oo_prefix():
     """Test with oo: prefix (language-agnostic) like Reter Code uses."""
     reasoner = Reter("ai")
@@ -145,6 +148,7 @@ def test_get_architecture_oo_prefix():
     print(f"SUCCESS with {result.num_rows} rows")
 
 
+@pytest.mark.slow
 def test_get_architecture_full_scale():
     """Full scale test - load ALL files like Reter Code does."""
     reasoner = Reter("ai")
@@ -255,6 +259,7 @@ def test_get_architecture_multi_language():
     print("SUCCESS - NO CRASH!")
 
 
+@pytest.mark.slow
 def test_get_architecture_from_reter_code_snapshot():
     """Load the actual Reter Code snapshot and run get_architecture query.
 
@@ -301,6 +306,7 @@ def test_get_architecture_from_reter_code_snapshot():
     print("SUCCESS - NO CRASH!")
 
 
+@pytest.mark.slow
 def test_get_architecture_snapshot_with_timeout():
     """Same as above but with timeout_ms > 0 (uses different code path)."""
     snapshot_path = Path("D:/ROOT/reter_root/.reter_code/.default.reter")

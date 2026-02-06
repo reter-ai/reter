@@ -1763,14 +1763,12 @@ class Reter:
     # High-performance serialization with Cap'n Proto (default) or Protobuf
     # ========================================================================
 
-    def save(self, filename, format='capnp'):
+    def save(self, filename):
         """
-        Save network state to binary file
+        Save network state to binary file (Cap'n Proto format)
 
         Args:
             filename: Path to output file
-            format: Serialization format - 'capnp' (default) or 'protobuf'
-                   Cap'n Proto uses memory-mapped I/O for better performance.
 
         Returns:
             bool: True if successful
@@ -1778,39 +1776,64 @@ class Reter:
         Example:
             r = Reter()
             r.load_ontology("...")
-            r.save("snapshot.bin")  # Uses Cap'n Proto (default)
-            r.save("snapshot.pb", format='protobuf')  # Uses Protobuf
+            r.save("snapshot.bin")
         """
-        if format == 'capnp':
-            return self.network.save_capnp(filename)
-        elif format == 'protobuf':
-            return self.network.save(filename)
-        else:
-            raise ValueError(f"Unknown format: {format}. Use 'capnp' or 'protobuf'.")
+        return self.network.save(filename)
 
-    def load(self, filename, format='capnp'):
+    def load(self, filename):
         """
-        Load network state from binary file
+        Load network state from binary file (Cap'n Proto format)
 
         Args:
             filename: Path to input file
-            format: Serialization format - 'capnp' (default) or 'protobuf'
-                   Cap'n Proto uses memory-mapped I/O for zero-copy loading.
 
         Returns:
             bool: True if successful
 
         Example:
             r = Reter()
-            r.load("snapshot.bin")  # Uses Cap'n Proto (default)
-            r.load("snapshot.pb", format='protobuf')  # Uses Protobuf
+            r.load("snapshot.bin")
         """
-        if format == 'capnp':
-            return self.network.load_capnp(filename)
-        elif format == 'protobuf':
-            return self.network.load(filename)
-        else:
-            raise ValueError(f"Unknown format: {format}. Use 'capnp' or 'protobuf'.")
+        return self.network.load(filename)
+
+    def load_lazy(self, filename):
+        """
+        Load network lazily (keeps data in memory-mapped file)
+
+        Facts are accessed on-demand without copying until materialize() is called.
+        This provides 10-50x faster load times for large snapshots.
+
+        Args:
+            filename: Path to input file (Cap'n Proto format)
+
+        Returns:
+            bool: True if successful
+
+        Example:
+            r = Reter()
+            r.load_lazy("large_snapshot.bin")  # Fast: ~10ms for 1M facts
+            df = r.query("SELECT ?s ?p ?o")    # Query works immediately
+            r.materialize()                     # Convert to eager if needed
+        """
+        return self.network.load_lazy(filename)
+
+    def is_lazy(self):
+        """
+        Check if network is in lazy loading mode
+
+        Returns:
+            bool: True if in lazy mode
+        """
+        return self.network.is_lazy()
+
+    def materialize(self):
+        """
+        Convert lazy-loaded network to eager mode
+
+        Copies all data from the memory-mapped file to internal storage.
+        Required before rule execution or RETE operations that modify the network.
+        """
+        self.network.materialize()
 
     def remove_source(self, source_id):
         """

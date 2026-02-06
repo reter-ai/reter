@@ -59,7 +59,11 @@ class QueryResultSet:
             tokens = self._network.get_query_results(self._production)
 
         # Get cache key for binding extraction
-        cache_key = self._production.cache_key()
+        # For template queries, _production is already the cache key string
+        if isinstance(self._production, str):
+            cache_key = self._production
+        else:
+            cache_key = self._production.cache_key()
 
         for token in tokens:
             # Extract bindings using cache key (fast path via cached field indices)
@@ -75,6 +79,10 @@ class QueryResultSet:
         """Number of results (requires iteration or Arrow table)"""
         if self._tokens is not None:
             return len(self._tokens)
+        # For template queries, _production is a string (cache key), not a production object
+        if isinstance(self._production, str):
+            # No production object, must count via iteration
+            return sum(1 for _ in self)
         return self._production.get_token_count()
 
     def __getitem__(self, key):
@@ -139,7 +147,18 @@ class QueryResultSet:
         except ImportError:
             raise ImportError("pyarrow is required for to_arrow(). Install with: pip install pyarrow")
 
-        # Use C++ vectorized to_arrow method
+        # For template queries with cached tokens, build Arrow table from iteration
+        if self._tokens is not None or isinstance(self._production, str):
+            # Build Arrow table from Python iteration
+            results = list(self)
+            if not results:
+                # Empty table with correct schema
+                return pa.table({var: [] for var in self._variables})
+            # Convert list of dicts to columnar format
+            columns = {var: [r.get(var) for r in results] for var in self._variables}
+            return pa.table(columns)
+
+        # Use C++ vectorized to_arrow method for regular queries
         return self._network.query_to_arrow(self._production, self._variables)
 
     def to_pandas(self):
